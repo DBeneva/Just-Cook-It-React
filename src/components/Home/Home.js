@@ -1,17 +1,16 @@
 import './Home.scss';
 
 function Home() {
-    return (
-      <div className="Home">
-        <img src="/food-4780114_960_720.jpg" alt="" />
-        <div class="text">
-            <p>Welcome to our very special place for sharing recipes!</p>
-            <a href="#">See Recipes</a>
-            <a href="#">Login</a>
-            <a href="#">Add New Recipe</a>
-        </div>
+  return (
+    <div className="Home">
+      <p className="welcome-message main-title">Welcome to our very special place for sharing recipes!</p>
+      <div className="buttons">
+        <a className="button" href="#">See Recipes</a>
+        <a className="button" href="#">Login</a>
+        {/* <a className="button" href="#">Add New Recipe</a> */}
       </div>
-    );
-  }
-  
-  export default Home;
+    </div>
+  );
+}
+
+export default Home;

@@ -1,0 +1,36 @@
+@import '../../../index.scss';
+
+.Header {
+    background-color: $primary-color;
+    color: $secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 50px;
+
+    .logo {
+        letter-spacing: 2px;
+        text-decoration: none;
+    }
+
+    .logo-egg {
+        width: 25px;
+        padding: 2px;
+    }
+
+    .navigation-list-item {
+        display: inline-block;
+    }
+
+    @include main-title($secondary-color);
+    @include button();
+}
+
+// .active, .logout:active {
+//     background-color: $secondary-color;
+//     box-shadow: 0px 0px 10px 0 gray;
+// }
+
+// .active a, .logout:active {
+//     color: $primary-color;
+// }
