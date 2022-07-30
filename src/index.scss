@@ -1,7 +1,7 @@
 $primary-color: #4a6b8b;
 $secondary-color: lightgray;
-$heading-font: 'Merienda';
-$main-font: Verdana;
+$font-title: 'Merienda';
+$font-body-text: Verdana;
 $shadow: 0 0 8px 0 gray; 
 
 *,
@@ -11,7 +11,8 @@ $shadow: 0 0 8px 0 gray;
 }
 
 html {
-  font-family: $main-font;
+  font-family: $font-body-text;
+  color: $primary-color;
 }
 
 *::selection {
@@ -37,14 +38,17 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $heading-font;
+  font-family: $font-title;
 }
 
-@mixin main-title($color) {
-  .main-title {
-    font-family: $heading-font;
+@mixin title($color, $padding-t, $padding-b) {
+  .title {
+    font-family: $font-title;
     font-size: 40px;
     color: $color;
+    text-align: center;
+    padding-top: $padding-t;
+    padding-bottom: $padding-b;
   }
 }
 
@@ -60,13 +64,14 @@ h6 {
 @mixin button($margin-tb, $margin-lr) {
   .button {
     text-decoration: none;
-    font-family: $main-font;
+    font-family: $font-body-text;
     font-size: 20px;
     background-color: $primary-color;
     color: $secondary-color;
     margin: $margin-tb $margin-lr;
     padding: 10px 20px;
     border-radius: 10px;
+    cursor: pointer;
   
     &:hover {
       background-color: $secondary-color;

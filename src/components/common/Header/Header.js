@@ -4,7 +4,7 @@ function Header() {
     return (
         <div className="Header">
             <div>
-                <a className="logo main-title" href="#">Just c<img className="logo-egg" src="/fried-egg.png" alt="Egg" /><img className="logo-egg" src="/fried-egg.png" alt="Egg" />k it!</a>
+                <a className="logo title" href="#">Just c<img className="logo-egg" src="/fried-egg.png" alt="Egg" /><img className="logo-egg" src="/fried-egg.png" alt="Egg" />k it!</a>
             </div>
 
             <nav className="navigation">

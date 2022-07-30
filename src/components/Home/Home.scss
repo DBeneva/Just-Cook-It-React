@@ -3,16 +3,14 @@
 
 .Home {
     color: $primary-color;
-    text-align: center;
     height: calc(100vh - 74px);
-    padding-top: 110px;
     
     .welcome-message {
         width: 60%;
         margin: auto;
     }
 
-    @include main-title($primary-color);
+    @include title($primary-color, 110px, 0);
     @include background-opacity-80('spices.jpg');
     @include buttons(17px, 5px);
 }
