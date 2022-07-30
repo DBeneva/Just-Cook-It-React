@@ -48,23 +48,23 @@ h6 {
   }
 }
 
-@mixin buttons() {
+@mixin buttons($margin-tb, $margin-lr) {
   .buttons {
     display: flex;
     justify-content: center;
   }
 
-  @include button();
+  @include button($margin-tb, $margin-lr);
 }
 
-@mixin button() {
+@mixin button($margin-tb, $margin-lr) {
   .button {
     text-decoration: none;
     font-family: $main-font;
     font-size: 20px;
     background-color: $primary-color;
     color: $secondary-color;
-    margin: 0 5px;
+    margin: $margin-tb $margin-lr;
     padding: 10px 20px;
     border-radius: 10px;
   

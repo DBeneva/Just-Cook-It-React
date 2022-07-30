@@ -4,17 +4,15 @@
 .Home {
     color: $primary-color;
     text-align: center;
-    height: 100vh;
-    padding-top: 120px;
+    height: calc(100vh - 74px);
+    padding-top: 110px;
     
-    .welcome-message,
-    .buttons {
+    .welcome-message {
         width: 60%;
         margin: auto;
-        padding: 15px 0;
     }
-    
+
     @include main-title($primary-color);
     @include background-opacity-80('spices.jpg');
-    @include buttons();
+    @include buttons(17px, 5px);
 }
