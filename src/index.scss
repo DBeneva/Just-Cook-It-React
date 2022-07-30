@@ -10,6 +10,10 @@ $shadow: 0 0 8px 0 gray;
   box-sizing: border-box;
 }
 
+html {
+  font-family: $main-font;
+}
+
 *::selection {
   color: $secondary-color;
   background-color: $primary-color;

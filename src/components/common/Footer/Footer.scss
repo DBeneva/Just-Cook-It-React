@@ -1,0 +1,24 @@
+@import '../../../index.scss';
+
+.Footer {
+    background-color: $primary-color;
+    color: $secondary-color;
+    text-align: center;
+    padding: 22px;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0px;
+    
+    p a {
+        color: $secondary-color;
+        text-decoration: none;
+    }
+    
+    i {
+        font-size: 18px;
+        margin: 0 10px;
+    }
+}
