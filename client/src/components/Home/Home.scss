@@ -10,7 +10,7 @@
         margin: auto;
     }
 
-    @include title($primary-color, 110px, 0);
+    @include title($primary-color, 135px, 0);
     @include background-opacity-80('spices.jpg');
     @include buttons(17px, 5px);
 }

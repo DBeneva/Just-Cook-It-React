@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Just Cook It!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This single-page application was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) version 18.2.0 for the SoftUni React exam (August 2022).
 
-## Available Scripts
+## Public Part
 
-In the project directory, you can run:
+Guest users can visit the Home Page, the About Page, see the recipe previews on the Recipes Page and the recipe details on the Recipe Page.
 
-### `npm start`
+In order to gain access to more functionality, guest users can register and log in from the Register/Login Page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Private Part
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Recipes
 
-### `npm test`
+Authenticated users can post their own recipe from the New-Recipe Page. They can like and unlike recipes created by other users, as well as edit and delete their own recipes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Account
 
-### `npm run build`
+They can view their account details on the Account Page.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+From the Edit Account Page they can edit their account information (username or email), access the Change Password Page or delete their account.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### My Recipes & My Favorites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A list of the user's recipes, as well as one of the recipes the user has liked, is available both from the header navigation of the page and from the Account Page.
 
-### `npm run eject`
+## Back End
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application communicates with a REST API written in NodeJS with Express. MongoDB and Mongoose take care of the data storage and manipulation.
