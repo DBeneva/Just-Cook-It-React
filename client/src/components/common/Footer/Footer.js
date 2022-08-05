@@ -9,7 +9,7 @@ function Footer() {
                 <a href="mailto:contactus@justcookit.com"><i class="fas fa-envelope"></i></a>
             </p>
             <p><i class="fas fa-map-marker-alt"></i> Sofia 1000, 84 Vitosha Str</p>
-            <p><a href="#">About Just Cook It</a></p>
+            <p><a href="/about">About Just Cook It</a></p>
         </div>
     );
 }
