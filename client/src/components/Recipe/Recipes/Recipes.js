@@ -1,21 +1,44 @@
 import { NavLink } from 'react-router-dom';
-import Recipe from '../Recipe/Recipe';
 import './Recipes.scss';
 
 function Recipes({
     recipes
 }) {
+    const RecipeCard = (recipe) => {
+        return (
+            <>
+                <img className="card-image" src="{recipe.imageUrl}" alt="Recipe Image" />
+                <div className="card-content">
+                    <div className="card-title">
+                        <h3>{recipe.name}</h3>
+                        <p>
+                            <i className="fas fa-clock"></i><span> {recipe.time} min</span>
+                        </p>
+                    </div>
+                    <div className="likes">
+                        <p>Liked by <span>{recipe.likedBy.length}</span> {recipe.likedBy.length != 1 ? 'people' : 'person'}</p>
+                    </div>
+                </div >
+            </>
+        )
+    };
+
     const noRecipes = (
         <div className="no-recipes">
             <h2>Sorry, there are currently no recipes.</h2>
-            <div>
-                <p>Be the first to add one!</p>
-                <NavLink to="/recipes/new-recipe">Add New Recipe</NavLink>
-                <NavLink to="/">Go back home</NavLink>
-            </div>
-            <div>
-                <NavLink to="/">Go back home</NavLink>
-            </div>
+            {user
+                ? (
+                    <div>
+                        <p>Be the first to add one!</p>
+                        <NavLink to="/recipes/new-recipe">Add New Recipe</NavLink>
+                        <NavLink to="/">Go back home</NavLink>)
+                    </div>
+                )
+                :
+                (<div>
+                    <NavLink to="/">Go back home</NavLink>
+                </div>)
+            }
         </div>
     );
 
@@ -23,13 +46,14 @@ function Recipes({
         <div className="Recipes">
             {recipes?.length > 0
                 ? (
-                    <ul className="">
-                        {recipes.map(r => <Recipe key={r._id} recipe={r} />)}
+                    <ul className="card">
+                        {recipes.map(r => <RecipeCard key={r._id} recipe={r} />)}
                     </ul>
                 )
-                : noRecipes
+                : recipes && recipes.length == 0
+                    ? noRecipes
+                    : <div className="loader"></div>
             }
-            <div className="loader"></div>
         </div>
     );
 }
