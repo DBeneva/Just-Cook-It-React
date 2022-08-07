@@ -1,9 +1,13 @@
+import { Link as button, useNavigate } from 'react-router-dom';
+
 import './About.scss';
 
 function About() {
+    const navigate = useNavigate();
+
     return (
         <div className="About">
-            <div className="back-btn"><i className="fa fa-arrow-circle-left"></i></div >
+            <div className="back-btn" onClick={() => navigate(-1)}><i className="fa fa-arrow-circle-left"></i></div >
             <div>
                 <h1 className="title">About Just Cook It</h1>
                 <p>
