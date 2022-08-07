@@ -1,4 +1,4 @@
-import { Link as button, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import './About.scss';
 
