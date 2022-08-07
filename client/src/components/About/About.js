@@ -5,7 +5,7 @@ function About() {
         <div className="About">
             <div className="back-btn"><i className="fa fa-arrow-circle-left"></i></div >
             <div>
-                <h2 className="title">About Just Cook It</h2>
+                <h1 className="title">About Just Cook It</h1>
                 <p>
                     We are an open community for people who love cooking. You are more than welcome to join us and make our space even more delicious with your own recipes.
                 </p>

@@ -1,0 +1,81 @@
+@import '../../../index.scss';
+
+.RecipeCard {
+    width: 300px;
+    height: 330px;
+    box-shadow: $card-shadow;
+    border-radius: 20px;
+    margin: 40px;
+    color: $primary-color;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+
+    .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+    
+    .card-title {
+        text-align: center;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        
+        h3 {
+            margin: 8px 0;
+        }
+        
+        p {
+            margin: 12px 0 0 0;
+            font-size: 12px;
+        }
+    }    
+
+    .likes {
+        width: 100%;
+        background-color: #4a6b8b;
+        color: lightgray;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        display: flex;
+        padding: 12px;
+        font-family: "Merienda";
+        position: absolute;
+        bottom: -1px;
+        
+        p {
+            margin: auto;
+        }
+    }
+}
+
+
+// table {
+//     margin: 0 10px;
+// }
+
+// .card-section {
+//     margin-bottom: 10px;
+// }
+
+// td {
+//     vertical-align: top;
+// }
+
+// td h4, td p {
+//     margin: 5px;
+// }
+
+// .ingredients {
+//     font-size: 14px;
+//     height: 100px;
+//     overflow: hidden;
+// }
+
+// h4 img {
+//     width: 20px;
+// }

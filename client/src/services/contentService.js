@@ -1,12 +1,17 @@
 import * as request from './requester';
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3030';
 
-export const loadRecipes = async () => await request.get(`${baseUrl}/recipes`);
+export const loadRecipes = async () => {
+    const recipes = await request.get(`${baseUrl}/recipes`);
+    return recipes;
+};
 
 export const loadRecipe = async (id, signal) => {
-    const recipe = await fetch(`${baseUrl}/recipes/${id}`, { signal });
-    return await recipe.json();
+    const response = await fetch(`${baseUrl}/recipes/${id}`, { signal });
+    const recipe = await response.json();
+    console.log(recipe);
+    return recipe;
 };
 
 export const loadMyRecipes = async (ownerId) => {

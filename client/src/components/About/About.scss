@@ -25,7 +25,7 @@
         border: none;
         background-color: $primary-color;
         color: $secondary-color;
-        box-shadow: $shadow;
+        box-shadow: $button-shadow;
     }
 
     @include title($primary-color, 150px, 50px);

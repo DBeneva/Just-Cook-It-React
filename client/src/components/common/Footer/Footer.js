@@ -4,11 +4,11 @@ function Footer() {
     return (
         <div className="Footer">
             <p>Contacts:
-                <a href="#facebook-page"><i class="fab fa-facebook-square"></i></a>
-                <a href="#instagram"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:contactus@justcookit.com"><i class="fas fa-envelope"></i></a>
+                <a href="#facebook-page"><i className="fab fa-facebook-square"></i></a>
+                <a href="#instagram"><i className="fab fa-instagram"></i></a>
+                <a href="mailto:contactus@justcookit.com"><i className="fas fa-envelope"></i></a>
             </p>
-            <p><i class="fas fa-map-marker-alt"></i> Sofia 1000, 84 Vitosha Str</p>
+            <p><i className="fas fa-map-marker-alt"></i> Sofia 1000, 84 Vitosha Str</p>
             <p><a href="/about">About Just Cook It</a></p>
         </div>
     );

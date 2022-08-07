@@ -2,7 +2,8 @@ $primary-color: #4a6b8b;
 $secondary-color: lightgray;
 $font-title: 'Merienda';
 $font-body-text: Verdana;
-$shadow: 0 0 8px 0 gray; 
+$button-shadow: 0 0 8px 0 gray;
+$card-shadow: 2px 2px 20px 0 gray;
 
 *,
 *::after,
@@ -41,6 +42,11 @@ h6 {
   font-family: $font-title;
 }
 
+h1,
+h2 {
+  font-weight: 400;
+}
+
 @mixin title($color, $padding-t, $padding-b) {
   .title {
     font-family: $font-title;
@@ -71,12 +77,13 @@ h6 {
     margin: $margin-tb $margin-lr;
     padding: 10px 20px;
     border-radius: 10px;
+    border: none;
     cursor: pointer;
   
     &:hover {
       background-color: $secondary-color;
       color: $primary-color;
-      box-shadow: $shadow;
+      box-shadow: $button-shadow;
     }
   }
 }
