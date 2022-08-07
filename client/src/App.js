@@ -8,6 +8,7 @@ import About from './components/About/About';
 import Recipes from './components/Recipe/Recipes/Recipes';
 import Recipe from './components/Recipe/Recipe/Recipe';
 import { AuthProvider } from './contexts/AuthContext';
+import Login from './components/user/Login/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/recipes/" element={<Recipes />} />
           <Route path="/recipes/:recipeId" element={<Recipe />} />
+          <Route path="/login" element={<Login />} />
 
         </Routes>
 
