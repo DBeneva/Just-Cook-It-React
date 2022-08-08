@@ -16,18 +16,28 @@ function Login() {
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        if (currentInput.length === 0) setUsernameStatus('empty');
-        else if (currentInput.length < 3) setUsernameStatus('too-short');
-        else setUsernameStatus('valid');
+
+        if (currentInput.length === 0) {
+            setUsernameStatus('empty');
+        } else if (currentInput.length < 3) {
+            setUsernameStatus('too-short');
+        } else {
+            setUsernameStatus('valid');
+        }
+
+        console.log(usernameStatus, passwordStatus);
 
         setSubmitDisabled(!(usernameStatus === 'valid' && passwordStatus === 'valid'));
     };
+    
 
     const changePassword = (e) => {
         const currentInput = e.target.value;
         if (currentInput.length === 0) setPasswordStatus('empty');
         else if (currentInput.length < 5) setPasswordStatus('too-short');
         else setPasswordStatus('valid');
+
+        console.log(usernameStatus, passwordStatus);
 
         setSubmitDisabled(!(usernameStatus === 'valid' && passwordStatus === 'valid'));
     };
@@ -40,15 +50,16 @@ function Login() {
         const { email, password } = Object.fromEntries(formData);
         console.log(formData);
 
-        // authService.login(email, password)
-        //     .then((authData) => {
-        //         login(authData);
-        //         navigate('/recipes');
-        //     })
-        //     .catch(err => {
-        //         // TODO: show notification
-        //         console.log(err);
-        //     });
+        authService.login(email, password)
+            .then((authData) => {
+                login(authData);
+                console.log('logged in');
+                navigate('/recipes');
+            })
+            .catch(err => {
+                // TODO: show notification
+                console.log(err);
+            });
     };
 
     const showPassword = () => {
@@ -69,7 +80,7 @@ function Login() {
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
                     <input className={`input-${usernameStatus}`} type="text" name="username" id="username"
-                        placeholder="Johny" required onChange={changeUsername} onBlur={changeUsername} />
+                        placeholder="Johny" required onFocus={changeUsername} onChange={changeUsername} onBlur={changeUsername} />
                 </p>
                 {
                     usernameStatus === 'empty'
@@ -82,7 +93,7 @@ function Login() {
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${passwordStatus}`} type={isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
-                        required onChange={changePassword} onBlur={changePassword} />
+                        required onFocus={changePassword} onChange={changePassword} onBlur={changePassword} />
 
                     <i className={isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
 
