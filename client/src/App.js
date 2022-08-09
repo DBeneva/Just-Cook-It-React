@@ -9,6 +9,7 @@ import Recipes from './components/Recipe/Recipes/Recipes';
 import Recipe from './components/Recipe/Recipe/Recipe';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './components/user/Login/Login';
+import Register from './components/user/Register/Register';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/recipes/" element={<Recipes />} />
           <Route path="/recipes/:recipeId" element={<Recipe />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
         </Routes>
 
