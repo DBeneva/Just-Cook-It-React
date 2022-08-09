@@ -86,7 +86,16 @@ h2 {
       box-shadow: $button-shadow;
     }
   }
+
+  .button[disabled],
+  .button[disabled]:hover {
+    background-color: #4a6a8b8c;
+    color: lightgray;
+    box-shadow: none;
+    cursor: default
+  }
 }
+
 
 @mixin background-opacity-80($image) {
   background-image: linear-gradient(rgba(255, 255, 255, 0.2),
