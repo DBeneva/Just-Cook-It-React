@@ -159,7 +159,6 @@ function Register() {
                         type="text" name="username" id="username"
                         placeholder="Johny"
                         required
-                        value={state.username.value}
                         onFocus={changeUsername}
                         onChange={changeUsername}
                     />
@@ -172,7 +171,6 @@ function Register() {
                     <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
                     <input className={`input-${state.email.status}`} type="email" name="email" id="email"
                         placeholder="john.doe@gmail.com"
-                        value={state.email.value}
                         onFocus={changeEmail}
                         onChange={changeEmail}
                     />
@@ -184,7 +182,6 @@ function Register() {
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password"
                         id="password" placeholder="******"
-                        value={state.password.value}
                         onFocus={changePassword}
                         onChange={changePassword}
                     />
@@ -199,7 +196,6 @@ function Register() {
                 <p className="field field-icon">
                     <label htmlFor="repass"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.repass.status}`} type={state.isVisibleRepass ? 'text' : 'password'} name="repass" id="repass" placeholder="******"
-                        value={state.repass.value}
                         onChange={changeRepass}
                         onFocus={changeRepass}
                     />

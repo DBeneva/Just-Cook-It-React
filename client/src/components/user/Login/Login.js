@@ -96,7 +96,7 @@ function Login() {
                     <input className={`input-${state.username.status}`} type="text" name="username" id="username"
                         placeholder="Johny" required
                         onInput={changeUsername}
-                        value={state.username.value} />
+                        />
                 </p>
 
                 {state.username.status === 'empty' && <p className="error">Username is required!</p>}
@@ -106,7 +106,6 @@ function Login() {
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
                         required
-                        value={state.password.value}
                         onChange={changePassword}
                     />
 
