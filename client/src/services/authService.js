@@ -1,12 +1,12 @@
 const baseUrl = 'http://localhost:3030';
 
-export const register = async (email, password) => {
+export const register = async (username, email, password) => {
     const response = await fetch(`${baseUrl}/users/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, email, password })
     });
 
     const jsonResult = await response.json();
@@ -18,13 +18,13 @@ export const register = async (email, password) => {
     throw jsonResult.message;
 };
 
-export const login = async (email, password) => {
+export const login = async (username, password) => {
     const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, password })
     });
 
     const jsonResult = await response.json();
