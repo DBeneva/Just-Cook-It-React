@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
@@ -8,38 +8,56 @@ import './Login.scss';
 function Login() {
     const navigate = useNavigate();
     const { login } = useAuthContext();
-    const [usernameStatus, setUsernameStatus] = useState('untouched');
-    const [passwordStatus, setPasswordStatus] = useState('untouched');
-    const [submitDisabled, setSubmitDisabled] = useState(true);
 
-    const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+    const initialState = {
+        username: { value: '', status: 'untouched' },
+        password: { value: '', status: 'untouched' },
+        isVisiblePassword: false,
+        submitDisabled: false
+    };
+
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+        setState(oldState => ({
+            ...oldState,
+            submitDisabled: !(state.username.status === 'valid' && state.password.status === 'valid')
+        }));
+    }, [state.username.status, state.password.status]);
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
+        const currentStatus = currentInput.length == 0
+            ? 'empty'
+            : currentInput.length < 3
+                ? 'too-short'
+                : 'valid';
 
-        if (currentInput.length === 0) {
-            setUsernameStatus('empty');
-        } else if (currentInput.length < 3) {
-            setUsernameStatus('too-short');
-        } else {
-            setUsernameStatus('valid');
-        }
-
-        console.log(usernameStatus, passwordStatus);
-
-        setSubmitDisabled(!(usernameStatus === 'valid' && passwordStatus === 'valid'));
+        setState(oldState => ({
+            ...oldState,
+            username: { value: currentInput, status: currentStatus }
+        }));
     };
-    
 
     const changePassword = (e) => {
         const currentInput = e.target.value;
-        if (currentInput.length === 0) setPasswordStatus('empty');
-        else if (currentInput.length < 5) setPasswordStatus('too-short');
-        else setPasswordStatus('valid');
+        const currentStatus = currentInput.length == 0
+            ? 'empty'
+            : currentInput.length < 5
+                ? 'too-short'
+                : 'valid';
 
-        console.log(usernameStatus, passwordStatus);
+        setState(oldState => ({
+            ...oldState,
+            password: { value: currentInput, status: currentStatus }
+        }));
+    };
 
-        setSubmitDisabled(!(usernameStatus === 'valid' && passwordStatus === 'valid'));
+    const showPassword = () => {
+        setState(oldState => ({
+            ...oldState,
+            isVisiblePassword: !state.isVisiblePassword
+        }));
     };
 
 
@@ -62,10 +80,6 @@ function Login() {
             });
     };
 
-    const showPassword = () => {
-        setIsVisiblePassword(!isVisiblePassword);
-    };
-
     return (
         <div className="Login">
             <form className="login" action="" method="post" onSubmit={onLoginHandler}>
@@ -79,35 +93,31 @@ function Login() {
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
-                    <input className={`input-${usernameStatus}`} type="text" name="username" id="username"
-                        placeholder="Johny" required onFocus={changeUsername} onChange={changeUsername} onBlur={changeUsername} />
+                    <input className={`input-${state.username.status}`} type="text" name="username" id="username"
+                        placeholder="Johny" required
+                        onInput={changeUsername}
+                        value={state.username.value} />
                 </p>
-                {
-                    usernameStatus === 'empty'
-                        ? <p className="error">Username is required!</p>
-                        : usernameStatus === 'too-short'
-                            ? <p className="error">Username must be at least 3 characters long!</p>
-                            : ''
-                }
+
+                {state.username.status === 'empty' && <p className="error">Username is required!</p>}
+                {state.username.status === 'too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
-                    <input className={`input-${passwordStatus}`} type={isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
-                        required onFocus={changePassword} onChange={changePassword} onBlur={changePassword} />
+                    <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
+                        required
+                        value={state.password.value}
+                        onChange={changePassword}
+                    />
 
-                    <i className={isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
+                    <i className={state.isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
 
                 </p>
-                {
-                    passwordStatus === 'empty'
-                        ? <p className="error">Password is required!</p>
-                        : passwordStatus === 'too-short'
-                            ? <p className="error">Password must be at least 5 characters!</p>
-                            : ''
-                }
+                {state.password.status === 'empty' && <p className="error">Password is required!</p>}
+                {state.password.status === 'too-short' && <p className="error">Password must be at least 5 characters!</p>}
 
                 <div className="links">
-                    <button className="button" disabled={submitDisabled}>Login</button>
+                    <button className="button" disabled={state.submitDisabled}>Login</button>
                     <p className="register-link">
                         Don't have an account? <Link to="/register">Click here!</Link>
                     </p>

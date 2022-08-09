@@ -5,12 +5,12 @@
     width: 30%;
     height: calc(100vh - 74px);
 
-    button[disabled], button[disabled]:hover {
-        background-color: #4a6a8b8c;
-        color: lightgray;
-        box-shadow: none;
-        cursor: default
-    }
+    // button[disabled], button[disabled]:hover {
+    //     background-color: #4a6a8b8c;
+    //     color: lightgray;
+    //     box-shadow: none;
+    //     cursor: default
+    // }
 
     @include title($primary-color, 0, 30px);
     @include button(20px, 0px);
