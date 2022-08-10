@@ -38,7 +38,7 @@ export const login = async (username, password) => {
 };
 
 export const logout = (token) => {
-    return fetch(`${baseUrl}/users/logout`, {
+    return fetch(`${baseUrl}/auth/logout`, {
         headers: {
             'X-Authorization': token
         }
