@@ -14,6 +14,7 @@
 
     @include title($primary-color, 0, 30px);
     @include button(20px, 0px);
+    @include errorMessage();
 }
 
 .login {
@@ -84,12 +85,6 @@ input:-webkit-autofill {
 
 .register-link a {
     color: #4a6b8b;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-    padding: 0 0 0 40px;
 }
 
 .links {

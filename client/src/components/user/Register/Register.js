@@ -8,6 +8,7 @@ import './Register.scss';
 function Register() {
     const { login } = useAuthContext();
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
     const initialState = {
         username: { value: '', status: 'untouched' },
@@ -136,8 +137,7 @@ function Register() {
                 navigate('/recipes');
             })
             .catch(err => {
-                // TODO: show notification
-                console.log(err);
+                setError(err);
             });
     };
 
@@ -146,11 +146,7 @@ function Register() {
             <form className="register" method="post" onSubmit={onRegisterHandler}>
                 <h2 className="title">Registration Form</h2>
 
-                {/* <ng-container *ngIf="error">
-            <p className="error">
-                {{error}}
-            </p>
-        </ng-container> */}
+                {error && <p className="error">{error.message}</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="username"><span><i className="fas fa-user"></i></span></label>

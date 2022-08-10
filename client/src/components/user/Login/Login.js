@@ -8,6 +8,7 @@ import './Login.scss';
 function Login() {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const [error, setError] = useState(null);
 
     const initialState = {
         username: { value: '', status: 'untouched' },
@@ -74,8 +75,7 @@ function Login() {
                 navigate('/recipes');
             })
             .catch(err => {
-                // TODO: show notification
-                console.log(err);
+                setError(err);
             });
     };
 
@@ -84,11 +84,7 @@ function Login() {
             <form className="login" action="" method="post" onSubmit={onLoginHandler}>
                 <h2 className="title">Login Form</h2>
 
-                {/* <ng-container *ngIf="error">
-            <p class="error">
-                {{error}}
-            </p>
-        </ng-container> */}
+                {error && <p className="error">{error.message}</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>

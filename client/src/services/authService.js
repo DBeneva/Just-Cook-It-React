@@ -10,14 +10,12 @@ export const register = async (username, email, password) => {
     });
 
     const jsonResult = await response.json();
-    console.log('response', response);
-    console.log('jsonresult', jsonResult);
 
     if (response.ok) {
         return jsonResult;
+    } else {
+        throw jsonResult;
     }
-
-    throw jsonResult.message;
 };
 
 export const login = async (username, password) => {
@@ -30,12 +28,13 @@ export const login = async (username, password) => {
     });
 
     const jsonResult = await response.json();
+    console.log('jsonResult', jsonResult);
 
     if (response.ok) {
         return jsonResult;
+    } else {
+        throw jsonResult;
     }
-
-    throw jsonResult.message;
 };
 
 export const logout = (token) => {
