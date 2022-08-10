@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext';
 import './Header.scss';
@@ -16,24 +16,24 @@ function Header() {
 
     const userNavigation = (
         <div className="user">
-            <li className="navigation-list-item"> <NavLink className="button" to="/recipes">Recipes</NavLink></li >
+            <li className="navigation-list-item"><NavLink className="button" to="/recipes">Recipes</NavLink></li >
             <li className="navigation-list-item"><NavLink className="button" to="/new-recipe">New Recipe</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/my-recipes">My Recipes</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/my-favorites">My Favorites</NavLink></li>
-            <li className="navigation-list-item"> <NavLink className="button" to="/users"><i className="fas fa-user"></i> {user.username}</NavLink></li >
-            <li className="navigation-list-item button logout"> Logout</li >
+            <li className="navigation-list-item"><NavLink className="button" to="/users"><i className="fas fa-user"></i> {user.username}</NavLink></li >
+            <li className="navigation-list-item"><NavLink className="button logout" to="/logout">Logout</NavLink></li >
         </div >
     );
     return (
         <div className="Header">
             <div>
-                <a className="logo title" href="/">Just c<img className="logo-egg" src="/fried-egg.png" alt="Egg" /><img className="logo-egg" src="/fried-egg.png" alt="Egg" />k it!</a>
+                <Link className="logo title" to="/">Just c<img className="logo-egg" src="/fried-egg.png" alt="Egg" /><img className="logo-egg" src="/fried-egg.png" alt="Egg" />k it!</Link>
             </div>
 
             <nav className="navigation">
                 <ul>
                     {
-                    user
+                    user.username
                     ? userNavigation
                     : guestNavigation
                     }
