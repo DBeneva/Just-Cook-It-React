@@ -52,10 +52,10 @@ export const deleteRecipe = async (data) => {
 export const likeRecipe = async (data) => {
     return fetch(`${baseUrl}/recipes/${data.recipeId}/like`, {
         method: 'PUT',
-        body: data.user
-        // headers: {
-        //     'X-Authorization': data.user.token
-        // }
+        body: data.user,
+        headers: {
+            'X-Authorization': data.user.token
+        }
     }).then(res => res.json());
 };
 

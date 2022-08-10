@@ -11,14 +11,19 @@ function Recipe() {
     const { user } = useAuthContext();
     // const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const { recipeId } = useParams();
-    console.log('recipe id', recipeId);
-    console.log('user', user);
     const [recipe, setRecipe] = useState({});
-    
+
+    const like = () => {
+        contentService.likeRecipe({ recipeId, user })
+            .then((recipe) => {
+                setRecipe(state => ({ ...state, likedBy: recipe.likedBy }));
+            });
+    };
+
     const ingredients = recipe.ingredients?.split(', ').map((i, index) => <li className="ingredients-item" key={index}>{i}</li>);
     const instructions = recipe.instructions?.split('\n').map((p, i) => <p key={i}>{p}</p>);
 
-    const likeButton = <button className="like button">Like <i className="fas fa-thumbs-up"></i></button>;
+    const likeButton = <button className="like button" onClick={like}>Like <i className="fas fa-thumbs-up"></i></button>;
     const unlikeButton = <button className="unlike button">Unlike <i className="fas fa-thumbs-down"></i></button>;
     const ownerButtons = (
         <div className="owner-buttons">
@@ -27,10 +32,11 @@ function Recipe() {
         </div>
     );
 
+
     useEffect(() => {
         contentService.loadRecipe(recipeId)
             .then(recipe => {
-                console.log('recipe', recipe);
+                console.log('liked by', recipe.likedBy);
                 setRecipe(recipe);
             })
             .catch(err => {
@@ -38,13 +44,6 @@ function Recipe() {
                 navigate('/');
             });
     }, [recipeId]);
-
-    // useEffect(() => {
-    //     likeService.getPetLikes(petId)
-    //         .then((likes) => {
-    //             setPet(state => ({ ...state, likes }));
-    //         });
-    // }, []);
 
     return (
         <div className="Recipe">
@@ -98,7 +97,7 @@ function Recipe() {
                                 user.username
                                     ? recipe.owner === user._id
                                         ? ownerButtons
-                                        : recipe.likedBy?.includes(user._id)
+                                        : recipe.likedBy?.toString().includes(user._id)
                                             ? unlikeButton
                                             : likeButton
                                     : ''
