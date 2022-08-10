@@ -7,8 +7,8 @@ export const loadRecipes = async () => {
     return recipes;
 };
 
-export const loadRecipe = async (id, signal) => {
-    const response = await fetch(`${baseUrl}/recipes/${id}`, { signal });
+export const loadRecipe = async (id) => {
+    const response = await fetch(`${baseUrl}/recipes/${id}`);
     const recipe = await response.json();
     console.log(recipe);
     return recipe;
@@ -52,9 +52,10 @@ export const deleteRecipe = async (data) => {
 export const likeRecipe = async (data) => {
     return fetch(`${baseUrl}/recipes/${data.recipeId}/like`, {
         method: 'PUT',
-        headers: {
-            'X-Authorization': data.user.token
-        }
+        body: data.user
+        // headers: {
+        //     'X-Authorization': data.user.token
+        // }
     }).then(res => res.json());
 };
 
