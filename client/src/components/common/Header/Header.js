@@ -1,24 +1,26 @@
-import './Header.scss';
 import { NavLink } from 'react-router-dom';
 
-function Header() {
-    let user;
+import { useAuthContext } from '../../../contexts/AuthContext';
+import './Header.scss';
 
-    const userNavigation = (
-        <div className="user">
+function Header() {
+    const { user } = useAuthContext();
+
+    const guestNavigation = (
+        <div>
             <li className="navigation-list-item"><NavLink className="button" to="/recipes">Recipes</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/login">Login</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/register">Register</NavLink></li>
         </div>
     );
 
-    const guestNavigation = (
-        <div>
+    const userNavigation = (
+        <div className="user">
             <li className="navigation-list-item"> <NavLink className="button" to="/recipes">Recipes</NavLink></li >
             <li className="navigation-list-item"><NavLink className="button" to="/new-recipe">New Recipe</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/my-recipes">My Recipes</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/my-favorites">My Favorites</NavLink></li>
-            <li className="navigation-list-item"> <NavLink className="button" to="/users"><i className="fas fa-user"></i> John</NavLink></li >
+            <li className="navigation-list-item"> <NavLink className="button" to="/users"><i className="fas fa-user"></i> {user.username}</NavLink></li >
             <li className="navigation-list-item button logout"> Logout</li >
         </div >
     );
