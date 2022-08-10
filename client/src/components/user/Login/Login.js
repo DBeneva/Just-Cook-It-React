@@ -65,10 +65,9 @@ function Login() {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const { email, password } = Object.fromEntries(formData);
-        console.log(formData);
+        const { username, password } = Object.fromEntries(formData);
 
-        authService.login(email, password)
+        authService.login(username, password)
             .then((authData) => {
                 login(authData);
                 console.log('logged in');
