@@ -37,7 +37,7 @@ function getToken() {
 
         let user = JSON.parse(userItem);
 
-        return user.accessToken;
+        return user.token;
     } catch(err) {
         console.log(err);
     }

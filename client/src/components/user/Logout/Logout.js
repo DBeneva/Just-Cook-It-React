@@ -9,7 +9,7 @@ const Logout = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        authService.logout(user.accessToken)
+        authService.logout(user.token)
             .then(() => {
                 logout();
                 navigate('/');
