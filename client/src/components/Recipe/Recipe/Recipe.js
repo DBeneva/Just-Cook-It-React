@@ -27,14 +27,6 @@ function Recipe() {
         </div>
     );
 
-    /* <button *ngIf="recipe.isUser && !recipe.isOwner && !recipe.hasLiked" className="like" (click)="likeRecipe(recipe._id)"> */
-    /* Like <i className="fas fa-thumbs-up"></i></button> */
-    /* <button *ngIf="recipe.isUser && !recipe.isOwner && recipe.hasLiked" className="unlike" (click)="unlikeRecipe(recipe._id)"> */
-    /* Unlike <i className="fas fa-thumbs-down"></i></button> */
-    /* <div className="owner-buttons" *ngIf="recipe.isOwner"> */
-    /* <button className="edit-btn" routerLink="/recipes/{{recipe._id}}/edit">Edit</button> */
-    /* <button className="delete-btn" (click)="showDeleteModal(true)">Delete <i className="fa fa-trash"></i></button> */
-
     useEffect(() => {
         contentService.loadRecipe(recipeId)
             .then(recipe => {
@@ -106,7 +98,7 @@ function Recipe() {
                                 user.username
                                     ? recipe.owner === user._id
                                         ? ownerButtons
-                                        : recipe.likedBy.includes(user._id)
+                                        : recipe.likedBy?.includes(user._id)
                                             ? unlikeButton
                                             : likeButton
                                     : ''

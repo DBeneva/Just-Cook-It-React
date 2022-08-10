@@ -5,89 +5,58 @@
     width: 30%;
     height: calc(100vh - 74px);
 
-    // button[disabled], button[disabled]:hover {
-    //     background-color: #4a6a8b8c;
-    //     color: lightgray;
-    //     box-shadow: none;
-    //     cursor: default
-    // }
-
     @include title($primary-color, 0, 30px);
     @include button(20px, 0px);
     @include errorMessage();
-}
-
-.login {
-    color: $primary-color;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // min-height: 57.5vh;
-}
-
-h2 {
-    // font-family: "Merienda";
-    margin-left: -130px;
-}
-
-.field {
-    padding: 5px 0;
-}
-
-input {
-    font-size: 16px;
-    color: #4a6b8b;
-    width: 300px;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #4a6b8b;
-    border-left: 0.3em solid #4a6b8b;
-}
-
-input:-webkit-autofill {
-    color: #4a6b8b !important;
-}
-
-.input-untouched {
-    border-left: 0.3em solid #4a6b8b;
-}
-
-.input-valid {
-    border-left: 0.3em solid green;
-}
-
-.input-empty,
-.input-too-short {
-    border-left: 0.3em solid red;
-}
-
-.fas {
-    margin: 0 10px;
-}
-
-// button {
-//     text-decoration: none;
-//     font-family: Verdana;
-//     font-size: 20px;
-//     background-color: #4a6b8b;
-//     color: lightgray;
-//     padding: 10px 20px;
-//     border-radius: 15px;
-//     display: inline-block;
-//     margin: 15px auto;
-// }
+    .login {
+        color: $primary-color;
+    }
     
-// button:hover {
-//     background-color: lightgray;
-//     color: #4a6b8b;
-//     box-shadow: 2px 2px 5px 0 gray;
-// }
-
-.register-link a {
-    color: #4a6b8b;
-}
-
-.links {
-    text-align: center;
-    margin-right: 90px;
+    h2 {
+        margin-left: -130px;
+    }
+    
+    .field {
+        padding: 5px 0;
+    }
+    
+    input {
+        font-size: 16px;
+        color: #4a6b8b;
+        width: 300px;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #4a6b8b;
+        border-left: 0.3em solid #4a6b8b;
+    }
+    
+    input:-webkit-autofill {
+        color: #4a6b8b !important;
+    }
+    
+    .input-untouched {
+        border-left: 0.3em solid #4a6b8b;
+    }
+    
+    .input-valid {
+        border-left: 0.3em solid green;
+    }
+    
+    .input-empty,
+    .input-too-short {
+        border-left: 0.3em solid red;
+    }
+    
+    .fas {
+        margin: 0 10px;
+    }
+    
+    .register-link a {
+        color: #4a6b8b;
+    }
+    
+    .links {
+        text-align: center;
+        margin-right: 90px;
+    }
 }
