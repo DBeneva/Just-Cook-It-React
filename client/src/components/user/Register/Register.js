@@ -6,8 +6,8 @@ import * as authService from '../../../services/authService';
 import './Register.scss';
 
 function Register() {
-    const navigate = useNavigate();
     const { login } = useAuthContext();
+    const navigate = useNavigate();
 
     const initialState = {
         username: { value: '', status: 'untouched' },
@@ -108,26 +108,6 @@ function Register() {
         }));
     };
 
-
-    const onRegisterHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-        const { username, email, password } = Object.fromEntries(formData);
-        console.log(formData);
-
-        authService.login(username, email, password)
-            .then((authData) => {
-                login(authData);
-                console.log('registered');
-                navigate('/recipes');
-            })
-            .catch(err => {
-                // TODO: show notification
-                console.log(err);
-            });
-    };
-
     const showPassword = () => {
         setState(oldState => ({
             ...oldState,
@@ -140,6 +120,25 @@ function Register() {
             ...oldState,
             isVisibleRepass: !state.isVisibleRepass
         }));
+    };
+
+    const onRegisterHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const { username, email, password } = Object.fromEntries(formData);
+        console.log(formData);
+
+        authService.register(username, email, password)
+            .then((authData) => {
+                login(authData);
+                console.log('registered');
+                navigate('/recipes');
+            })
+            .catch(err => {
+                // TODO: show notification
+                console.log(err);
+            });
     };
 
     return (
