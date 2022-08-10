@@ -14,10 +14,12 @@ function Recipe() {
     console.log('recipe id', recipeId);
     console.log('user', user);
     const [recipe, setRecipe] = useState({});
+    
     const ingredients = recipe.ingredients?.split(', ').map((i, index) => <li className="ingredients-item" key={index}>{i}</li>);
     const instructions = recipe.instructions?.split('\n').map((p, i) => <p key={i}>{p}</p>);
-    const likeButton = <button className="like">Like <i className="fas fa-thumbs-up"></i></button>;
-    const unlikeButton = <button className="unlike">Unlike <i className="fas fa-thumbs-down"></i></button>;
+
+    const likeButton = <button className="like button">Like <i className="fas fa-thumbs-up"></i></button>;
+    const unlikeButton = <button className="unlike button">Unlike <i className="fas fa-thumbs-down"></i></button>;
     const ownerButtons = (
         <div className="owner-buttons">
             <Link className="edit-btn button" to={`/recipes/${recipeId}/edit`}>Edit</Link>
@@ -101,9 +103,13 @@ function Recipe() {
                                 <p>Liked by <span>{recipe.likedBy?.length}</span> {recipe.likedBy?.length !== 1 ? 'people' : 'person'}</p>
                             </div>
                             {
-                               user
-                               ? ownerButtons
-                               : likeButton
+                                user.username
+                                    ? recipe.owner === user._id
+                                        ? ownerButtons
+                                        : recipe.likedBy.includes(user._id)
+                                            ? unlikeButton
+                                            : likeButton
+                                    : ''
                             }
                         </div>
                     </div>
