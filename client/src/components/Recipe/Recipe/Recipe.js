@@ -20,11 +20,18 @@ function Recipe() {
             });
     };
 
+    const unlike = () => {
+        contentService.unlikeRecipe({ recipeId, user })
+            .then((recipe) => {
+                setRecipe(state => ({ ...state, likedBy: recipe.likedBy }));
+            });
+    };
+
     const ingredients = recipe.ingredients?.split(', ').map((i, index) => <li className="ingredients-item" key={index}>{i}</li>);
     const instructions = recipe.instructions?.split('\n').map((p, i) => <p key={i}>{p}</p>);
 
     const likeButton = <button className="like button" onClick={like}>Like <i className="fas fa-thumbs-up"></i></button>;
-    const unlikeButton = <button className="unlike button">Unlike <i className="fas fa-thumbs-down"></i></button>;
+    const unlikeButton = <button className="unlike button" onClick={unlike}>Unlike <i className="fas fa-thumbs-down"></i></button>;
     const ownerButtons = (
         <div className="owner-buttons">
             <Link className="edit-btn button" to={`/recipes/${recipeId}/edit`}>Edit</Link>
