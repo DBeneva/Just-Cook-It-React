@@ -23,14 +23,14 @@ export const loadMyFavorites = async (ownerId) => {
     return await request.get(`${baseUrl}/recipes/my-favorites`);
 };
 
-export const saveRecipe = async (data, token) => {
+export const saveRecipe = async (data, user) => {
     const response = await fetch(`${baseUrl}/recipes`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
-            'X-Authorization': token
+            'X-Authorization': user.token
         },
-        body: JSON.stringify({ ...data, likes: [] })
+        body: JSON.stringify({ ...data, likedBy: [], user })
     });
 
     return await response.json();
