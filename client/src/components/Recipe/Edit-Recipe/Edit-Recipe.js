@@ -25,13 +25,13 @@ function EditRecipe() {
     };
 
     const [state, setState] = useState(initialState);
-    const [recipeData, setRecipeData] = useState({});
 
     useEffect(() => {
         contentService.loadRecipe(recipeId)
             .then(recipe => {
                 console.log('recipe from content service', recipe);
-                setState({
+                setState(oldState => ({
+                    ...oldState,
                     recipeData: {
                         name: { value: recipe.name, status: 'untouched' },
                         time: { value: recipe.time, status: 'untouched' },
@@ -40,9 +40,8 @@ function EditRecipe() {
                         imageUrl: { value: recipe.imageUrl, status: 'untouched' }
                     },
                     submitDisabled: true
-                });
+                }));
 
-                setRecipeData(recipe);
                 console.log('recipe in state', state);
             })
             .catch(error => {
@@ -83,7 +82,6 @@ function EditRecipe() {
             ...oldState,
             recipeData: { ...oldState.recipeData, name: { value: currentInput, status: currentStatus } }
         }));
-        setRecipeData(oldState => ({ ...oldState, name: currentInput }));
     };
 
     const changeTime = (e) => {
@@ -96,7 +94,6 @@ function EditRecipe() {
             ...oldState,
             recipeData: { ...oldState.recipeData, time: { value: currentInput, status: currentStatus } }
         }));
-        setRecipeData(oldState => ({ ...oldState, time: currentInput }));
     };
 
     const changeIngredients = (e) => {
@@ -109,7 +106,6 @@ function EditRecipe() {
             ...oldState,
             recipeData: { ...oldState.recipeData, ingredients: { value: currentInput, status: currentStatus } }
         }));
-        setRecipeData(oldState => ({ ...oldState, ingredients: currentInput }));
     };
 
     const changeInstructions = (e) => {
@@ -122,7 +118,6 @@ function EditRecipe() {
             ...oldState,
             recipeData: { ...oldState.recipeData, instructions: { value: currentInput, status: currentStatus } }
         }));
-        setRecipeData(oldState => ({ ...oldState, instructions: currentInput }));
     };
 
     const changeImageUrl = (e) => {
@@ -139,20 +134,24 @@ function EditRecipe() {
             ...oldState,
             recipeData: { ...oldState.recipeData, imageUrl: { value: currentInput, status: currentStatus } }
         }));
-        setRecipeData(oldState => ({ ...oldState, imageUrl: currentInput }));
     };
 
     const editRecipe = (e) => {
         e.preventDefault();
 
+        const recipeData = Object.entries(state.recipeData).reduce((acc, [k, v]) => Object.assign(acc, { [k]: v.value }), { _id: recipeId });
+        
         console.log('recipeData to be sent to recipe service', recipeData);
+        
         contentService.updateRecipe({ ...recipeData, user })
-            .then((updatedRecipe) => {
-                console.log(updatedRecipe);
+            .then(() => {
                 navigate('/recipes');
             })
-            .catch(err => {
-                setError(err);
+            .catch((error) => {
+                console.log('error from server update recipe', error);
+                setError(error);
+                setState(oldState => ({ ...oldState, submitDisabled: true }));
+                throw new Error(error.message);
             });
     };
 
@@ -168,7 +167,7 @@ function EditRecipe() {
                 <div className="title-section">
                     <div className="recipe-title">
                         <label htmlFor="recipeName">Title <span className="red">*</span></label>
-                        <input type="text" name="recipeName" id="recipeName" required minLength="5"
+                        <input type="text" name="recipeName" id="recipeName" required minLength="3"
                             defaultValue={state.recipeData.name.value}
                             onInput={changeRecipeName} />
                         {state.recipeData.name.status === 'empty' && <p className="error">Recipe name is required!</p>}

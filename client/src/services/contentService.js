@@ -46,7 +46,13 @@ export const updateRecipe = async (data) => {
         body: JSON.stringify(data)
     });
 
-    return await response.json();
+    const jsonResult = await response.json();
+
+    if (response.ok) {
+        return jsonResult;
+    } else {
+        throw jsonResult;
+    }
 };
 
 export const deleteRecipe = async (data) => {
