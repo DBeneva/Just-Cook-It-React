@@ -13,6 +13,7 @@ import Login from './components/user/Login/Login';
 import Register from './components/user/Register/Register';
 import Logout from './components/user/Logout/Logout';
 import NewRecipe from './components/Recipe/New-Recipe/New-Recipe';
+import EditRecipe from './components/Recipe/Edit-Recipe/Edit-Recipe';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/recipes/" element={<Recipes />} />
           <Route path="/recipes/:recipeId" element={<Recipe />} />
           <Route path="/new-recipe" element={<NewRecipe />} />
+          <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />

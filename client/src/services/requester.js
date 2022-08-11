@@ -13,7 +13,7 @@ export const request = async (method, url, data) => {
             body: JSON.stringify(data)
         });
     }
-    
+
     return result.then(responseHandler);
 };
 
@@ -32,13 +32,13 @@ function getToken() {
         let userItem = localStorage.getItem('user');
 
         if (!userItem) {
-            throw {message: 'You must be authenticated'};
+            throw { message: 'You must be authenticated' };
         }
 
         let user = JSON.parse(userItem);
 
         return user.token;
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }

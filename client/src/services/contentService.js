@@ -37,7 +37,16 @@ export const saveRecipe = async (data, user) => {
 };
 
 export const updateRecipe = async (data) => {
-    await request.put(`${baseUrl}/pets/${data.recipeId}`, data.recipeData);
+    const response = await fetch(`${baseUrl}/recipes/${data._id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': data.user.token
+        },
+        body: JSON.stringify(data)
+    });
+
+    return await response.json();
 };
 
 export const deleteRecipe = async (data) => {
