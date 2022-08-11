@@ -141,17 +141,13 @@ function EditRecipe() {
 
         const recipeData = Object.entries(state.recipeData).reduce((acc, [k, v]) => Object.assign(acc, { [k]: v.value }), { _id: recipeId });
         
-        console.log('recipeData to be sent to recipe service', recipeData);
-        
         contentService.updateRecipe({ ...recipeData, user })
             .then(() => {
                 navigate('/recipes');
             })
             .catch((error) => {
-                console.log('error from server update recipe', error);
                 setError(error);
                 setState(oldState => ({ ...oldState, submitDisabled: true }));
-                throw new Error(error.message);
             });
     };
 
