@@ -8,7 +8,6 @@ import './Edit-Recipe.scss';
 
 function EditRecipe() {
     const { recipeId } = useParams();
-    console.log('recipe id from params', recipeId);
     const { user } = useAuthContext();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -29,7 +28,6 @@ function EditRecipe() {
     useEffect(() => {
         contentService.loadRecipe(recipeId)
             .then(recipe => {
-                console.log('recipe from content service', recipe);
                 setState(oldState => ({
                     ...oldState,
                     recipeData: {
@@ -64,9 +62,6 @@ function EditRecipe() {
                 state.recipeData.imageUrl.status === 'valid' || 'untouched'
             )
         }));
-
-        console.log('state changed', state);
-
     }, [state.recipeData.name.value, state.recipeData.time.value, state.recipeData.ingredients.value, state.recipeData.instructions.value, state.recipeData.imageUrl.value]);
 
 
@@ -127,8 +122,6 @@ function EditRecipe() {
             : !/^https?:\/\/.+/.test(currentInput)
                 ? 'invalid'
                 : 'valid';
-
-        console.log(currentInput, currentStatus);
 
         setState(oldState => ({
             ...oldState,
