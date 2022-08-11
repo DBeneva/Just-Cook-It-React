@@ -71,7 +71,7 @@ function Login() {
             .then((authData) => {
                 login(authData);
                 console.log('logged in');
-                navigate('/recipes');
+                navigate(-1);
             })
             .catch(err => {
                 setError(err);
