@@ -15,7 +15,6 @@ import Logout from './components/user/Logout/Logout';
 import NewRecipe from './components/Recipe/NewRecipe/NewRecipe';
 import EditRecipe from './components/Recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
-import PrivateRoute from './components/common/PrivateRoute/PrivateRoute';
 import MyRecipes from './components/Recipe/MyRecipes/MyRecipes';
 import MyFavorites from './components/Recipe/MyFavorites/MyFavorites';
 
