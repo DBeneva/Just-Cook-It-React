@@ -2,10 +2,11 @@
 
 
 .Recipe {
-    min-height: calc(100vh - 74px);
+    height: 100%;
     margin: 130px auto;
     opacity: 1;
     animation: 'appearing' .5s;
+    position: relative;
 
     @include button(10px, 10px);
 
@@ -122,15 +123,6 @@
       
     .owner-buttons {
         margin-left: 180px;
-    }
-    
-    .delete-btn {
-        color: rgb(239, 94, 94);
-    }
-    
-    .delete-btn:hover {
-        background-color: rgb(239, 94, 94);
-        color: lightgray;
     }
     
     .error {

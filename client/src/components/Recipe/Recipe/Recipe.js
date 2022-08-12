@@ -5,11 +5,12 @@ import * as contentService from '../../../services/contentService';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
 import './Recipe.scss';
+import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
 
 function Recipe() {
     const navigate = useNavigate();
     const { user } = useAuthContext();
-    // const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
 
@@ -27,6 +28,20 @@ function Recipe() {
             });
     };
 
+    const deleteHandler = (e) => {
+        e.preventDefault();
+
+        contentService.deleteRecipe({ recipeId, user })
+            .then(() => navigate('/recipes'))
+            .finally(() => setShowDeleteModal(false));
+    };
+
+    const deleteClickHandler = (e) => {
+        e.preventDefault();
+
+        setShowDeleteModal(true);
+    };
+
     const ingredients = recipe.ingredients?.split(', ').map((i, index) => <li className="ingredients-item" key={index}>{i}</li>);
     const instructions = recipe.instructions?.split('\n').map((p, i) => <p key={i}>{p}</p>);
 
@@ -35,10 +50,9 @@ function Recipe() {
     const ownerButtons = (
         <div className="owner-buttons">
             <Link className="edit-btn button" to={`/recipes/${recipeId}/edit`}>Edit</Link>
-            <button className="delete-btn button">Delete <i className="fa fa-trash"></i></button>
+            <button className="delete-btn button" onClick={deleteClickHandler}>Delete <i className="fa fa-trash"></i></button>
         </div>
     );
-
 
     useEffect(() => {
         contentService.loadRecipe(recipeId)
@@ -54,13 +68,13 @@ function Recipe() {
 
     return (
         <div className="Recipe">
-            {/* <app-delete-recipe [recipeName]="recipe.name" [recipeId]="recipe._id" (hideModal)="showDeleteModal(false)" *ngIf="isDeletingRecipe"></app-delete-recipe> */}
-            {/* <div className="back-btn"><i (click)="back()" className="fa fa-arrow-circle-left"></i></div> */}
-            {/* <ng-container *ngIf="error">
-        <p className="error">
-            {{error}}
-        </p>
-    </ng-container> */}
+            <ConfirmationModal
+                show={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                onSave={deleteHandler}
+                toBeDeleted={'recipe'}
+                name={recipe.name}
+            />
             {recipe
                 ?
                 <div className="card">

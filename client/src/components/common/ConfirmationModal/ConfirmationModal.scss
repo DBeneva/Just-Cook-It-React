@@ -1,0 +1,43 @@
+@import '../../../index.scss';
+
+.ConfirmationModal {
+    position: absolute;
+    top: calc(100% - 100px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: lightgray;
+    // color: #4a6b8b;
+    width: 530px;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px 0 gray;
+    text-align: center;
+    padding: 30px;
+    outline: 1700px solid rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    line-height: 1.7;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    .name {
+        font-family: "Merienda";
+        color: red;
+    }
+
+    @include button(20px, 10px);
+    // @include title($primary-color, 0px, 0px);
+
+    .button:not(.delete-btn) {
+        background-color: $secondary-color;
+        color: $primary-color;
+    }
+
+    .button:hover:not(.delete-btn) {
+        background-color: $primary-color;
+        color: $secondary-color;
+    }
+
+    .delete-btn {
+        background-color: $secondary-color;
+    }
+}

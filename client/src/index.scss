@@ -94,6 +94,15 @@ h2 {
     box-shadow: none;
     cursor: default
   }
+
+  .delete-btn {
+    color: rgb(239, 94, 94);
+  }
+
+  .delete-btn:hover {
+    background-color: rgb(239, 94, 94);
+    color: lightgray;
+  }
 }
 
 @mixin errorMessage() {
