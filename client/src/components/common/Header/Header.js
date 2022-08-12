@@ -17,9 +17,9 @@ function Header() {
     const userNavigation = (
         <div className="user">
             <li className="navigation-list-item"><NavLink className="button" to="/recipes">Recipes</NavLink></li >
-            <li className="navigation-list-item"><NavLink className="button" to="/new-recipe">New Recipe</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/my-recipes">My Recipes</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/my-favorites">My Favorites</NavLink></li>
+            <li className="navigation-list-item"><NavLink className="button" to="/recipes/new-recipe">New Recipe</NavLink></li>
+            <li className="navigation-list-item"><NavLink className="button" to="/recipes/my-recipes">My Recipes</NavLink></li>
+            <li className="navigation-list-item"><NavLink className="button" to="/recipes/my-favorites">My Favorites</NavLink></li>
             <li className="navigation-list-item"><NavLink className="button" to="/users"><i className="fas fa-user"></i> {user.username}</NavLink></li >
             <li className="navigation-list-item"><NavLink className="button logout" to="/logout">Logout</NavLink></li >
         </div >

@@ -30,7 +30,7 @@ function App() {
           <Route path="/recipes/:recipeId" element={<Recipe />} />
           <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route element={<GuardedRoute />}>
-            <Route path="/new-recipe" element={<NewRecipe />} />
+            <Route path="/recipes/new-recipe" element={<NewRecipe />} />
           </Route>
           <Route element={<PrivateRoute />}>
           </Route>
