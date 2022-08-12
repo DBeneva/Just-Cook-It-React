@@ -12,8 +12,8 @@ import Recipe from './components/Recipe/Recipe/Recipe';
 import Login from './components/user/Login/Login';
 import Register from './components/user/Register/Register';
 import Logout from './components/user/Logout/Logout';
-import NewRecipe from './components/Recipe/New-Recipe/New-Recipe';
-import EditRecipe from './components/Recipe/Edit-Recipe/Edit-Recipe';
+import NewRecipe from './components/Recipe/NewRecipe/NewRecipe';
+import EditRecipe from './components/Recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
 import PrivateRoute from './components/common/PrivateRoute/PrivateRoute';
 

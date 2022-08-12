@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import * as contentService from '../../../services/contentService';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
-import './New-Recipe.scss';
+import './NewRecipe.scss';
 
 function NewRecipe() {
     const { user } = useAuthContext();
@@ -118,7 +118,7 @@ function NewRecipe() {
     };
 
     return (
-        <div className="New-Recipe">
+        <div className="NewRecipe">
             <div className="page-title">
                 <h2 className="title">New Recipe</h2>
             </div>

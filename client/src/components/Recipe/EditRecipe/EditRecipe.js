@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import * as contentService from '../../../services/contentService';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
-import './Edit-Recipe.scss';
+import './EditRecipe.scss';
 
 function EditRecipe() {
     const { recipeId } = useParams();
@@ -145,7 +145,7 @@ function EditRecipe() {
     };
 
     return (
-        <div className="Edit-Recipe">
+        <div className="EditRecipe">
             <div className="page-title">
                 <h2 className="title">Edit Recipe</h2>
             </div>
