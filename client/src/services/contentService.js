@@ -14,12 +14,21 @@ export const loadRecipe = async (id) => {
     return recipe;
 };
 
-export const loadMyRecipes = async (ownerId) => {
-    // const query = encodeURIComponent(`_ownerId="${ownerId}"`);
-    return await request.get(`${baseUrl}/recipes/my-recipes`);
+
+export const loadMyRecipes = async (user) => {
+    const response = await fetch(`${baseUrl}/recipes/my-recipes`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.token
+        }
+    });
+    
+    return await response.json();
 };
 
 export const loadMyFavorites = async (ownerId) => {
+    // const query = encodeURIComponent(`_ownerId="${ownerId}"`);
     return await request.get(`${baseUrl}/recipes/my-favorites`);
 };
 

@@ -16,6 +16,7 @@ import NewRecipe from './components/Recipe/NewRecipe/NewRecipe';
 import EditRecipe from './components/Recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
 import PrivateRoute from './components/common/PrivateRoute/PrivateRoute';
+import MyRecipes from './components/Recipe/MyRecipes/MyRecipes';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route element={<GuardedRoute />}>
             <Route path="/recipes/new-recipe" element={<NewRecipe />} />
+            <Route path="/recipes/my-recipes" element={<MyRecipes />} />
           </Route>
           <Route element={<PrivateRoute />}>
           </Route>
