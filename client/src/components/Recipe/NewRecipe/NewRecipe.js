@@ -17,7 +17,7 @@ function NewRecipe() {
         ingredients: { value: '', status: 'untouched' },
         instructions: { value: '', status: 'untouched' },
         imageUrl: { value: '', status: 'untouched' },
-        submitDisabled: false
+        submitDisabled: true
     };
 
     const [state, setState] = useState(initialState);
@@ -161,7 +161,7 @@ function NewRecipe() {
                 </div>
                 <div className="buttons">
                     <Link to="/recipes" className="cancel button">Cancel</Link>
-                    <button type="submit" className="submit button">Create a New Recipe</button>
+                    <button type="submit" className="submit button" disabled={state.submitDisabled}>Create a New Recipe</button>
                 </div>
             </form >
         </div >
