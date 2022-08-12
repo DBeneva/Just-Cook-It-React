@@ -17,6 +17,7 @@ import EditRecipe from './components/Recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
 import PrivateRoute from './components/common/PrivateRoute/PrivateRoute';
 import MyRecipes from './components/Recipe/MyRecipes/MyRecipes';
+import MyFavorites from './components/Recipe/MyFavorites/MyFavorites';
 
 function App() {
   return (
@@ -29,12 +30,11 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/recipes/" element={<Recipes />} />
           <Route path="/recipes/:recipeId" element={<Recipe />} />
-          <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route element={<GuardedRoute />}>
+            <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
             <Route path="/recipes/new-recipe" element={<NewRecipe />} />
             <Route path="/recipes/my-recipes" element={<MyRecipes />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
+            <Route path="/recipes/my-favorites" element={<MyFavorites />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

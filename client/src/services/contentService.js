@@ -27,9 +27,16 @@ export const loadMyRecipes = async (user) => {
     return await response.json();
 };
 
-export const loadMyFavorites = async (ownerId) => {
-    // const query = encodeURIComponent(`_ownerId="${ownerId}"`);
-    return await request.get(`${baseUrl}/recipes/my-favorites`);
+export const loadMyFavorites = async (user) => {
+    const response = await fetch(`${baseUrl}/recipes/my-favorites`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.token
+        }
+    });
+    
+    return await response.json();
 };
 
 export const saveRecipe = async (data, user) => {
