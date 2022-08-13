@@ -36,3 +36,22 @@ export const deleteAccount = async (user) => {
         throw jsonResult;
     }
 };
+
+export const changePassword = async (oldPassword, newPassword, user) => {
+    const response = await fetch(`${baseUrl}/users/${user._id}/change-password`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.token
+        },
+        body: JSON.stringify({ oldPassword, newPassword })
+    });
+
+    const jsonResult = await response.json();
+
+    if (response.ok) {
+        return jsonResult;
+    } else {
+        throw jsonResult;
+    }
+};
