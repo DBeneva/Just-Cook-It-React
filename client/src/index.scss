@@ -135,7 +135,7 @@ h2 {
   .input-empty,
   .input-too-short,
   .input-no-special-symbol,
-  .input-cyrillic-letters,
+  .input-non-latin-letters,
   .input-non-alphanumeric .input-no-match {
     border-left: 0.3em solid red;
   }

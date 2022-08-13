@@ -76,7 +76,7 @@ function Register() {
             : currentInput.length < 5
                 ? 'too-short'
                 : /[а-яА-Я]/.test(currentInput)
-                    ? 'cyrillic-letters'
+                    ? 'non-latin-letters'
                     : !/[\!\?@\#\$%\^\&\*\(\)]/.test(currentInput)
                         ? 'no-special-symbol'
                         : 'valid';
