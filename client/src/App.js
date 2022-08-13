@@ -20,6 +20,7 @@ import MyFavorites from './components/recipe/MyFavorites/MyFavorites';
 import Account from './components/user/account/Account/Account';
 import EditAccount from './components/user/account/EditAccount/EditAccount';
 import ChangePassword from './components/user/account/ChangePassword/ChangePassword';
+import NotFound from './components/static/NotFound/NotFound';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer></Footer>
