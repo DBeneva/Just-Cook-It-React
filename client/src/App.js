@@ -6,7 +6,7 @@ import './App.css';
 import Home from './components/Home/Home';
 import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
-import About from './components/About/About';
+import About from './components/static/About/About';
 import Recipes from './components/recipe/Recipes/Recipes';
 import Recipe from './components/recipe/Recipe/Recipe';
 import Login from './components/user/Login/Login';
