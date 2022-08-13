@@ -7,16 +7,16 @@ import Home from './components/Home/Home';
 import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
 import About from './components/About/About';
-import Recipes from './components/Recipe/Recipes/Recipes';
-import Recipe from './components/Recipe/Recipe/Recipe';
+import Recipes from './components/recipe/Recipes/Recipes';
+import Recipe from './components/recipe/Recipe/Recipe';
 import Login from './components/user/Login/Login';
 import Register from './components/user/Register/Register';
 import Logout from './components/user/Logout/Logout';
-import NewRecipe from './components/Recipe/NewRecipe/NewRecipe';
-import EditRecipe from './components/Recipe/EditRecipe/EditRecipe';
+import NewRecipe from './components/recipe/NewRecipe/NewRecipe';
+import EditRecipe from './components/recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
-import MyRecipes from './components/Recipe/MyRecipes/MyRecipes';
-import MyFavorites from './components/Recipe/MyFavorites/MyFavorites';
+import MyRecipes from './components/recipe/MyRecipes/MyRecipes';
+import MyFavorites from './components/recipe/MyFavorites/MyFavorites';
 
 function App() {
   return (

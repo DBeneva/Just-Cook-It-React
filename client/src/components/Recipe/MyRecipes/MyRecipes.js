@@ -21,43 +21,37 @@ function MyRecipes() {
             });
     }, []);
 
-    const back = () => {
-        navigate(-1);
-    };
-
     const buttons = user.username
         ? (
             <div>
                 <p>Add one right away!</p>
                 <Link className="button" to="/recipes/new-recipe">Add New Recipe</Link>
-                <Link className="button" onClick={back}>Go Back</Link>
+                <button className="button" onClick={() => navigate(-1)}>Go Back</button>
             </div>
         )
         : <Link className="button" to="/">Go back home</Link>;
 
     return (
         <div className="MyRecipes">
-            <div className="title">
-                <h2>My Recipes</h2>
-            </div>
             {/* <!-- <app-loading-recipes *ngIf="!myRecipes"></app-loading-recipes> --> */}
             {
                 myRecipes && myRecipes.length > 0
                     ?
                     (
                         <div className="recipes">
+                            <h2 className="title">My Recipes</h2>
                             {myRecipes.map(r => <RecipeCard key={r._id} recipe={r} />)}
                         </div>
                     )
                     : myRecipes && myRecipes.length == 0
                         ?
                         (
-                            <div>
+                            <div className="no-recipes">
                                 <h2 className="title">Sorry, you have currently no recipes.</h2>
                                 {buttons}
                             </div>
                         )
-                        : <div className = "loader"></div >
+                        : <div className="loader"></div >
             }
         </div>
     )
