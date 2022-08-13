@@ -17,6 +17,7 @@ import EditRecipe from './components/recipe/EditRecipe/EditRecipe';
 import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
 import MyRecipes from './components/recipe/MyRecipes/MyRecipes';
 import MyFavorites from './components/recipe/MyFavorites/MyFavorites';
+import Account from './components/user/account/Account/Account';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/recipes/new-recipe" element={<NewRecipe />} />
             <Route path="/recipes/my-recipes" element={<MyRecipes />} />
             <Route path="/recipes/my-favorites" element={<MyFavorites />} />
+            <Route path="/users/:userId" element={<Account />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
