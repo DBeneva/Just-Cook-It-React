@@ -1,0 +1,89 @@
+@import '../../../../index.scss';
+
+.EditAccount {
+    width: 35%;
+    // color: #4a6b8b;
+    margin: 105px auto;
+    // min-height: 63.2vh;
+    background-color: rgba(211, 211, 211, 0.499);
+    padding: 0px 40px 20px 40px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 0px #4a6a8b9c;
+
+    h2 {
+        img {
+            width: 100px;
+            margin-top: 50px;
+        }
+    }
+
+    .field {
+        padding: 1px 0;
+        margin: 20px 0;
+    }
+
+    // input {
+    //     width: 300px;
+    //     padding: 12px;
+    //     border-radius: 10px;
+    //     border: 1px solid #4a6b8b;
+    //     border-left: 0.3em solid #4a6b8b;
+    //     width: 90%;
+    //     color: #4a6b8b;
+    //     font-family: Verdana;
+    //     font-size: 14px;
+    // }
+
+    img {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    .fas {
+        margin-right: 10px;
+        width: 20px;
+    }
+
+    .change-password {
+        margin-top: 30px;
+    }
+
+    @include buttons(40px, 10px);
+    @include title($primary-color, 0px, 20px);
+    @include errorMessage();
+    @include input();
+
+    .button {
+        background-color: transparent;
+        color: $primary-color;
+
+        &:hover {
+            background-color: $primary-color;
+            color: $secondary-color;
+        }
+    }
+
+    .delete-btn {
+        color: rgb(239, 94, 94);
+
+        &:hover {
+            background-color: rgb(239, 94, 94);
+            color: lightgray;
+        }
+    }
+
+    .button:disabled {
+        color: gray;
+        background-color: transparent;
+
+        &:hover {
+            color: gray;
+            background-color: transparent;        
+        }
+    }
+
+    .cancel-btn:hover {
+        background-color: gray;
+        color: lightgray;
+    }
+}
