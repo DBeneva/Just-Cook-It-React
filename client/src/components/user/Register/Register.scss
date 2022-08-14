@@ -5,11 +5,6 @@
     width: 30%;
     height: calc(100vh - 74px);
 
-    @include title($primary-color, 0, 30px);
-    @include button(20px, 0px);
-    @include errorMessage(0 0 10px 35px);
-    @include input();
-
     .register {
         color: $primary-color;
         margin: 30px 0 91px 0;
@@ -59,4 +54,13 @@
         text-align: center;
         margin-right: 90px;
     }
+    
+    .fas {
+        margin: 0 10px;
+    }
+
+    @include title($primary-color, 0, 30px);
+    @include button(20px, 0px);
+    @include errorMessage(0 0 10px 35px);
+    @include input();
 }

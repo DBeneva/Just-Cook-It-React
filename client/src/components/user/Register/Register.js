@@ -59,7 +59,7 @@ function Register() {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
             ? 'empty'
-            : !/[a-z]+\@[a-z]+\.[a-z]+/.test(currentInput)
+            : !/^[a-z]+\@[a-z]+\.[a-z]+$/.test(currentInput)
                 ? 'invalid'
                 : 'valid';
 
@@ -185,14 +185,14 @@ function Register() {
 
                 {state.password.status === 'empty' && <p className="error">Password is required!</p>}
                 {state.password.status === 'too-short' && <p className="error">Password must be at least 5 characters!</p>}
-                {state.password.status === 'cyrillic-letters' && <p className="error">Latin characters only!</p>}
+                {state.password.status === 'non-latin-letters' && <p className="error">Latin characters only!</p>}
                 {state.password.status === 'no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="repass"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.repass.status}`} type={state.isVisibleRepass ? 'text' : 'password'} name="repass" id="repass" placeholder="******"
-                        onChange={changeRepass}
                         onFocus={changeRepass}
+                        onChange={changeRepass}
                     />
                     <i className={state.isVisibleRepass ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showRepass}></i>
                 </p>

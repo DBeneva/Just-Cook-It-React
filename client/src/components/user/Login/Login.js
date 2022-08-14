@@ -89,7 +89,8 @@ function Login() {
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
                     <input className={`input-${state.username.status}`} type="text" name="username" id="username"
                         placeholder="Johny" required
-                        onInput={changeUsername}
+                        onFocus={changeUsername}
+                        onChange={changeUsername}
                         />
                 </p>
 
@@ -100,6 +101,7 @@ function Login() {
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
                         required
+                        onFocus={changePassword}
                         onChange={changePassword}
                     />
 
