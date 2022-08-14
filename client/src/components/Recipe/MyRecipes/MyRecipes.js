@@ -17,6 +17,7 @@ function MyRecipes() {
         contentService.loadMyRecipes(user)
             .then(recipes => setMyRecipes(recipes))
             .catch(err => {
+                setError(err);
                 console.log(`Error: ${err}`);
             });
     }, []);
@@ -33,7 +34,8 @@ function MyRecipes() {
 
     return (
         <div className="MyRecipes">
-            {/* <!-- <app-loading-recipes *ngIf="!myRecipes"></app-loading-recipes> --> */}
+            {error && <p className="error">{error.message}</p>}
+
             {
                 myRecipes && myRecipes.length > 0
                     ?
@@ -55,12 +57,6 @@ function MyRecipes() {
             }
         </div>
     )
-
-    {/* <ng-container *ngIf="error">
-            <p className="error">
-                {{error}}
-            </p>
-        </ng-container> */}
 }
 
 
