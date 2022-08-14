@@ -1,27 +1,41 @@
-$primary-color: #4a6b8b;
-$secondary-color: lightgray;
-$font-title: 'Merienda';
-$font-body-text: Verdana;
-$button-shadow: 0 0 8px 0 gray;
-$card-shadow: 2px 2px 20px 0 gray;
-
+/* Box Sizing */
 *,
 *::after,
 *::before {
   box-sizing: border-box;
 }
 
+/* Fonts */
+$font-title: 'Merienda';
+$font-body-text: Verdana;
+
+/* Colors */
+$primary-color: #4a6b8b;
+$secondary-color: lightgray;
+$disabled-btn-background: #4a6a8b8c;
+$input-focus-background: #4a6a8b2d;
+$delete-btn-color: #EF5E5E;
+$success-color: green;
+$error-color: red;
+
+/* Shadows */
+$button-shadow: 0 0 8px 0 gray;
+$card-shadow: 2px 2px 20px 0 gray;
+
+/* Text & Links */
 html,
 a {
   font-family: $font-body-text;
   color: $primary-color;
 }
 
+/* Selection */
 *::selection {
   color: $secondary-color;
   background-color: $primary-color;
 }
 
+/* Block Elements Margin */
 body,
 p,
 ul,
@@ -34,6 +48,7 @@ h6 {
   margin: 0;
 }
 
+/* Titles */
 h1,
 h2,
 h3,
@@ -59,6 +74,7 @@ h2 {
   }
 }
 
+/* Buttons */
 @mixin buttons($margin-tb, $margin-lr) {
   .buttons {
     display: flex;
@@ -90,67 +106,66 @@ h2 {
 
   .button[disabled],
   .button[disabled]:hover {
-    background-color: #4a6a8b8c;
-    color: lightgray;
+    background-color: $disabled-btn-background;
+    color: $secondary-color;
     box-shadow: none;
-    cursor: default
+    cursor: default;
   }
 
   .delete-btn {
-    color: rgb(239, 94, 94);
+    color: $delete-btn-color;
   }
 
   .delete-btn:hover {
-    background-color: rgb(239, 94, 94);
-    color: lightgray;
+    background-color: $delete-btn-color;
+    color: $secondary-color;
   }
 }
 
+/* Input Fields */
 @mixin input() {
   input {
     font-size: 16px;
     width: 300px;
     padding: 15px;
     border-radius: 10px;
-    border: 1px solid #4a6b8b;
-    border-left: 0.3em solid #4a6b8b;
   }
 
   input:focus {
-    border: 2px solid #4a6b8b;
-    border-left: 0.3em solid #4a6b8b;
-    background-color: #4a6a8b2d;
+    background-color: $input-focus-background;
     outline: none;
     box-shadow: none;
   }
 
   .input-untouched {
-    border-left: 0.3em solid #4a6b8b;
+    @include inputBorder($primary-color);
   }
 
   .input-valid {
-    border-left: 0.3em solid green;
+    @include inputBorder($success-color);
   }
 
-  .input-empty,
-  .input-too-short,
-  .input-no-special-symbol,
-  .input-non-latin-letters,
-  .input-non-alphanumeric .input-no-match {
-    border-left: 0.3em solid red;
-  }
+  .input-invalid {
+    @include inputBorder($error-color);
+  }  
 }
 
+@mixin inputBorder($color) {
+  border: 1px solid $primary-color;
+  border-left: 0.3em solid $color;
+}
+
+/* Error Messages */
 @mixin errorMessage($padding) {
   .error {
-    color: red;
+    color: $error-color;
     font-size: 14px;
     padding: $padding;
     margin: 0;
   }
 }
 
-
+/* Background Image with 80% Opacity */
 @mixin background-opacity-80($image) {
   background-image: linear-gradient(rgba(255, 255, 255, 0.2),
     rgba(255, 255, 255, 0.2)),
