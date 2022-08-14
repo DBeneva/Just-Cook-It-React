@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import './Home.scss';
 
 function Home() {
