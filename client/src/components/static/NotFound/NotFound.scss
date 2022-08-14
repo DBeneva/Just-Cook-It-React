@@ -3,8 +3,8 @@
 .NotFound {
     @include page-layout(0, 100%, 100vh);
     @include flex-column();
-    @include back-btn(155px, 150px);
-    @include title($primary-color, 150px, 40px);
+    @include back-btn(185px, 150px);
+    @include title($primary-color, 150px, 40px, 40px);
     
     img {
         display: block;

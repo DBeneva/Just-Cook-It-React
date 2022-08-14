@@ -8,7 +8,7 @@
     }
 
     @include page-layout(50px, 100%, calc(100vh - 120px));
-    @include title($primary-color, 80px, 30px);
+    @include title($primary-color, 80px, 30px, 40px);
     @include background-opacity-80('spices.jpg');
     @include buttons(20px, 5px);    
 }

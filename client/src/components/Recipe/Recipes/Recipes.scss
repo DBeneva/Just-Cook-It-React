@@ -20,7 +20,7 @@
         margin: 120px auto;
         text-align: center;
     
-        @include title($primary-color, 60px, 40px);
+        @include title($primary-color, 60px, 40px, 40px);
         @include button(40px, 10px);
     }
 

@@ -26,6 +26,6 @@
         display: inline-block;
     }
 
-    @include title($secondary-color, 0, 0);
+    @include title($secondary-color, 0, 0, 40px);
     @include button(0, 5px);
 }

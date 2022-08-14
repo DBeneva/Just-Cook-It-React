@@ -69,7 +69,7 @@
     }
 
     @include button(10px, 10px);
-    @include title($primary-color, 0, 30px);
+    @include title($primary-color, 0, 30px, 40px);
     @include error-message(0 0 10px 35px);
 
     // .buttons {

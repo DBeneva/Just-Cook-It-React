@@ -9,6 +9,6 @@
     }    
     
     @include page-layout(0, 60%, auto);
-    @include back-btn(155px, 150px);
-    @include title($primary-color, 150px, 20px);
+    @include back-btn(185px, 150px);
+    @include title($primary-color, 150px, 20px, 40px);
 }
