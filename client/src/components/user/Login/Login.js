@@ -8,8 +8,6 @@ import getPasswordProperty from '../../../utils/getPasswordProperty';
 import getUsernameStatus from '../../../utils/getUsernameStatus';
 import getPasswordStatus from '../../../utils/getPasswordStatus';
 
-import './Login.scss';
-
 function Login() {
     const initialState = {
         username: { value: '', status: 'untouched' },
@@ -74,13 +72,13 @@ function Login() {
     };
 
     return (
-        <div className="Login">
+        <div className="Register-Login">
             <form method="post" onSubmit={onLoginHandler}>
                 <h2 className="title">Login Form</h2>
 
                 {error && <p className="error">{error.message}</p>}
 
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
                     <input
                         className={`input-${state.username.status}`}
@@ -92,12 +90,12 @@ function Login() {
                         onFocus={changeUsername}
                         onChange={changeUsername}
                     />
-                </p>
+                    {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                    {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
+                </div>
 
-                {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
-                {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input
                         className={`input-${state.password.status}`}
@@ -108,12 +106,10 @@ function Login() {
                         onFocus={changePassword}
                         onChange={changePassword}
                     />
-
                     <i className={state.visiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
-
-                </p>
-                {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
-                {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                    {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
+                    {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                </div>
 
                 <button className="button" disabled={state.submitDisabled}>Login</button>
                 <p className="register-link">

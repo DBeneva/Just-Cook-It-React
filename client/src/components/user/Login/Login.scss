@@ -1,9 +1,0 @@
-@import '../../../index.scss';
-
-.Login {
-    @include pageLayout(174px, 35%, auto);
-    @include title($primary-color, 0, 30px);
-    @include button(20px, 0px);
-    @include errorMessage(0 0 10px 35px);
-    @include form();
-}
