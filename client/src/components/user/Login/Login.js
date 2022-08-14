@@ -65,7 +65,7 @@ function Login() {
         authService.login(state.username.value, state.password.value)
             .then((authData) => {
                 login(authData);
-                navigate(-1);
+                navigate('/');
             })
             .catch(err => {
                 setError(err);
