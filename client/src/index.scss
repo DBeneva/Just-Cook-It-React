@@ -143,8 +143,8 @@ h2 {
 /* Input Fields */
 @mixin input() {
   input {
+    width: 100%;
     font-size: 16px;
-    width: 300px;
     padding: 15px;
     border-radius: 10px;
   }
@@ -168,6 +168,7 @@ h2 {
   }
 
   .field {
+    width: 100%;
     padding: 5px 0;
     position: relative;
   }
