@@ -42,11 +42,11 @@ function Register() {
     const changeUsername = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : /[^a-zA-Z]/.test(currentInput)
-                ? 'non-alphanumeric'
+                ? 'invalid non-alphanumeric'
                 : currentInput.length < 3
-                    ? 'too-short'
+                    ? 'invalid too-short'
                     : 'valid';
 
         setState(oldState => ({
@@ -58,7 +58,7 @@ function Register() {
     const changeEmail = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : !/^[a-z]+\@[a-z]+\.[a-z]+$/.test(currentInput)
                 ? 'invalid'
                 : 'valid';
@@ -72,13 +72,13 @@ function Register() {
     const changePassword = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : currentInput.length < 5
-                ? 'too-short'
+                ? 'invalid too-short'
                 : /[а-яА-Я]/.test(currentInput)
-                    ? 'non-latin-letters'
+                    ? 'invalid non-latin-letters'
                     : !/[\!\?@\#\$%\^\&\*\(\)]/.test(currentInput)
-                        ? 'no-special-symbol'
+                        ? 'invalid no-special-symbol'
                         : 'valid';
 
         setState(oldState => ({
@@ -89,7 +89,7 @@ function Register() {
                 status: state.repass.status === 'untouched'
                     ? 'untouched'
                     : currentInput !== state.repass.value
-                        ? 'no-match'
+                        ? 'invalid no-match'
                         : 'valid'
             }
         }));
@@ -98,9 +98,9 @@ function Register() {
     const changeRepass = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : currentInput !== state.password.value
-                ? 'no-match'
+                ? 'invalid no-match'
                 : 'valid';
 
         setState(oldState => ({
@@ -158,9 +158,9 @@ function Register() {
                         onChange={changeUsername}
                     />
                 </p>
-                {state.username.status === 'empty' && <p className="error">Username is required!</p>}
-                {state.username.status === 'non-alphanumeric' && <p className="error">Latin characters only!</p>}
-                {state.username.status === 'too-short' && <p className="error">Username must be at least 3 characters long!</p>}
+                {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                {state.username.status === 'invalid non-alphanumeric' && <p className="error">Latin characters only!</p>}
+                {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
@@ -170,7 +170,7 @@ function Register() {
                         onChange={changeEmail}
                     />
                 </p>
-                {state.email.status === 'empty' && <p className="error">Email is required!</p>}
+                {state.email.status === 'invalid empty' && <p className="error">Email is required!</p>}
                 {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
 
                 <p className="field field-icon">
@@ -183,10 +183,10 @@ function Register() {
                     <i className={state.isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
                 </p>
 
-                {state.password.status === 'empty' && <p className="error">Password is required!</p>}
-                {state.password.status === 'too-short' && <p className="error">Password must be at least 5 characters!</p>}
-                {state.password.status === 'non-latin-letters' && <p className="error">Latin characters only!</p>}
-                {state.password.status === 'no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
+                {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
+                {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                {state.password.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
+                {state.password.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="repass"><span><i className="fas fa-lock"></i></span></label>
@@ -197,8 +197,8 @@ function Register() {
                     <i className={state.isVisibleRepass ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showRepass}></i>
                 </p>
 
-                {state.repass.status === 'empty' && <p className="error">Please confirm password!</p>}
-                {state.repass.status === 'no-match' && <p className="error">Passwords don't match!</p>}
+                {state.repass.status === 'invalid empty' && <p className="error">Please confirm password!</p>}
+                {state.repass.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
 
                 <div className="links">
                     <button className="button" disabled={state.submitDisabled}>Create Account</button>

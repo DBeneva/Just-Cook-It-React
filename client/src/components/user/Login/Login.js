@@ -29,9 +29,9 @@ function Login() {
     const changeUsername = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : currentInput.length < 3
-                ? 'too-short'
+                ? 'invalid too-short'
                 : 'valid';
 
         setState(oldState => ({
@@ -43,9 +43,9 @@ function Login() {
     const changePassword = (e) => {
         const currentInput = e.target.value;
         const currentStatus = currentInput.length == 0
-            ? 'empty'
+            ? 'invalid empty'
             : currentInput.length < 5
-                ? 'too-short'
+                ? 'invalid too-short'
                 : 'valid';
 
         setState(oldState => ({
@@ -94,8 +94,8 @@ function Login() {
                         />
                 </p>
 
-                {state.username.status === 'empty' && <p className="error">Username is required!</p>}
-                {state.username.status === 'too-short' && <p className="error">Username must be at least 3 characters long!</p>}
+                {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
@@ -108,8 +108,8 @@ function Login() {
                     <i className={state.isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
 
                 </p>
-                {state.password.status === 'empty' && <p className="error">Password is required!</p>}
-                {state.password.status === 'too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
+                {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
 
                 <div className="links">
                     <button className="button" disabled={state.submitDisabled}>Login</button>
