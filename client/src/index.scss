@@ -5,16 +5,25 @@
   box-sizing: border-box;
 }
 
+
 /* Page Layout */
-@mixin pageLayout($margin-tb, $width, $height) {
+@mixin page-layout($margin-tb, $width, $height) {
   margin: $margin-tb auto;
   width: $width;
   height: $height;
 }
 
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 /* Fonts */
 $font-title: 'Merienda';
 $font-body-text: Verdana;
+
 
 /* Colors */
 $primary-color: #4a6b8b;
@@ -25,9 +34,11 @@ $delete-btn-color: #EF5E5E;
 $success-color: green;
 $error-color: red;
 
+
 /* Shadows */
 $button-shadow: 0 0 8px 0 gray;
 $card-shadow: 2px 2px 20px 0 gray;
+
 
 /* Text Font & Color */
 html,
@@ -37,11 +48,13 @@ input {
   color: $primary-color;
 }
 
+
 /* Selection */
 *::selection {
   color: $secondary-color;
   background-color: $primary-color;
 }
+
 
 /* Block Elements Margin */
 body,
@@ -55,6 +68,7 @@ h5,
 h6 {
   margin: 0;
 }
+
 
 /* Titles */
 h1,
@@ -81,6 +95,7 @@ h2 {
     padding-bottom: $padding-b;
   }
 }
+
 
 /* Buttons */
 @mixin buttons($margin-tb, $margin-lr) {
@@ -127,7 +142,7 @@ h2 {
   .delete-btn:hover {
     background-color: $delete-btn-color;
     color: $secondary-color;
-  }  
+  }
 }
 
 @mixin back-btn($top, $left) {
@@ -146,16 +161,16 @@ h2 {
   }
 }
 
+
 /* Forms */
 @mixin form() {
   form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-column();
   }
 
   @include input();
 }
+
 
 /* Input Fields */
 @mixin input() {
@@ -173,15 +188,15 @@ h2 {
   }
 
   .input-untouched {
-    @include inputBorder($primary-color);
+    @include input-border($primary-color);
   }
 
   .input-valid {
-    @include inputBorder($success-color);
+    @include input-border($success-color);
   }
 
   .input-invalid {
-    @include inputBorder($error-color);
+    @include input-border($error-color);
   }
 
   .field {
@@ -203,13 +218,14 @@ h2 {
   }
 }
 
-@mixin inputBorder($color) {
+@mixin input-border($color) {
   border: 1px solid $primary-color;
   border-left: 0.3em solid $color;
 }
 
+
 /* Error Messages */
-@mixin errorMessage($padding) {
+@mixin error-message($padding) {
   .error {
     color: $error-color;
     font-size: 14px;
@@ -217,6 +233,7 @@ h2 {
     margin: 0;
   }
 }
+
 
 /* Background Image with 80% Opacity */
 @mixin background-opacity-80($image) {
