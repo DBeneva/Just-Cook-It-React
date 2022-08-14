@@ -1,4 +1,4 @@
-const getPasswordStatus = (form, value) => {
+const getPasswordStatus = (value, form) => {
     if (value.length == 0) return 'invalid empty';
     else if (value.length < 5) return 'invalid too-short';
     else if (form === 'register' && /[а-яА-Я]/.test(value)) return 'invalid non-latin-letters';
