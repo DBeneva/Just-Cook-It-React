@@ -1,53 +1,43 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
+import isFormStatusValid from '../../../utils/isFormStatusValid';
+import getPasswordStatus from '../../../utils/getPasswordStatus';
+import getUsernameStatus from '../../../utils/getUsernameStatus';
+import getPasswordProperty from '../../../utils/getPasswordProperty';
+import getEmailStatus from '../../../utils/getEmailStatus';
+import getRepassStatus from '../../../utils/getRepassStatus';
 
-import './Register.scss';
+import '../RegisterLogin.scss';
 
 function Register() {
-    const { login } = useAuthContext();
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
-
     const initialState = {
         username: { value: '', status: 'untouched' },
         email: { value: '', status: 'untouched' },
         password: { value: '', status: 'untouched' },
         repass: { value: '', status: 'untouched' },
-        isVisiblePassword: false,
-        isVisibleRepass: false,
+        visiblePassword: false,
+        visibleRepass: false,
         submitDisabled: false
     };
 
     const [state, setState] = useState(initialState);
+    const navigate = useNavigate();
+    const { login } = useAuthContext();
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(
-                state.username.status === 'valid' &&
-                state.email.status === 'valid' &&
-                state.password.status === 'valid' &&
-                state.repass.status === 'valid'
-            )
+            submitDisabled: !isFormStatusValid(state)
         }));
-    }, [
-        state.username.status,
-        state.email.status,
-        state.password.status,
-        state.repass.status
-    ]);
+    }, [state.username.status, state.email.status, state.password.status, state.repass.status]);
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : /[^a-zA-Z]/.test(currentInput)
-                ? 'invalid non-alphanumeric'
-                : currentInput.length < 3
-                    ? 'invalid too-short'
-                    : 'valid';
+        const currentStatus = getUsernameStatus(currentInput, 'register');
 
         setState(oldState => ({
             ...oldState,
@@ -57,11 +47,7 @@ function Register() {
 
     const changeEmail = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : !/^[a-z]+\@[a-z]+\.[a-z]+$/.test(currentInput)
-                ? 'invalid'
-                : 'valid';
+        const currentStatus = getEmailStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -71,37 +57,21 @@ function Register() {
 
     const changePassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : currentInput.length < 5
-                ? 'invalid too-short'
-                : /[а-яА-Я]/.test(currentInput)
-                    ? 'invalid non-latin-letters'
-                    : !/[\!\?@\#\$%\^\&\*\(\)]/.test(currentInput)
-                        ? 'invalid no-special-symbol'
-                        : 'valid';
+        const currentStatus = getPasswordStatus(currentInput, 'register');
 
         setState(oldState => ({
             ...oldState,
             password: { value: currentInput, status: currentStatus },
             repass: {
                 value: state.repass.value,
-                status: state.repass.status === 'untouched'
-                    ? 'untouched'
-                    : currentInput !== state.repass.value
-                        ? 'invalid no-match'
-                        : 'valid'
+                status: !state.repass.status === 'untouched' && getRepassStatus(state.repass.value, currentInput)
             }
         }));
     };
 
     const changeRepass = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : currentInput !== state.password.value
-                ? 'invalid no-match'
-                : 'valid';
+        const currentStatus = getRepassStatus(currentInput, state.password.value);
 
         setState(oldState => ({
             ...oldState,
@@ -109,46 +79,36 @@ function Register() {
         }));
     };
 
-    const showPassword = () => {
-        setState(oldState => ({
-            ...oldState,
-            isVisiblePassword: !state.isVisiblePassword
-        }));
-    };
+    const showHidePassword = (e) => {
+        const stateProperty = getPasswordProperty(e);
 
-    const showRepass = () => {
         setState(oldState => ({
             ...oldState,
-            isVisibleRepass: !state.isVisibleRepass
+            [stateProperty]: !state[stateProperty]
         }));
     };
 
     const onRegisterHandler = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const { username, email, password } = Object.fromEntries(formData);
-        console.log(formData);
-
-        authService.register(username, email, password)
+        authService.register(state.username.value, state.email.value, state.password.value)
             .then((authData) => {
                 login(authData);
-                console.log('registered');
-                navigate('/recipes');
+                navigate('/');
             })
             .catch(err => {
                 setError(err);
+                console.error(err);
             });
     };
 
     return (
-        <div className="Register">
+        <div className="Register-Login">
             <form className="register" method="post" onSubmit={onRegisterHandler}>
                 <h2 className="title">Registration Form</h2>
-
                 {error && <p className="error">{error.message}</p>}
 
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="username"><span><i className="fas fa-user"></i></span></label>
                     <input className={`input-${state.username.status}`}
                         type="text" name="username" id="username"
@@ -157,56 +117,51 @@ function Register() {
                         onFocus={changeUsername}
                         onChange={changeUsername}
                     />
-                </p>
-                {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
-                {state.username.status === 'invalid non-alphanumeric' && <p className="error">Latin characters only!</p>}
-                {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
+                    {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                    {state.username.status === 'invalid non-alphanumeric' && <p className="error">Latin characters only!</p>}
+                    {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
+                </div>
 
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
                     <input className={`input-${state.email.status}`} type="email" name="email" id="email"
                         placeholder="john.doe@gmail.com"
                         onFocus={changeEmail}
                         onChange={changeEmail}
                     />
-                </p>
-                {state.email.status === 'invalid empty' && <p className="error">Email is required!</p>}
-                {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
+                    {state.email.status === 'invalid empty' && <p className="error">Email is required!</p>}
+                    {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
+                </div>
 
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
-                    <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password"
+                    <input className={`input-${state.password.status}`} type={state.visiblePassword ? 'text' : 'password'} name="password"
                         id="password" placeholder="******"
                         onFocus={changePassword}
                         onChange={changePassword}
                     />
-                    <i className={state.isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
-                </p>
+                    <i className={state.visiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
+                    {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
+                    {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                    {state.password.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
+                    {state.password.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
+                </div>
 
-                {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
-                {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
-                {state.password.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
-                {state.password.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
-
-                <p className="field field-icon">
+                <div className="field field-icon">
                     <label htmlFor="repass"><span><i className="fas fa-lock"></i></span></label>
-                    <input className={`input-${state.repass.status}`} type={state.isVisibleRepass ? 'text' : 'password'} name="repass" id="repass" placeholder="******"
+                    <input className={`input-${state.repass.status}`} type={state.visibleRepass ? 'text' : 'password'} name="repass" id="repass" placeholder="******"
                         onFocus={changeRepass}
                         onChange={changeRepass}
                     />
-                    <i className={state.isVisibleRepass ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showRepass}></i>
-                </p>
-
-                {state.repass.status === 'invalid empty' && <p className="error">Please confirm password!</p>}
-                {state.repass.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
-
-                <div className="links">
-                    <button className="button" disabled={state.submitDisabled}>Create Account</button>
-                    <p className="login-link">
-                        Have an account? <Link to="/login">Click here!</Link>
-                    </p>
+                    <i className={state.visibleRepass ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
+                    {state.repass.status === 'invalid empty' && <p className="error">Please confirm password!</p>}
+                    {state.repass.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
                 </div>
 
+                <button className="button" disabled={state.submitDisabled}>Create Account</button>
+                <div className="login-link">
+                    Have an account? <Link to="/login">Click here!</Link>
+                </div>
             </form>
         </div>
     );

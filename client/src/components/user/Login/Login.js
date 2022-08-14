@@ -30,7 +30,7 @@ function Login() {
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = getUsernameStatus('login', currentInput);
+        const currentStatus = getUsernameStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -40,7 +40,7 @@ function Login() {
 
     const changePassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = getPasswordStatus('login', currentInput);
+        const currentStatus = getPasswordStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -75,7 +75,6 @@ function Login() {
         <div className="Register-Login">
             <form method="post" onSubmit={onLoginHandler}>
                 <h2 className="title">Login Form</h2>
-
                 {error && <p className="error">{error.message}</p>}
 
                 <div className="field field-icon">
@@ -112,9 +111,9 @@ function Login() {
                 </div>
 
                 <button className="button" disabled={state.submitDisabled}>Login</button>
-                <p className="register-link">
+                <div className="register-link">
                     Don't have an account? <Link to="/register">Click here!</Link>
-                </p>
+                </div>
             </form>
         </div>
     );
