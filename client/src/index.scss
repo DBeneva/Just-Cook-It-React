@@ -141,11 +141,11 @@ h2 {
   }
 }
 
-@mixin errorMessage() {
+@mixin errorMessage($padding) {
   .error {
     color: red;
     font-size: 14px;
-    padding: 0 0 10px 35px;
+    padding: $padding;
     margin: 0;
   }
 }

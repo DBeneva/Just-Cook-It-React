@@ -7,7 +7,7 @@
 
     @include title($primary-color, 0, 30px);
     @include button(20px, 0px);
-    @include errorMessage();
+    @include errorMessage(0 0 10px 35px);
     .login {
         color: $primary-color;
     }
