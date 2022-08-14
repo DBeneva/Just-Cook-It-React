@@ -19,6 +19,14 @@
   align-items: center;
 }
 
+@mixin position-absolute($top, $left, $z-index) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+  z-index: $z-index;
+}
+
 
 /* Fonts */
 $font-title: 'Merienda';
@@ -33,11 +41,13 @@ $input-focus-background: #4a6a8b2d;
 $delete-btn-color: #EF5E5E;
 $success-color: green;
 $error-color: red;
+$confirmation-modal-background: #E8E8E8;
 
 
-/* Shadows */
+/* Shadows & Outlines */
 $button-shadow: 0 0 8px 0 gray;
 $card-shadow: 2px 2px 20px 0 gray;
+$confirmation-modal-outline: 1700px solid rgba(0, 0, 0, 0.5);
 
 
 /* Text Font & Color */
@@ -85,10 +95,10 @@ h2 {
   font-weight: 400;
 }
 
-@mixin title($color, $padding-t, $padding-b) {
+@mixin title($color, $padding-t, $padding-b, $font-size) {
   .title {
     font-family: $font-title;
-    font-size: 40px;
+    font-size: $font-size;
     color: $color;
     text-align: center;
     padding-top: $padding-t;
@@ -135,8 +145,19 @@ h2 {
     cursor: default;
   }
 
+  .naked-btn {
+    color: $primary-color;
+    background-color: transparent;
+
+    &:hover {
+      color: $secondary-color;
+      background-color: $primary-color;
+    }
+  }
+
   .delete-btn {
     color: $delete-btn-color;
+    background-color: transparent;
   }
 
   .delete-btn:hover {
@@ -147,9 +168,7 @@ h2 {
 
 @mixin back-btn($top, $left) {
   .back-btn {
-    position: absolute;
-    top: $top;
-    left: $left;
+    @include position-absolute($top, $left, 0);
     font-size: 40px;
   }
 
