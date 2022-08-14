@@ -9,86 +9,14 @@ function Account() {
     const { user } = useAuthContext();
     const [error, setError] = useState(null);
 
-    // const initialState = {
-    //     username: { value: '', status: 'untouched' },
-    //     password: { value: '', status: 'untouched' },
-    //     isVisiblePassword: false,
-    //     submitDisabled: false
-    // };
-
-    // const [state, setState] = useState(initialState);
-
-    // useEffect(() => {
-    //     setState(oldState => ({
-    //         ...oldState,
-    //         submitDisabled: !(state.username.status === 'valid' && state.password.status === 'valid')
-    //     }));
-    // }, [state.username.status, state.password.status]);
-
-    // const changeUsername = (e) => {
-    //     const currentInput = e.target.value;
-    //     const currentStatus = currentInput.length == 0
-    //         ? 'empty'
-    //         : currentInput.length < 3
-    //             ? 'too-short'
-    //             : 'valid';
-
-    //     setState(oldState => ({
-    //         ...oldState,
-    //         username: { value: currentInput, status: currentStatus }
-    //     }));
-    // };
-
-    // const changePassword = (e) => {
-    //     const currentInput = e.target.value;
-    //     const currentStatus = currentInput.length == 0
-    //         ? 'empty'
-    //         : currentInput.length < 5
-    //             ? 'too-short'
-    //             : 'valid';
-
-    //     setState(oldState => ({
-    //         ...oldState,
-    //         password: { value: currentInput, status: currentStatus }
-    //     }));
-    // };
-
-    // const showPassword = () => {
-    //     setState(oldState => ({
-    //         ...oldState,
-    //         isVisiblePassword: !state.isVisiblePassword
-    //     }));
-    // };
-
-    // const onAccountHandler = (e) => {
-    //     e.preventDefault();
-
-    //     const formData = new FormData(e.currentTarget);
-    //     const { username, password } = Object.fromEntries(formData);
-
-    //     authService.login(username, password)
-    //         .then((authData) => {
-    //             login(authData);
-    //             console.log('logged in');
-    //             navigate(-1);
-    //         })
-    //         .catch(err => {
-    //             setError(err);
-    //         });
-    // };
-
     return (
         <div className="Account">
-    <h2 className="title">
-        <p className="image"><img src="/cooking-hat.png" alt="Cooking Hat" /></p>
-        {user.username}'s Account
-    </h2>
+    <div>
+        <div className="image"><img src="/cooking-hat.png" alt="Cooking Hat" /></div>
+        <h2 className="title">{user.username}'s Account</h2>
+    </div>
 
-    {/* <ng-container *ngIf="error">
-        <p className="error">
-            {{error}}
-        </p>
-    </ng-container> */}
+    {error && <p className="error">{error.message}</p>}
 
     <div className="field field-icon">
         <p id="username"><span><i className="fas fa-user"></i></span> {user.username}</p>
