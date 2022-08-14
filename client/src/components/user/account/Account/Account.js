@@ -11,7 +11,7 @@ function Account() {
 
     return (
         <div className="Account">
-    <div>
+    <div className="card-header">
         <div className="image"><img src="/cooking-hat.png" alt="Cooking Hat" /></div>
         <h2 className="title">{user.username}'s Account</h2>
     </div>
