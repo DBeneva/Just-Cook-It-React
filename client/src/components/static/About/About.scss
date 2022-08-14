@@ -1,32 +1,14 @@
 @import '../../../index.scss';
 
 .About {
-    width: 60%;
-    margin: auto;
     line-height: 1.7;
+    text-align: center;
 
     p {
-        text-align: center;
-        padding: 5px 0;
+        padding: 10px 0;
     }    
     
-    .back-btn {
-        position: absolute;
-        color: $primary-color;
-        background-color: white;
-        top: 155px;
-        left: 150px;
-        font-size: 40px;
-        padding: 0;
-    }
-    
-    .back-btn i:hover {
-        border-radius: 50%;
-        border: none;
-        background-color: $primary-color;
-        color: $secondary-color;
-        box-shadow: $button-shadow;
-    }
-
-    @include title($primary-color, 150px, 50px);
+    @include pageLayout(0, 60%, auto);
+    @include back-btn(155px, 150px);
+    @include title($primary-color, 150px, 20px);
 }

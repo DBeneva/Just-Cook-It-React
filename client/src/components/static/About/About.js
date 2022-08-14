@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import './About.scss';
 
 function About() {
@@ -25,5 +24,3 @@ function About() {
 }
 
 export default About;
-
-{/* <div class="back-btn"><i (click)="back()" class="fa fa-arrow-circle-left"></i></div > */}
