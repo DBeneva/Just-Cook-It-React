@@ -64,10 +64,10 @@ h2 {
   font-weight: 400;
 }
 
-@mixin pageLayout($margin-tb, $width) {
+@mixin pageLayout($margin-tb, $width, $height) {
   margin: $margin-tb auto;
   width: $width;
-  height: auto;
+  height: $height;
 }
 
 @mixin title($color, $padding-t, $padding-b) {
