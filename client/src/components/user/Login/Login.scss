@@ -1,64 +1,9 @@
 @import '../../../index.scss';
 
 .Login {
-    margin: 170px auto;
-    width: 30%;
-    height: calc(100vh - 74px);
-
+    @include pageLayout(174px, 35%);
     @include title($primary-color, 0, 30px);
     @include button(20px, 0px);
     @include errorMessage(0 0 10px 35px);
-    .login {
-        color: $primary-color;
-    }
-    
-    h2 {
-        margin-left: -130px;
-    }
-    
-    .field {
-        padding: 5px 0;
-    }
-    
-    // input {
-    //     font-size: 16px;
-    //     color: #4a6b8b;
-    //     width: 300px;
-    //     padding: 15px;
-    //     border-radius: 10px;
-    //     border: 1px solid #4a6b8b;
-    //     border-left: 0.3em solid #4a6b8b;
-    // }
-    
-    // input:-webkit-autofill {
-    //     color: #4a6b8b !important;
-    // }
-    
-    // .input-untouched {
-    //     border-left: 0.3em solid #4a6b8b;
-    // }
-    
-    // .input-valid {
-    //     border-left: 0.3em solid green;
-    // }
-    
-    // .input-empty,
-    // .input-too-short {
-    //     border-left: 0.3em solid red;
-    // }
-    
-    .fas {
-        margin: 0 10px;
-    }
-    
-    .register-link a {
-        color: #4a6b8b;
-    }
-    
-    .links {
-        text-align: center;
-        margin-right: 90px;
-    }
-
-    @include input();
+    @include form();
 }

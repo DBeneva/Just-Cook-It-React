@@ -1,38 +1,38 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
+import isFormStatusValid from '../../../utils/isFormStatusValid';
+import getPasswordProperty from '../../../utils/getPasswordProperty';
+import getUsernameStatus from '../../../utils/getUsernameStatus';
+import getPasswordStatus from '../../../utils/getPasswordStatus';
 
 import './Login.scss';
 
 function Login() {
+    const initialState = {
+        username: { value: '', status: 'untouched' },
+        password: { value: '', status: 'untouched' },
+        visiblePassword: false,
+        submitDisabled: true
+    };
+
+    const [state, setState] = useState(initialState);
     const navigate = useNavigate();
     const { login } = useAuthContext();
     const [error, setError] = useState(null);
 
-    const initialState = {
-        username: { value: '', status: 'untouched' },
-        password: { value: '', status: 'untouched' },
-        isVisiblePassword: false,
-        submitDisabled: false
-    };
-
-    const [state, setState] = useState(initialState);
-
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(state.username.status === 'valid' && state.password.status === 'valid')
+            submitDisabled: !isFormStatusValid(state)
         }));
     }, [state.username.status, state.password.status]);
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : currentInput.length < 3
-                ? 'invalid too-short'
-                : 'valid';
+        const currentStatus = getUsernameStatus('login', currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -42,11 +42,7 @@ function Login() {
 
     const changePassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'invalid empty'
-            : currentInput.length < 5
-                ? 'invalid too-short'
-                : 'valid';
+        const currentStatus = getPasswordStatus('login', currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -54,44 +50,48 @@ function Login() {
         }));
     };
 
-    const showPassword = () => {
+    const showHidePassword = (e) => {
+        const stateProperty = getPasswordProperty(e);
+
         setState(oldState => ({
             ...oldState,
-            isVisiblePassword: !state.isVisiblePassword
+            [stateProperty]: !state[stateProperty]
         }));
     };
 
     const onLoginHandler = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const { username, password } = Object.fromEntries(formData);
-
-        authService.login(username, password)
+        authService.login(state.username.value, state.password.value)
             .then((authData) => {
                 login(authData);
-                console.log('logged in');
                 navigate(-1);
             })
             .catch(err => {
                 setError(err);
+                console.error(err);
             });
     };
 
     return (
         <div className="Login">
-            <form className="login" action="" method="post" onSubmit={onLoginHandler}>
+            <form method="post" onSubmit={onLoginHandler}>
                 <h2 className="title">Login Form</h2>
 
                 {error && <p className="error">{error.message}</p>}
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
-                    <input className={`input-${state.username.status}`} type="text" name="username" id="username"
-                        placeholder="Johny" required
+                    <input
+                        className={`input-${state.username.status}`}
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="Johny"
+                        required
                         onFocus={changeUsername}
                         onChange={changeUsername}
-                        />
+                    />
                 </p>
 
                 {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
@@ -99,24 +99,26 @@ function Login() {
 
                 <p className="field field-icon">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
-                    <input className={`input-${state.password.status}`} type={state.isVisiblePassword ? 'text' : 'password'} name="password" id="password" placeholder="******"
+                    <input
+                        className={`input-${state.password.status}`}
+                        type={state.visiblePassword ? 'text' : 'password'}
+                        name="password" id="password"
+                        placeholder="******"
                         required
                         onFocus={changePassword}
                         onChange={changePassword}
                     />
 
-                    <i className={state.isVisiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
+                    <i className={state.visiblePassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
 
                 </p>
                 {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
                 {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
 
-                <div className="links">
-                    <button className="button" disabled={state.submitDisabled}>Login</button>
-                    <p className="register-link">
-                        Don't have an account? <Link to="/register">Click here!</Link>
-                    </p>
-                </div>
+                <button className="button" disabled={state.submitDisabled}>Login</button>
+                <p className="register-link">
+                    Don't have an account? <Link to="/register">Click here!</Link>
+                </p>
             </form>
         </div>
     );
