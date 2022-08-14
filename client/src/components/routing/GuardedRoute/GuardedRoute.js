@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Navigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
 const GuardedRoute = () => {
