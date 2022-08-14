@@ -6,7 +6,9 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
 function Recipes({}) {
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState(null);
+    const [error, setError] = useState(null);
+
     // const navigate = useNavigate();
     // console.log('user', useAuthContext().user);
     // const { user } = useAuthContext();
@@ -19,7 +21,8 @@ function Recipes({}) {
                 setRecipes(recipes);
             })
             .catch(err => {
-                console.log(`Error: ${err}`);
+                setError(err);
+                console.error(`Error: ${err}`);
             });
     }, []);
 
@@ -44,6 +47,8 @@ function Recipes({}) {
 
     return (
         <div className="Recipes">
+            {error && <p className="error">{error.message}</p>}
+
             {recipes?.length > 0
                 ? recipes.map(r => <RecipeCard key={r._id} recipe={r} />)
                 : recipes && recipes.length == 0
