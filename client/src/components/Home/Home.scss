@@ -2,15 +2,13 @@
 
 
 .Home {
-    color: $primary-color;
-    height: calc(100vh - 74px);
-    
     .welcome-message {
-        width: 60%;
+        width: 45%;
         margin: auto;
     }
 
-    @include title($primary-color, 135px, 0);
+    @include pageLayout(50px, 100%, 100vh);
+    @include title($primary-color, 80px, 30px);
     @include background-opacity-80('spices.jpg');
-    @include buttons(17px, 5px);
+    @include buttons(20px, 5px);    
 }
