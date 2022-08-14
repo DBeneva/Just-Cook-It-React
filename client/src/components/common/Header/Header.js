@@ -32,11 +32,7 @@ function Header() {
 
             <nav className="navigation">
                 <ul>
-                    {
-                    user.username
-                    ? userNavigation
-                    : guestNavigation
-                    }
+                    {user.username ? userNavigation : guestNavigation}
                 </ul >
             </nav >
 
