@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+/* Page Layout */
+@mixin pageLayout($margin-tb, $width, $height) {
+  margin: $margin-tb auto;
+  width: $width;
+  height: $height;
+}
+
 /* Fonts */
 $font-title: 'Merienda';
 $font-body-text: Verdana;
@@ -64,12 +71,6 @@ h2 {
   font-weight: 400;
 }
 
-@mixin pageLayout($margin-tb, $width, $height) {
-  margin: $margin-tb auto;
-  width: $width;
-  height: $height;
-}
-
 @mixin title($color, $padding-t, $padding-b) {
   .title {
     font-family: $font-title;
@@ -126,6 +127,22 @@ h2 {
   .delete-btn:hover {
     background-color: $delete-btn-color;
     color: $secondary-color;
+  }  
+}
+
+@mixin back-btn($top, $left) {
+  .back-btn {
+    position: absolute;
+    top: $top;
+    left: $left;
+    font-size: 40px;
+  }
+
+  .back-btn i:hover {
+    border-radius: 50%;
+    background-color: $primary-color;
+    color: $secondary-color;
+    box-shadow: $button-shadow;
   }
 }
 
@@ -205,5 +222,5 @@ h2 {
 @mixin background-opacity-80($image) {
   background-image: linear-gradient(rgba(255, 255, 255, 0.2),
     rgba(255, 255, 255, 0.2)),
-  url('../../../public/#{$image}');
+  url('../../../../public/#{$image}');
 }
