@@ -58,5 +58,5 @@
 
     @include buttons(30px, 10px);
     @include title($primary-color, 0px, 20px);
-    @include errorMessage(0 0 10px 35px);
+    @include error-message(0 0 10px 35px);
 }

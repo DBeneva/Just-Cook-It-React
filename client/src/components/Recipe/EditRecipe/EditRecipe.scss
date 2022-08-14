@@ -70,7 +70,7 @@
 
     @include button(10px, 10px);
     @include title($primary-color, 0, 30px);
-    @include errorMessage(0 0 10px 35px);
+    @include error-message(0 0 10px 35px);
 
     // .buttons {
     //     margin: 20px auto;

@@ -48,7 +48,7 @@
         }
     }
 
-    @include errorMessage(20px);
+    @include error-message(20px);
 
     .error {
         flex-basis: 100;

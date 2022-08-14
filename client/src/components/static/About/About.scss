@@ -8,7 +8,7 @@
         padding: 10px 0;
     }    
     
-    @include pageLayout(0, 60%, auto);
+    @include page-layout(0, 60%, auto);
     @include back-btn(155px, 150px);
     @include title($primary-color, 150px, 20px);
 }
