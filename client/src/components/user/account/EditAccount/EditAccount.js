@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useAuthContext } from '../../../../contexts/AuthContext';
 import * as userService from '../../../../services/userService';
-
+import getEmailStatus from '../../../../utils/getEmailStatus';
+import getUsernameStatus from '../../../../utils/getUsernameStatus';
+import isFormStatusValid from '../../../../utils/isFormStatusValid';
 import ConfirmationModal from '../../../common/ConfirmationModal/ConfirmationModal';
+
 import './EditAccount.scss';
 
 function EditAccount() {
-    const navigate = useNavigate();
     const { login, user } = useAuthContext();
+    const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -23,21 +27,13 @@ function EditAccount() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(
-                (state.username.status === 'valid' && state.email.status === 'valid') ||
-                (state.username.status === 'untouched' && state.email.status === 'valid') ||
-                (state.username.status === 'valid' && state.email.status === 'untouched')
-            )
+            submitDisabled: !isFormStatusValid(state)
         }));
     }, [state.username.status, state.email.status]);
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput.length < 3
-                ? 'too-short'
-                : 'valid';
+        const currentStatus = getUsernameStatus(currentInput, 'edit');
 
         setState(oldState => ({
             ...oldState,
@@ -47,11 +43,7 @@ function EditAccount() {
 
     const changeEmail = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : !/[a-z]+\@[a-z]+\.[a-z]+/.test(currentInput)
-                ? 'invalid'
-                : 'valid';
+        const currentStatus = getEmailStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -62,18 +54,14 @@ function EditAccount() {
     const editAccount = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const { username, email } = Object.fromEntries(formData);
-
-        userService.editAccount(username, email, user)
+        userService.editAccount(state.username.value, state.email.value, state.user.value)
             .then((userData) => {
                 login(userData);
-                console.log('account edited');
-                navigate(-1);
+                navigate(`/users/${user._id}`);
             })
             .catch(err => {
-                setError({ message: err });
-                console.log(error);
+                setError(err);
+                console.error(error);
             });
     };
 
@@ -103,29 +91,37 @@ function EditAccount() {
                 name={user.username}
             />
 
-            <h2 className="title">
-                <p><img src="/cooking-hat.png" alt="Cooking Hat" /></p>
-                {user.username}'s Account
-            </h2>
+            <div><img className="cooking-hat" src="/cooking-hat.png" alt="Cooking Hat" /></div>
+            <h2 className="title">{user.username}'s Account</h2>
+
             {error && <p className="error">{error.message}</p>}
 
             <form onSubmit={editAccount}>
-                <div className="field field-icon">
+                <div className="field">
                     <label htmlFor="username"><span><i className="fas fa-user"></i></span></label>
-                    <input type="text" name="username" id="username" required
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        required
                         className={`input-${state.username.status}`}
                         defaultValue={state.username.value}
                         onFocus={changeUsername}
                         onChange={changeUsername}
-                        minLength="3" />
+                        minLength="3"
+                    />
                 </div>
 
                 {state.username.status === 'empty' && <p className="error">Username is required!</p>}
                 {state.username.status === 'too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
-                <div className="field field-icon">
+                <div className="field">
                     <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
-                    <input type="email" name="email" id="email" required
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
                         className={`input-${state.email.status}`}
                         defaultValue={state.email.value}
                         onFocus={changeEmail}
@@ -135,16 +131,14 @@ function EditAccount() {
                 {state.email.status === 'empty' && <p className="error">Email is required!</p>}
                 {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
 
-                <div className="change-password">
-                    <p>
-                        <span><i className="fas fa-lock"></i></span>
-                        <Link to={`/users/${user._id}/change-password`}>Change your password</Link>
-                    </p>
+                <div className="field">
+                    <p><span><i className="fas fa-lock"></i></span></p>
+                    <Link className="change-password-link" to={`/users/${user._id}/change-password`}>Change your password</Link>
                 </div>
 
                 <div className="buttons">
-                    <button className="cancel-btn button" onClick={() => navigate(-1)}>Cancel</button>
-                    <button className="button" type="submit" disabled={state.submitDisabled}>Save</button>
+                    <button className="naked-cancel-btn button" onClick={() => navigate(-1)}>Cancel</button>
+                    <button className="naked-btn button" type="submit" disabled={state.submitDisabled}>Save</button>
                     <button type="button" className="delete-btn button" onClick={deleteClickHandler}>Delete <i className="fa fa-trash"></i></button>
                 </div>
             </form>
