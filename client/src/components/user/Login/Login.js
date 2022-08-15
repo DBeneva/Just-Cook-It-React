@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
@@ -18,8 +18,10 @@ function Login() {
 
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { login } = useAuthContext();
     const [error, setError] = useState(null);
+    const redirectUrl = searchParams.get('redirectUrl');
 
     useEffect(() => {
         setState(oldState => ({
@@ -63,7 +65,7 @@ function Login() {
         authService.login(state.username.value, state.password.value)
             .then((authData) => {
                 login(authData);
-                navigate('/');
+                navigate(redirectUrl ? decodeURIComponent(redirectUrl) : '/');
             })
             .catch(err => {
                 setError(err);
