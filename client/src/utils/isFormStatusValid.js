@@ -1,5 +1,9 @@
-const isFormStatusValid = (state) => {
-    return (Object.entries(state).filter(([k, v]) => v.status).every(([k, v]) => v.status === 'valid'));
+const isFormStatusValid = (state, form) => {
+    const fieldsWithStatus = Object.entries(state).filter(([k, v]) => v.status);
+
+    return form
+        ? fieldsWithStatus.some(([k, v]) => v.status === 'valid')
+        : fieldsWithStatus.every(([k, v]) => v.status === 'valid');
 };
 
-export default isFormStatusValid; 
+export default isFormStatusValid;
