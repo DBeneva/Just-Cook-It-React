@@ -27,7 +27,7 @@ function EditAccount() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !isFormStatusValid(state)
+            submitDisabled: !isFormStatusValid(state, 'edit')
         }));
     }, [state.username.status, state.email.status]);
 
@@ -54,14 +54,14 @@ function EditAccount() {
     const editAccount = (e) => {
         e.preventDefault();
 
-        userService.editAccount(state.username.value, state.email.value, state.user.value)
+        userService.editAccount(state.username.value, state.email.value, user)
             .then((userData) => {
                 login(userData);
                 navigate(`/users/${user._id}`);
             })
             .catch(err => {
                 setError(err);
-                console.error(error);
+                console.error(err);
             });
     };
 
@@ -106,7 +106,6 @@ function EditAccount() {
                         required
                         className={`input-${state.username.status}`}
                         defaultValue={state.username.value}
-                        onFocus={changeUsername}
                         onChange={changeUsername}
                         minLength="3"
                     />
@@ -124,7 +123,6 @@ function EditAccount() {
                         required
                         className={`input-${state.email.status}`}
                         defaultValue={state.email.value}
-                        onFocus={changeEmail}
                         onChange={changeEmail} />
                 </div>
 
