@@ -175,7 +175,7 @@ h2 {
       background-color: $cancel-btn-color;
       color: $secondary-color;
     }
-  }  
+  }
 
   .delete-btn {
     background-color: transparent;
@@ -206,6 +206,16 @@ h2 {
 /* Forms */
 @mixin form() {
   form {
+    width: 100%;
+    padding: 0 60px;
+
+    .special-symbol {
+      background-color: $delete-btn-color;
+      color: $secondary-color;
+      padding: 2px;
+      border-radius: 5px;
+    }
+
     @include flex-column();
   }
 
@@ -216,6 +226,7 @@ h2 {
 /* Input Fields */
 @mixin input() {
   input {
+    position: relative;
     width: 100%;
     font-size: 16px;
     padding: 15px;
@@ -246,16 +257,18 @@ h2 {
     position: relative;
   }
 
-  label .fas {
+  label {
     margin: 0 10px;
     position: absolute;
-    top: 25px;
+    top: 20px;
     left: -40px;
   }
 
   .fa-eye,
   .fa-eye-slash {
+    position: absolute;
     left: calc(100% + 5px);
+    top: 25px;
   }
 }
 
@@ -272,6 +285,11 @@ h2 {
     font-size: 14px;
     padding: $padding;
     margin: 0;
+    align-self: flex-start;
+  }
+
+  .error-centered {
+    align-self: center;
   }
 }
 
