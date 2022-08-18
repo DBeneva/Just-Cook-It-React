@@ -38,6 +38,7 @@ $primary-color: #4a6b8b;
 $secondary-color: lightgray;
 $disabled-btn-background: #4a6a8b8c;
 $input-focus-background: #4a6a8b2d;
+$cancel-btn-color: gray;
 $delete-btn-color: #EF5E5E;
 $success-color: green;
 $error-color: red;
@@ -135,39 +136,55 @@ h2 {
       color: $primary-color;
       box-shadow: $button-shadow;
     }
-  }
 
-  .button[disabled],
-  .button[disabled]:hover {
-    background-color: $disabled-btn-background;
-    color: $secondary-color;
-    box-shadow: none;
-    cursor: default;
-  }
-
-  .naked-btn {
-    color: $primary-color;
-    background-color: transparent;
-
-    &:hover {
+    &:disabled,
+    &:disabled:hover {
+      background-color: $disabled-btn-background;
       color: $secondary-color;
-      background-color: $primary-color;
+      box-shadow: none;
+      cursor: default;
     }
   }
 
   .cancel-btn {
+    background-color: $cancel-btn-color;
     color: $secondary-color;
-    background-color: gray;
   }
+
+  .naked-btn {
+    background-color: transparent;
+    color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $secondary-color;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      background-color: transparent;
+      color: $disabled-btn-background;
+    }
+  }
+
+  .naked-cancel-btn {
+    background-color: transparent;
+    color: $cancel-btn-color;
+
+    &:hover {
+      background-color: $cancel-btn-color;
+      color: $secondary-color;
+    }
+  }  
 
   .delete-btn {
-    color: $delete-btn-color;
     background-color: transparent;
-  }
+    color: $delete-btn-color;
 
-  .delete-btn:hover {
-    background-color: $delete-btn-color;
-    color: $secondary-color;
+    &:hover {
+      background-color: $delete-btn-color;
+      color: $secondary-color;
+    }
   }
 }
 
@@ -229,7 +246,7 @@ h2 {
     position: relative;
   }
 
-  .fas {
+  label .fas {
     margin: 0 10px;
     position: absolute;
     top: 25px;
