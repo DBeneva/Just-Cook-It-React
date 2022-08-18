@@ -52,7 +52,7 @@ function EditAccount() {
     const editAccount = (e) => {
         e.preventDefault();
 
-        userService.editAccount(state.username.value, state.email.value, user)
+        userService.editAccount(state.username.value, state.email.value, user._id)
             .then((userData) => {
                 login(userData);
                 navigate(`/users/${user._id}`);
@@ -68,7 +68,7 @@ function EditAccount() {
 
         navigate('/logout');
 
-        userService.deleteAccount(user)
+        userService.deleteAccount(user._id)
             .then(() => navigate('/'))
             .finally(() => setShowDeleteModal(false));
     };
