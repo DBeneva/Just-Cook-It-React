@@ -1,11 +1,11 @@
 @import '../../../index.scss';
 
 .Account {
-    @include page-layout(115px, 35%, auto);
+    @include page-layout(115px, 37%, auto);
     @include flex-column();
     @include title($primary-color, 0px, 20px, 40px);
     @include buttons(20px, 10px);
-    @include error-message(0 0 10px 0px);
+    @include error-message(10px 0);
     @include form();
 
     background-color: $confirmation-modal-background;
@@ -14,7 +14,7 @@
     box-shadow: $card-shadow;
 
     .cooking-hat {
-        width: 100px;    
+        width: 100px;
     }
 
     .change-password-link {
@@ -29,5 +29,14 @@
             width: 20px;
             margin-right: 10px;
         }
-    }    
+    }
+
+    .password {
+        width: 95%;
+        margin-left: 20px;
+
+        ~ p {
+            padding-left: 20px;
+        }
+    }
 }
