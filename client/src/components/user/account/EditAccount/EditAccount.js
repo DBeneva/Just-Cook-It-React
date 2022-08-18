@@ -25,7 +25,7 @@ function EditAccount() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !isFormStatusValid(state, 'edit')
+            submitDisabled: !isFormStatusValid(state)
         }));
     }, [state.username.status, state.email.status]);
 
@@ -92,7 +92,7 @@ function EditAccount() {
             <div><img className="cooking-hat" src="/cooking-hat.png" alt="Cooking Hat" /></div>
             <h2 className="title">{user.username}'s Account</h2>
 
-            {error && <p className="error">{error.message}</p>}
+            {error && <p className="error error-centered">{error.message}</p>}
 
             <form onSubmit={editAccount}>
                 <div className="field">
@@ -107,10 +107,9 @@ function EditAccount() {
                         onChange={changeUsername}
                         minLength="3"
                     />
+                    {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                    {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
                 </div>
-
-                {state.username.status === 'empty' && <p className="error">Username is required!</p>}
-                {state.username.status === 'too-short' && <p className="error">Username must be at least 3 characters long!</p>}
 
                 <div className="field">
                     <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
@@ -122,10 +121,9 @@ function EditAccount() {
                         className={`input-${state.email.status}`}
                         defaultValue={state.email.value}
                         onChange={changeEmail} />
+                    {state.email.status === 'invalid empty' && <p className="error">Email is required!</p>}
+                    {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
                 </div>
-
-                {state.email.status === 'empty' && <p className="error">Email is required!</p>}
-                {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
 
                 <div className="field">
                     <label><span><i className="fas fa-lock"></i></span></label>
@@ -133,7 +131,7 @@ function EditAccount() {
                 </div>
 
                 <div className="buttons">
-                    <button className="naked-cancel-btn button" onClick={() => navigate(-1)}>Cancel</button>
+                    <button type="button" className="naked-cancel-btn button" onClick={() => navigate(-1)}>Cancel</button>
                     <button className="naked-btn button" type="submit" disabled={state.submitDisabled}>Save</button>
                     <button type="button" className="delete-btn button" onClick={deleteClickHandler}>Delete <i className="fa fa-trash"></i></button>
                 </div>

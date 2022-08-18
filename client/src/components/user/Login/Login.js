@@ -26,7 +26,7 @@ function Login() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !isFormStatusValid(state)
+            submitDisabled: !isFormStatusValid(state, 'login')
         }));
     }, [state.username.status, state.password.status]);
 
@@ -96,7 +96,7 @@ function Login() {
                 </div>
 
 
-                <div className="field field-icon">
+                <div className="field">
                     <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
                     <input
                         className={`input-${state.password.status}`}

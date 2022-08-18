@@ -31,7 +31,7 @@ function Register() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !isFormStatusValid(state)
+            submitDisabled: !isFormStatusValid(state, 'register')
         }));
     }, [state.username.status, state.email.status, state.password.status, state.repass.status]);
 
