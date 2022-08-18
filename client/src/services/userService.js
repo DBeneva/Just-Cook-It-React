@@ -3,10 +3,7 @@ import * as request from './requester';
 const baseUrl = 'http://localhost:3030';
 
 export const editAccount = async (data, userId) => {
-    return await request.put(
-        `${baseUrl}/users/${userId}`,
-        data
-    );
+    return await request.put(`${baseUrl}/users/${userId}`, data);
 };
 
 export const deleteAccount = async (userId) => {
@@ -14,8 +11,5 @@ export const deleteAccount = async (userId) => {
 };
 
 export const changePassword = async (data, userId) => {
-    return await request.put(
-        `${baseUrl}/users/${userId}/change-password`,
-        data
-    );
+    return await request.put(`${baseUrl}/users/${userId}/change-password`, data);
 };

@@ -1,46 +1,15 @@
+import * as request from './requester';
+
 const baseUrl = 'http://localhost:3030';
 
-export const register = async (username, email, password) => {
-    const response = await fetch(`${baseUrl}/auth/register`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({ username, email, password })
-    });
-
-    const jsonResult = await response.json();
-
-    if (response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult;
-    }
+export const register = async (data) => {
+    return await request.post(`${baseUrl}/auth/register`, data);
 };
 
-export const login = async (username, password) => {
-    const response = await fetch(`${baseUrl}/auth/login`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-    });
-
-    const jsonResult = await response.json();
-    console.log('jsonResult', jsonResult);
-
-    if (response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult;
-    }
+export const login = async (data) => {
+    return await request.post(`${baseUrl}/auth/login`, data);
 };
 
-export const logout = (token) => {
-    return fetch(`${baseUrl}/auth/logout`, {
-        headers: {
-            'X-Authorization': token
-        }
-    });
+export const logout = async () => {
+    return await request.get(`${baseUrl}/auth/logout`);
 };
