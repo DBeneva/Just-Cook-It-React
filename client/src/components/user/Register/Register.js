@@ -64,7 +64,7 @@ function Register() {
             password: { value: currentInput, status: currentStatus },
             repass: {
                 value: state.repass.value,
-                status: !state.repass.status === 'untouched' && getRepassStatus(state.repass.value, currentInput)
+                status: state.repass.status === 'untouched' ? 'untouched' : getRepassStatus(state.repass.value, currentInput)
             }
         }));
     };

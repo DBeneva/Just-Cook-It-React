@@ -51,7 +51,7 @@ function ChangePassword() {
             newPassword: { value: currentInput, status: currentStatus },
             confirmPassword: {
                 value: state.confirmPassword.value,
-                status: !state.confirmPassword.status === 'untouched' && getRepassStatus(state.confirmPassword.value, currentInput)
+                status: state.confirmPassword.status === 'untouched' ? 'untouched' : getRepassStatus(state.confirmPassword.value, currentInput)
             }
         }));
     };
