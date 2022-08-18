@@ -59,10 +59,15 @@ function Login() {
         }));
     };
 
-    const onLoginHandler = (e) => {
+    const loginHandler = (e) => {
         e.preventDefault();
 
-        authService.login(state.username.value, state.password.value)
+        const userData = {
+            username: state.username.value,
+            password: state.password.value
+        };
+
+        authService.login(userData)
             .then((authData) => {
                 login(authData);
                 navigate(redirectUrl ? decodeURIComponent(redirectUrl) : '/');
@@ -75,7 +80,7 @@ function Login() {
 
     return (
         <div className="Register-Login">
-            <form method="post" onSubmit={onLoginHandler}>
+            <form method="post" onSubmit={loginHandler}>
                 <h2 className="title">Login Form</h2>
                 {error && <p className="error">{error.message}</p>}
 
