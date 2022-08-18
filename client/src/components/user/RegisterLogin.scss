@@ -6,11 +6,4 @@
     @include button(20px, 0px);
     @include error-message(5px 0);
     @include form();
-
-    .special-symbol {
-        background-color: $delete-btn-color;
-        color: $secondary-color;
-        padding: 2px;
-        border-radius: 5px;
-    }
 }
