@@ -1,6 +1,6 @@
-@import '../../../../index.scss';
+@import '../../../index.scss';
 
-.EditAccount {
+.Account {
     @include page-layout(115px, 35%, auto);
     @include flex-column();
     @include title($primary-color, 0px, 20px, 40px);
@@ -21,4 +21,13 @@
         display: block;
         padding: 17px 5px;
     }
+
+    .section {
+        margin: 21px 0;
+
+        .fas {
+            width: 20px;
+            margin-right: 10px;
+        }
+    }    
 }

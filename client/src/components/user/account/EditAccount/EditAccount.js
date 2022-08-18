@@ -8,8 +8,6 @@ import getUsernameStatus from '../../../../utils/getUsernameStatus';
 import isFormStatusValid from '../../../../utils/isFormStatusValid';
 import ConfirmationModal from '../../../common/ConfirmationModal/ConfirmationModal';
 
-import './EditAccount.scss';
-
 function EditAccount() {
     const { login, user } = useAuthContext();
     const navigate = useNavigate();
@@ -82,7 +80,7 @@ function EditAccount() {
     };
 
     return (
-        <div className="EditAccount">
+        <div className="Account">
             <ConfirmationModal
                 show={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
@@ -130,7 +128,7 @@ function EditAccount() {
                 {state.email.status === 'invalid' && <p className="error">Email is not valid!</p>}
 
                 <div className="field">
-                    <p><span><i className="fas fa-lock"></i></span></p>
+                    <label><span><i className="fas fa-lock"></i></span></label>
                     <Link className="change-password-link" to={`/users/${user._id}/change-password`}>Change your password</Link>
                 </div>
 
