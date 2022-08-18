@@ -1,57 +1,21 @@
+import * as request from './requester';
+
 const baseUrl = 'http://localhost:3030';
 
-export const editAccount = async (username, email, user) => {
-    const response = await fetch(`${baseUrl}/users/${user._id}`, {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': user.token
-        },
-        body: JSON.stringify({ username, email })
-    });
-
-    const jsonResult = await response.json();
-
-    if (response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult;
-    }
+export const editAccount = async (data, userId) => {
+    return await request.put(
+        `${baseUrl}/users/${userId}`,
+        data
+    );
 };
 
-export const deleteAccount = async (user) => {
-    const response = await fetch(`${baseUrl}/users/${user._id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': user.token
-        }
-    });
-
-    const jsonResult = await response.json();
-
-    if (response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult;
-    }
+export const deleteAccount = async (userId) => {
+    return await request.remove(`${baseUrl}/users/${userId}`);
 };
 
-export const changePassword = async (oldPassword, newPassword, user) => {
-    const response = await fetch(`${baseUrl}/users/${user._id}/change-password`, {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': user.token
-        },
-        body: JSON.stringify({ oldPassword, newPassword })
-    });
-
-    const jsonResult = await response.json();
-
-    if (response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult;
-    }
+export const changePassword = async (data, userId) => {
+    return await request.put(
+        `${baseUrl}/users/${userId}/change-password`,
+        data
+    );
 };
