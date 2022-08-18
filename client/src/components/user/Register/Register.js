@@ -88,10 +88,16 @@ function Register() {
         }));
     };
 
-    const onRegisterHandler = (e) => {
+    const registerHandler = (e) => {
         e.preventDefault();
 
-        authService.register(state.username.value, state.email.value, state.password.value)
+        const userData = {
+            username: state.username.value,
+            email: state.email.value,
+            password: state.password.value
+        };
+
+        authService.register(userData)
             .then((authData) => {
                 login(authData);
                 navigate('/');
@@ -104,7 +110,7 @@ function Register() {
 
     return (
         <div className="Register-Login">
-            <form className="register" method="post" onSubmit={onRegisterHandler}>
+            <form className="register" method="post" onSubmit={registerHandler}>
                 <h2 className="title">Registration Form</h2>
                 {error && <p className="error">{error.message}</p>}
 
