@@ -52,7 +52,12 @@ function EditAccount() {
     const editAccount = (e) => {
         e.preventDefault();
 
-        userService.editAccount(state.username.value, state.email.value, user._id)
+        const data = {
+            username: state.username.value,
+            email: state.email.value
+        };
+
+        userService.editAccount(data, user._id)
             .then((userData) => {
                 login(userData);
                 navigate(`/users/${user._id}`);

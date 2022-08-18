@@ -69,7 +69,12 @@ function ChangePassword() {
     const changePassword = (e) => {
         e.preventDefault();
 
-        userService.changePassword(state.oldPassword.value, state.newPassword.value, user)
+        const data = {
+            oldPassword: state.oldPassword.value,
+            newPassword: state.newPassword.value
+        };
+
+        userService.changePassword(data, user._id)
             .then((userData) => {
                 login(userData);
                 navigate(`/users/${user._id}`);
