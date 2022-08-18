@@ -4,9 +4,8 @@
     width: 300px;
     height: 330px;
     box-shadow: $card-shadow;
-    border-radius: 20px;
+    border-radius: 15px;
     margin: 40px;
-    color: $primary-color;
     text-decoration: none;
     position: relative;
     cursor: pointer;
@@ -17,17 +16,13 @@
         object-fit: cover;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
+        margin-bottom: 8px;
     }
     
-    .card-title {
-        text-align: center;
-        margin: 0;
+    .card-header {
+        padding: 0 15px;
         display: flex;
-        justify-content: space-around;
-        
-        h3 {
-            margin: 8px 0;
-        }
+        justify-content: space-between;
         
         p {
             margin: 12px 0 0 0;
@@ -37,45 +32,14 @@
 
     .likes {
         width: 100%;
-        background-color: #4a6b8b;
-        color: lightgray;
+        background-color: $primary-color;
+        color: $secondary-color;
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
-        display: flex;
         padding: 12px;
-        font-family: "Merienda";
+        font-family: $font-title;
+        text-align: center;
         position: absolute;
-        bottom: -1px;
-        
-        p {
-            margin: auto;
-        }
+        bottom: 0;
     }
 }
-
-
-// table {
-//     margin: 0 10px;
-// }
-
-// .card-section {
-//     margin-bottom: 10px;
-// }
-
-// td {
-//     vertical-align: top;
-// }
-
-// td h4, td p {
-//     margin: 5px;
-// }
-
-// .ingredients {
-//     font-size: 14px;
-//     height: 100px;
-//     overflow: hidden;
-// }
-
-// h4 img {
-//     width: 20px;
-// }

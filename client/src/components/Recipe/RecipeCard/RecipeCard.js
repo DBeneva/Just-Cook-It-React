@@ -7,7 +7,7 @@ function RecipeCard({ recipe }) {
         <Link className="RecipeCard" to={`/recipes/${recipe._id}`}>
             <img className="card-image" src={recipe.imageUrl} alt="Recipe Image" />
             <div className="card-content">
-                <div className="card-title">
+                <div className="card-header">
                     <h3>{recipe.name}</h3>
                     <p>
                         <i className="fas fa-clock"></i><span> {recipe.time} min</span>
