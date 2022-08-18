@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useAuthContext } from '../../../../contexts/AuthContext';
 import * as userService from '../../../../services/userService';
-
-import './ChangePassword.scss';
+import getPasswordProperty from '../../../../utils/getPasswordProperty';
+import getPasswordStatus from '../../../../utils/getPasswordStatus';
+import getRepassStatus from '../../../../utils/getRepassStatus';
+import isFormStatusValid from '../../../../utils/isFormStatusValid';
 
 function ChangePassword() {
     const navigate = useNavigate();
@@ -25,21 +28,13 @@ function ChangePassword() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(
-                state.oldPassword.status === 'valid' &&
-                state.newPassword.status === 'valid' &&
-                state.confirmPassword.status === 'valid'
-            )
+            submitDisabled: !isFormStatusValid(state, 'change-password')
         }));
-    }, [state.oldPassword, state.newPassword, state.confirmPassword]);
+    }, [state.oldPassword.status, state.newPassword.status, state.confirmPassword.status]);
 
     const changeOldPassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput.length < 5
-                ? 'too-short'
-                : 'valid';
+        const currentStatus = getPasswordStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -49,37 +44,21 @@ function ChangePassword() {
 
     const changeNewPassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput.length < 5
-                ? 'too-short'
-                : /[а-яА-Я]/.test(currentInput)
-                    ? 'non-latin-letters'
-                    : !/[\!\?@\#\$%\^\&\*\(\)]/.test(currentInput)
-                        ? 'no-special-symbol'
-                        : 'valid';
+        const currentStatus = getPasswordStatus(currentInput, 'change-password');
 
         setState(oldState => ({
             ...oldState,
             newPassword: { value: currentInput, status: currentStatus },
             confirmPassword: {
                 value: state.confirmPassword.value,
-                status: state.confirmPassword.status === 'untouched'
-                    ? 'untouched'
-                    : currentInput !== state.confirmPassword.value
-                        ? 'no-match'
-                        : 'valid'
+                status: !state.confirmPassword.status === 'untouched' && getRepassStatus(state.confirmPassword.value, currentInput)
             }
         }));
     };
 
     const changeConfirmPassword = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput !== state.confirmPassword.value
-                ? 'no-match'
-                : 'valid';
+        const currentStatus = getRepassStatus(currentInput, state.newPassword.value);
 
         setState(oldState => ({
             ...oldState,
@@ -90,24 +69,19 @@ function ChangePassword() {
     const changePassword = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const { oldPassword, newPassword } = Object.fromEntries(formData);
-
-        userService.changePassword(oldPassword, newPassword, user)
+        userService.changePassword(state.oldPassword.value, state.newPassword.value, user)
             .then((userData) => {
                 login(userData);
-                console.log('password changed');
-                navigate(-1);
+                navigate(`/users/${user._id}`);
             })
             .catch(err => {
-                setError({ message: err });
-                console.log(error);
+                setError(err);
+                console.error(err);
             });
     };
 
-    const showPassword = (e) => {
-        const currentInput = e.target.parentElement.firstChild.getAttribute('for');
-        const stateProperty = `visible${currentInput.slice(0, 1).toLocaleUpperCase()}${currentInput.slice(1)}`;
+    const showHidePassword = (e) => {
+        const stateProperty = getPasswordProperty(e);
 
         setState(oldState => ({
             ...oldState,
@@ -116,53 +90,48 @@ function ChangePassword() {
     };
 
     return (
-        <div className="ChangePassword">
-            <form onSubmit={changePassword} className="change-password" method="post">
+        <div className="Account">
+            <form onSubmit={changePassword} method="post">
                 <h2 className="title">Change Password</h2>
                 {error && <p className="error">{error.message}</p>}
 
-                <div className="input-fields">
+                <div className="field">
+                    <label className="label-text" htmlFor="oldPassword"><span>Old </span></label>
+                    <input className={`input-${state.oldPassword.status} password`} type={state.visibleOldPassword ? 'text' : 'password'} name="oldPassword" id="oldPassword" placeholder="******"
+                        required
+                        onFocus={changeOldPassword}
+                        onChange={changeOldPassword}
+                    />
+                    <i className={state.visibleOldPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
+                    {state.oldPassword.status === 'invalid empty' && <p className="error">Please enter your current password!</p>}
+                    {state.oldPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                </div>
 
-                    <p className="field field-icon">
-                        <label htmlFor="oldPassword"><span>Old </span></label>
-                        <input className={`input-${state.oldPassword.status}`} type={state.visibleOldPassword ? 'text' : 'password'} name="oldPassword" id="oldPassword" placeholder="******"
-                            required
-                            onFocus={changeOldPassword}
-                            onChange={changeOldPassword}
-                        />
-                        <i className={state.visibleOldPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
-                    </p>
 
-                    {state.oldPassword.status === 'empty' && <p className="error">Please enter your current password!</p>}
-                    {state.oldPassword.status === 'too-short' && <p className="error">Password must be at least 5 characters!</p>}
+                <div className="field">
+                    <label className="label-text" htmlFor="newPassword"><span>New </span></label>
+                    <input className={`input-${state.newPassword.status} password`} type={state.visibleNewPassword ? 'text' : 'password'} name="newPassword" id="newPassword" placeholder="******"
+                        required
+                        onFocus={changeNewPassword}
+                        onChange={changeNewPassword}
+                    />
+                    <i className={state.visibleNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
+                    {state.newPassword.status === 'invalid empty' && <p className="error">Please enter your new password!</p>}
+                    {state.newPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters long!</p>}
+                    {state.newPassword.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
+                    {state.newPassword.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="error special-symbol">!?@#$%^&*()</span>!</p>}
+                </div>
 
-                    <p className="field field-icon">
-                        <label htmlFor="newPassword"><span>New </span></label>
-                        <input className={`input-${state.newPassword.status}`} type={state.visibleNewPassword ? 'text' : 'password'} name="newPassword" id="newPassword" placeholder="******"
-                            required
-                            onFocus={changeNewPassword}
-                            onChange={changeNewPassword}
-                        />
-                        <i className={state.visibleNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
-                    </p>
-
-                    {state.newPassword.status === 'empty' && <p className="error">Please enter your new password!</p>}
-                    {state.newPassword.status === 'too-short' && <p className="error">Password must be at least 5 characters long!</p>}
-                    {state.newPassword.status === 'non-latin-letters' && <p className="error">Latin characters only!</p>}
-                    {state.newPassword.status === 'no-special-symbol' && <p className="error">Please include at least one special symbol (!?@#$%^&*())!</p>}
-
-                    <p className="field field-icon">
-                        <label htmlFor="confirmPassword"><span>New </span></label>
-                        <input className={`input-${state.newPassword.status}`} type={state.visibleConfirmPassword ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" placeholder="******"
-                            required
-                            onFocus={changeConfirmPassword}
-                            onChange={changeConfirmPassword}
-                        />
-                        <i className={state.visibleConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showPassword}></i>
-                    </p>
-
-                    {state.confirmPassword.status === 'empty' && <p className="error">Please confirm your new password!</p>}
-                    {state.confirmPassword.status === 'no-match' && <p className="error">Passwords don't match!</p>}
+                <div className="field">
+                    <label className="label-text" htmlFor="confirmPassword"><span>New </span></label>
+                    <input className={`input-${state.confirmPassword.status} password`} type={state.visibleConfirmPassword ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" placeholder="******"
+                        required
+                        onFocus={changeConfirmPassword}
+                        onChange={changeConfirmPassword}
+                    />
+                    <i className={state.visibleConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
+                    {state.confirmPassword.status === 'invalid empty' && <p className="error">Please confirm your new password!</p>}
+                    {state.confirmPassword.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
                 </div>
 
                 <div className="buttons">
