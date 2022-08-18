@@ -1,7 +1,7 @@
 @import '../../index.scss';
 
 .Register-Login {
-    @include page-layout(130px, 30%, auto);
+    @include page-layout(130px, 37%, auto);
     @include title($primary-color, 0, 30px, 40px);
     @include button(20px, 0px);
     @include error-message(5px 0);

@@ -10,7 +10,7 @@ import getPasswordProperty from '../../../utils/getPasswordProperty';
 import getEmailStatus from '../../../utils/getEmailStatus';
 import getRepassStatus from '../../../utils/getRepassStatus';
 
-import '../RegisterLogin.scss';
+import '../Auth.scss';
 
 function Register() {
     const initialState = {
