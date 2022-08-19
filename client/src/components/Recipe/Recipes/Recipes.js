@@ -7,9 +7,9 @@ import RecipeCard from '../RecipeCard/RecipeCard';
 import './Recipes.scss';
 
 function Recipes() {
+    const { user } = useAuthContext();
     const [recipes, setRecipes] = useState(null);
     const [error, setError] = useState(null);
-    const { user } = useAuthContext();
 
     useEffect(() => {
         contentService.loadRecipes()
