@@ -5,7 +5,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
 import isFormStatusValid from '../../../utils/isFormStatusValid';
 import getPasswordProperty from '../../../utils/getPasswordProperty';
-import getUsernameStatus from '../../../utils/getUsernameStatus';
+import getNameStatus from '../../../utils/getNameStatus';
 import getPasswordStatus from '../../../utils/getPasswordStatus';
 
 function Login() {
@@ -32,7 +32,7 @@ function Login() {
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = getUsernameStatus(currentInput);
+        const currentStatus = getNameStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,

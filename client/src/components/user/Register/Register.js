@@ -5,7 +5,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import * as authService from '../../../services/authService';
 import isFormStatusValid from '../../../utils/isFormStatusValid';
 import getPasswordStatus from '../../../utils/getPasswordStatus';
-import getUsernameStatus from '../../../utils/getUsernameStatus';
+import getNameStatus from '../../../utils/getNameStatus';
 import getPasswordProperty from '../../../utils/getPasswordProperty';
 import getEmailStatus from '../../../utils/getEmailStatus';
 import getRepassStatus from '../../../utils/getRepassStatus';
@@ -37,7 +37,7 @@ function Register() {
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = getUsernameStatus(currentInput, 'register');
+        const currentStatus = getNameStatus(currentInput, 'register');
 
         setState(oldState => ({
             ...oldState,

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../../contexts/AuthContext';
 import * as userService from '../../../../services/userService';
 import getEmailStatus from '../../../../utils/getEmailStatus';
-import getUsernameStatus from '../../../../utils/getUsernameStatus';
+import getNameStatus from '../../../../utils/getNameStatus';
 import isFormStatusValid from '../../../../utils/isFormStatusValid';
 import ConfirmationModal from '../../../common/ConfirmationModal/ConfirmationModal';
 
@@ -31,7 +31,7 @@ function EditAccount() {
 
     const changeUsername = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = getUsernameStatus(currentInput, 'edit');
+        const currentStatus = getNameStatus(currentInput, 'edit');
 
         setState(oldState => ({
             ...oldState,
