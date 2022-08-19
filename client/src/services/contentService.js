@@ -26,14 +26,14 @@ export const updateRecipe = async (data) => {
     return await request.put(`${baseUrl}/recipes/${data._id}`, data);
 };
 
-export const deleteRecipe = async (data) => {
-    return await request.remove(`${baseUrl}/recipes/${data.recipeId}`);
+export const deleteRecipe = async (recipeId) => {
+    return await request.remove(`${baseUrl}/recipes/${recipeId}`);
 };
 
-export const likeRecipe = async (recipeId, user) => {
-    return await request.put(`${baseUrl}/recipes/${recipeId}/like`, user);
+export const likeRecipe = async (recipeId) => {
+    return await request.put(`${baseUrl}/recipes/${recipeId}/like`);
 };
 
-export const unlikeRecipe = async (recipeId, user) => {
-    return await request.put(`${baseUrl}/recipes/${recipeId}/unlike`, user);
+export const unlikeRecipe = async (recipeId) => {
+    return await request.put(`${baseUrl}/recipes/${recipeId}/unlike`);
 };
