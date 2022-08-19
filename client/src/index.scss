@@ -181,6 +181,7 @@ h2 {
   .delete-btn {
     background-color: transparent;
     color: $delete-btn-color;
+    position: relative;
 
     &:hover {
       background-color: $delete-btn-color;
@@ -276,6 +277,32 @@ h2 {
 @mixin input-border($color) {
   border: 1px solid $primary-color;
   border-left: 0.3em solid $color;
+}
+
+
+/* Card Bottom Banner */
+@mixin likes($padding-lr) {
+  .likes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px $padding-lr;
+
+    .button {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    width: 100%;
+    background-color: $primary-color;
+    color: $secondary-color;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-family: $font-title;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
 }
 
 
