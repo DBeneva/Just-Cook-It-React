@@ -1,26 +1,16 @@
 export const request = async (method, url, data) => {
-    let result = null;
+    const response = await fetch(url, {
+        method,
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(data)
+    });
 
-    if (method === 'GET') {
-        result = fetch(url);
-    } else {
-        result = fetch(url, {
-            method,
-            headers: {
-                'content-type': 'application/json',
-                'X-Authorization': getToken()
-            },
-            body: JSON.stringify(data)
-        });
-    }
+    const jsonData = await response.json();
 
-    return result.then(responseHandler);
-};
-
-async function responseHandler(res) {
-    let jsonData = await res.json();
-
-    if (res.ok) {
+    if (response.ok) {
         return jsonData;
     } else {
         throw jsonData;
@@ -29,17 +19,10 @@ async function responseHandler(res) {
 
 function getToken() {
     try {
-        let userItem = localStorage.getItem('user');
-
-        if (!userItem) {
-            throw { message: 'You must be authenticated' };
-        }
-
-        let user = JSON.parse(userItem);
-
-        return user.token;
+        const userItem = localStorage.getItem('user');
+        return JSON.parse(userItem).token;
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
