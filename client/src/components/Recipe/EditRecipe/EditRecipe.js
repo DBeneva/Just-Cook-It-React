@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
 import * as contentService from '../../../services/contentService';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import getNameStatus from '../../../utils/getNameStatus';
+import getRequiredInputStatus from '../../../utils/getRequiredInputStatus';
+import getUrlStatus from '../../../utils/getUrlStatus';
+import isFormStatusValid from '../../../utils/isFormStatusValid';
 
 import './EditRecipe.scss';
 
 function EditRecipe() {
-    const { recipeId } = useParams();
-    const { user } = useAuthContext();
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
-
     const initialState = {
         recipeData: {
             name: { value: '', status: 'untouched' },
@@ -23,7 +21,10 @@ function EditRecipe() {
         submitDisabled: true
     };
 
+    const navigate = useNavigate();
+    const { recipeId } = useParams();
     const [state, setState] = useState(initialState);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         contentService.loadRecipe(recipeId)
@@ -36,16 +37,14 @@ function EditRecipe() {
                         ingredients: { value: recipe.ingredients, status: 'untouched' },
                         instructions: { value: recipe.instructions, status: 'untouched' },
                         imageUrl: { value: recipe.imageUrl, status: 'untouched' }
-                    },
-                    submitDisabled: true
+                    }
                 }));
 
                 console.log('recipe in state', state);
             })
-            .catch(error => {
-                console.error(error);
-
-                setError(error);
+            .catch(err => {
+                setError(err);
+                console.error(err);
                 navigate(`/recipes/${recipeId}`);
             });
     }, [recipeId]);
@@ -54,24 +53,14 @@ function EditRecipe() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(
-                state.recipeData.name.status === 'valid' || 'untouched' &&
-                state.recipeData.time.status === 'valid' || 'untouched' &&
-                state.recipeData.ingredients.status === 'valid' || 'untouched' &&
-                state.recipeData.instructions.status === 'valid' || 'untouched' &&
-                state.recipeData.imageUrl.status === 'valid' || 'untouched'
-            )
+            submitDisabled: !isFormStatusValid(state.recipeData)
         }));
-    }, [state.recipeData.name.value, state.recipeData.time.value, state.recipeData.ingredients.value, state.recipeData.instructions.value, state.recipeData.imageUrl.value]);
+    }, [state.recipeData.name, state.recipeData.time, state.recipeData.ingredients, state.recipeData.instructions, state.recipeData.imageUrl]);
 
 
     const changeRecipeName = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput.length < 3
-                ? 'too-short'
-                : 'valid';
+        const currentStatus = getNameStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -81,9 +70,7 @@ function EditRecipe() {
 
     const changeTime = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -93,9 +80,7 @@ function EditRecipe() {
 
     const changeIngredients = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -105,9 +90,7 @@ function EditRecipe() {
 
     const changeInstructions = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -117,11 +100,7 @@ function EditRecipe() {
 
     const changeImageUrl = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : !/^https?:\/\/.+/.test(currentInput)
-                ? 'invalid'
-                : 'valid';
+        const currentStatus = getUrlStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -133,13 +112,14 @@ function EditRecipe() {
         e.preventDefault();
 
         const recipeData = Object.entries(state.recipeData).reduce((acc, [k, v]) => Object.assign(acc, { [k]: v.value }), { _id: recipeId });
-        
-        contentService.updateRecipe({ ...recipeData, user })
+
+        contentService.updateRecipe(recipeData)
             .then(() => {
                 navigate('/recipes');
             })
-            .catch((error) => {
-                setError(error);
+            .catch((err) => {
+                setError(err);
+                console.error(err);
                 setState(oldState => ({ ...oldState, submitDisabled: true }));
             });
     };
@@ -155,48 +135,92 @@ function EditRecipe() {
             <form onSubmit={editRecipe}>
                 <div className="title-section">
                     <div className="recipe-title">
-                        <label htmlFor="recipeName">Title <span className="red">*</span></label>
-                        <input type="text" name="recipeName" id="recipeName" required minLength="3"
+                        <label htmlFor="recipeName">Title <span className="error">*</span></label>
+                        <input
+                            type="text"
+                            name="recipeName"
+                            id="recipeName"
+                            required
                             defaultValue={state.recipeData.name.value}
-                            onInput={changeRecipeName} />
-                        {state.recipeData.name.status === 'empty' && <p className="error">Recipe name is required!</p>}
-                        {state.recipeData.name.status === 'too-short' && <p className="error">Recipe name must be at least 3 characters long!</p>}
+                            onFocus={changeRecipeName}
+                            onChange={changeRecipeName}
+                            onBlur={changeRecipeName}
+                        />
+                        {state.recipeData.name.status === 'invalid empty' && <p className="error">Recipe name is required!</p>}
+                        {state.recipeData.name.status === 'invalid too-short' && <p className="error">Recipe name must be at least 3 characters long!</p>}
                     </div>
+
                     <div>
-                        <label htmlFor="time">Cooking Time (Minutes) <span className="red">*</span></label>
-                        <input type="number" name="time" id="time" required min="0"
+                        <label htmlFor="time">Cooking Time (Minutes) <span className="error">*</span></label>
+                        <input
+                            type="number"
+                            name="time"
+                            id="time"
+                            required
+                            min="0"
                             defaultValue={state.recipeData.time.value}
-                            onInput={changeTime} />
-                        {state.recipeData.time.status === 'empty' && <p className="error">Recipe time is required!</p>}
+                            onFocus={changeTime}
+                            onChange={changeTime}
+                            onBlur={changeTime}
+                        />
+                        {state.recipeData.time.status === 'invalid empty' && <p className="error">Recipe time is required!</p>}
                     </div>
                 </div>
+
                 <div className="ingredients">
-                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="red">*</span></label>
-                    <textarea type="text" name="ingredients" id="ingredients" rows="3" required
+                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="error">*</span></label>
+                    <textarea
+                        type="text"
+                        name="ingredients"
+                        id="ingredients"
+                        rows="3"
+                        required
                         placeholder="Ingredient 1, Ingredient 2, Ingredient 3"
                         defaultValue={state.recipeData.ingredients.value}
-                        onInput={changeIngredients}>
+                        onFocus={changeIngredients}
+                        onChange={changeIngredients}
+                        onBlur={changeIngredients}
+                    >
                     </textarea>
-                    {state.recipeData.ingredients.status === 'empty' && <p className="error">Please enter ingredients for your recipe!</p>}
+                    {state.recipeData.ingredients.status === 'invalid empty' && <p className="error">Please enter ingredients for your recipe!</p>}
                 </div>
+
                 <div className="instructions">
-                    <label htmlFor="instructions">Instructions <span className="red">*</span></label>
-                    <textarea type="text" name="instructions" id="instructions" rows="3" required
+                    <label htmlFor="instructions">Instructions <span className="error">*</span></label>
+                    <textarea
+                        type="text"
+                        name="instructions"
+                        id="instructions"
+                        rows="3"
+                        required
                         defaultValue={state.recipeData.instructions.value}
-                        onInput={changeInstructions}>
+                        onFocus={changeInstructions}
+                        onChange={changeInstructions}
+                        onBlur={changeInstructions}
+                    >
                     </textarea>
-                    {state.recipeData.instructions.status === 'empty' && <p className="error">Please enter instructions for your recipe!</p>}
+                    {state.recipeData.instructions.status === 'invalid empty' && <p className="error">Please enter instructions for your recipe!</p>}
                 </div>
+
                 <div className="image">
-                    <label htmlFor="imageUrl">Image URL <span className="red">*</span></label>
-                    <input type="text" name="imageUrl" id="imageUrl" required placeholder="http(s)://"
+                    <label htmlFor="imageUrl">Image URL <span className="error">*</span></label>
+                    <input
+                        type="text"
+                        name="imageUrl"
+                        id="imageUrl"
+                        required
+                        placeholder="http(s)://"
                         defaultValue={state.recipeData.imageUrl.value}
-                        onInput={changeImageUrl} />
-                    {state.recipeData.imageUrl.status === 'empty' && <p className="error">Recipe image is required!</p>}
+                        onFocus={changeImageUrl}
+                        onChange={changeImageUrl}
+                        onBlur={changeImageUrl}
+                    />
+                    {state.recipeData.imageUrl.status === 'invalid empty' && <p className="error">Recipe image is required!</p>}
                     {state.recipeData.imageUrl.status === 'invalid' && <p className="error">Please enter a valid URL!</p>}
                 </div>
+
                 <div className="buttons">
-                    <Link to={`/recipes/${recipeId}`} className="cancel button">Cancel</Link>
+                    <Link to={`/recipes/${recipeId}`} className="cancel-btn button">Cancel</Link>
                     <button type="submit" className="submit button" disabled={state.submitDisabled}>Save Recipe</button>
                 </div>
             </form >
