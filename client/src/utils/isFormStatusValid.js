@@ -3,7 +3,7 @@ const isFormStatusValid = (state, form) => {
 
     return form
         ? fieldsWithStatus.every(([k, v]) => v.status === 'valid')
-        : fieldsWithStatus.some(([k, v]) => v.status === 'valid');
+        : fieldsWithStatus.every(([k, v]) => v.status === 'valid' || v.status === 'untouched');
 };
 
 export default isFormStatusValid;
