@@ -8,19 +8,19 @@ function Header() {
 
     const guestNavigation = (
         <div>
-            <li className="navigation-list-item"><NavLink className="button" to="/recipes">Recipes</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/login">Login</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/register">Register</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/recipes">Recipes</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/login">Login</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/register">Register</NavLink></li>
         </div>
     );
 
     const userNavigation = (
         <div className="user">
-            <li className="navigation-list-item"><NavLink className="button" to="/recipes">Recipes</NavLink></li >
-            <li className="navigation-list-item"><NavLink className="button" to="/recipes/new-recipe">New Recipe</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/recipes/my-recipes">My Recipes</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to="/recipes/my-favorites">My Favorites</NavLink></li>
-            <li className="navigation-list-item"><NavLink className="button" to={`/users/${user._id}`}><i className="fas fa-user"></i> {user.username}</NavLink></li >
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/recipes">Recipes</NavLink></li >
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/recipes/new-recipe">New Recipe</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/recipes/my-recipes">My Recipes</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to="/recipes/my-favorites">My Favorites</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({isActive}) => "button" + (isActive ? " active-btn" : "")} to={`/users/${user._id}`}><i className="fas fa-user"></i> {user.username}</NavLink></li >
             <li className="navigation-list-item"><NavLink className="button logout" to="/logout">Logout</NavLink></li >
         </div >
     );
