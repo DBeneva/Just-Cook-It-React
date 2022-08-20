@@ -8,11 +8,13 @@ import './MyRecipes.scss';
 function MyRecipes() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    const [myRecipes, setMyRecipes] = useState({});
+    const [myRecipes, setMyRecipes] = useState([]);
 
     useEffect(() => {
         contentService.loadMyRecipes()
-            .then(recipes => setMyRecipes(recipes))
+            .then(recipes => {
+                setMyRecipes(recipes);
+            })
             .catch(err => {
                 setError(err);
                 console.error(err);
@@ -22,7 +24,7 @@ function MyRecipes() {
     const buttons = (
         <div>
             <p>Add one right away!</p>
-            <Link className="button" to="/recipes/new-recipe">Add New Recipe</Link>
+            <Link className="button" to="/new-recipe">Add New Recipe</Link>
             <button className="button cancel-btn" onClick={() => navigate(-1)}>Go Back</button>
         </div>
     );

@@ -8,7 +8,7 @@ import './MyFavorites.scss';
 function MyFavorites() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    const [myFavorites, setMyFavorites] = useState({});
+    const [myFavorites, setMyFavorites] = useState([]);
 
     useEffect(() => {
         contentService.loadMyFavorites()
