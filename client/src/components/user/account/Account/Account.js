@@ -23,11 +23,11 @@ function Account() {
                 </div>
 
                 <div className="section">
-                    <p><span><img className="fas" src="/instructions.png" /></span> <Link to="/recipes/my-recipes">My Recipes</Link></p>
+                    <p><span><img className="fas" src="/instructions.png" /></span> <Link to="/my-recipes">My Recipes</Link></p>
                 </div>
 
                 <div className="section">
-                    <p><span><i className="fas fa-heart"></i></span> <Link to="/recipes/my-favorites">My Favourite Recipes</Link></p>
+                    <p><span><i className="fas fa-heart"></i></span> <Link to="/my-favorites">My Favourite Recipes</Link></p>
                 </div>
 
                 <div className="buttons">
