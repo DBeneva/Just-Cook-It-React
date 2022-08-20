@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import * as contentService from '../../../services/contentService';
-import { useAuthContext } from '../../../contexts/AuthContext';
-
+import getNameStatus from '../../../utils/getNameStatus';
+import getRequiredInputStatus from '../../../utils/getRequiredInputStatus';
+import getUrlStatus from '../../../utils/getUrlStatus';
+import isFormStatusValid from '../../../utils/isFormStatusValid';
 import './NewRecipe.scss';
 
 function NewRecipe() {
-    const { user } = useAuthContext();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -25,24 +26,14 @@ function NewRecipe() {
     useEffect(() => {
         setState(oldState => ({
             ...oldState,
-            submitDisabled: !(
-                state.recipeName.status === 'valid' &&
-                state.time.status === 'valid' &&
-                state.ingredients.status === 'valid' &&
-                state.instructions.status === 'valid' &&
-                state.imageUrl.status === 'valid'
-            )
+            submitDisabled: !isFormStatusValid(state, 'new-recipe')
         }));
     }, [state.recipeName.status, state.time.status, state.ingredients.status, state.instructions.status, state.imageUrl.status]);
 
 
     const changeRecipeName = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : currentInput.length < 3
-                ? 'too-short'
-                : 'valid';
+        const currentStatus = getNameStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -52,9 +43,7 @@ function NewRecipe() {
 
     const changeTime = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -64,9 +53,7 @@ function NewRecipe() {
 
     const changeIngredients = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -76,9 +63,7 @@ function NewRecipe() {
 
     const changeInstructions = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : 'valid';
+        const currentStatus = getRequiredInputStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -88,13 +73,7 @@ function NewRecipe() {
 
     const changeImageUrl = (e) => {
         const currentInput = e.target.value;
-        const currentStatus = currentInput.length == 0
-            ? 'empty'
-            : !/^https?:\/\/.+/.test(currentInput)
-                ? 'invalid'
-                : 'valid';
-
-        console.log(currentInput, currentStatus);
+        const currentStatus = getUrlStatus(currentInput);
 
         setState(oldState => ({
             ...oldState,
@@ -105,15 +84,21 @@ function NewRecipe() {
     const createRecipe = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const recipeData = Object.fromEntries(formData);
+        const recipeData = {
+            recipeName: state.recipeName.value,
+            time: state.time.value,
+            ingredients: state.ingredients.value,
+            instructions: state.instructions.value,
+            imageUrl: state.imageUrl.value
+        };
 
-        contentService.saveRecipe(recipeData, user)
+        contentService.saveRecipe(recipeData)
             .then(() => {
                 navigate('/recipes');
             })
             .catch(err => {
                 setError(err);
+                console.error(err);
             });
     };
 
@@ -128,45 +113,87 @@ function NewRecipe() {
             <form onSubmit={createRecipe}>
                 <div className="title-section">
                     <div className="recipe-title">
-                        <label htmlFor="recipeName">Title <span className="red">*</span></label>
-                        <input type="text" name="recipeName" id="recipeName" required minLength="5" onInput={changeRecipeName} />
-                        {state.recipeName.status === 'empty' && <p className="error">Recipe name is required!</p>}
-                        {state.recipeName.status === 'too-short' && <p className="error">Recipe name must be at least 3 characters long!</p>}
+                        <label htmlFor="recipeName">Title <span className="error">*</span></label>
+                        <input
+                            type="text"
+                            name="recipeName"
+                            id="recipeName"
+                            required
+                            onFocus={changeRecipeName}
+                            onChange={changeRecipeName}
+                        />
+                        {state.recipeName.status === 'invalid empty' && <p className="error">Recipe name is required!</p>}
+                        {state.recipeName.status === 'invalid too-short' && <p className="error">Recipe name must be at least 3 characters long!</p>}
                     </div>
+
                     <div>
-                        <label htmlFor="time">Cooking Time (Minutes) <span className="red">*</span></label>
-                        <input type="number" name="time" id="time" required min="0" onInput={changeTime} />
-                        {state.time.status === 'empty' && <p className="error">Recipe time is required!</p>}
+                        <label htmlFor="time">Cooking Time (Minutes) <span className="error">*</span></label>
+                        <input
+                            type="number"
+                            name="time"
+                            id="time"
+                            required
+                            min="0"
+                            onFocus={changeTime}
+                            onChange={changeTime}
+                        />
+                        {state.time.status === 'invalid empty' && <p className="error">Recipe time is required!</p>}
                     </div>
                 </div>
+
                 <div className="ingredients">
-                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="red">*</span></label>
-                    <textarea type="text" name="ingredients" id="ingredients" rows="3" required
+                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="error">*</span></label>
+                    <textarea
+                        type="text"
+                        name="ingredients"
+                        id="ingredients"
+                        rows="3"
+                        required
                         placeholder="Ingredient 1, Ingredient 2, Ingredient 3"
-                        onInput={changeIngredients}>
+                        onFocus={changeIngredients}
+                        onChange={changeIngredients}
+                    >
                     </textarea>
-                    {state.ingredients.status === 'empty' && <p className="error">Please enter ingredients for your recipe!</p>}
+                    {state.ingredients.status === 'invalid empty' && <p className="error">Please enter ingredients for your recipe!</p>}
                 </div>
+
                 <div className="instructions">
-                    <label htmlFor="instructions">Instructions <span className="red">*</span></label>
-                    <textarea type="text" name="instructions" id="instructions" rows="3" required onInput={changeInstructions}>
+                    <label htmlFor="instructions">Instructions <span className="error">*</span></label>
+                    <textarea
+                        type="text"
+                        name="instructions"
+                        id="instructions"
+                        rows="3"
+                        required
+                        onFocus={changeInstructions}
+                        onChange={changeInstructions}
+                    >
                     </textarea>
-                    {state.instructions.status === 'empty' && <p className="error">Please enter instructions for your recipe!</p>}
+                    {state.instructions.status === 'invalid empty' && <p className="error">Please enter instructions for your recipe!</p>}
                 </div>
+
                 <div className="image">
-                    <label htmlFor="imageUrl">Image URL <span className="red">*</span></label>
-                    <input type="text" name="imageUrl" id="imageUrl" required placeholder="http(s)://" onInput={changeImageUrl} />
-                    {state.imageUrl.status === 'empty' && <p className="error">Recipe image is required!</p>}
+                    <label htmlFor="imageUrl">Image URL <span className="error">*</span></label>
+                    <input
+                        type="text"
+                        name="imageUrl"
+                        id="imageUrl"
+                        required
+                        placeholder="http(s)://"
+                        onFocus={changeImageUrl}
+                        onChange={changeImageUrl}
+                    />
+                    {state.imageUrl.status === 'invalid empty' && <p className="error">Recipe image is required!</p>}
                     {state.imageUrl.status === 'invalid' && <p className="error">Please enter a valid URL!</p>}
                 </div>
+
                 <div className="buttons">
-                    <Link to="/recipes" className="cancel button">Cancel</Link>
+                    <Link to="/recipes" className="cancel-btn button">Cancel</Link>
                     <button type="submit" className="submit button" disabled={state.submitDisabled}>Create a New Recipe</button>
                 </div>
             </form >
         </div >
     );
 }
-
 
 export default NewRecipe;

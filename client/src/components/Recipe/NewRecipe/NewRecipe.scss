@@ -1,18 +1,18 @@
 @import '../../../index.scss';
 
 .NewRecipe {
-    height: calc(100vh - 74px);
-    margin: 100px auto;
-    width: 45%;
-    // color: #4a6b8b;
+    @include page-layout(115px, 45%, auto);
+    @include buttons(20px, 10px);
+    @include title($primary-color, 0, 30px, 40px);
+    @include error-message(5px 0);
 
     .page-title {
-        font-family: "Merienda";
+        font-family: $font-title;
         text-align: center;
     }
 
     form {
-        border: 1px solid #4a6b8b;
+        border: 1px solid $primary-color;
         border-radius: 10px;
         padding: 10px 20px 10px 20px;
     }
@@ -21,7 +21,6 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        // flex-flow: row wrap;
     }
 
     .title-section div {
@@ -38,18 +37,17 @@
     textarea {
         width: 100%;
         padding: 8px;
-        border: 1px solid #4a6b8b;
+        border: 1px solid $primary-color;
         border-radius: 5px;
         resize: none;
-        color: #4a6b8b;
         font-family: Verdana;
         font-size: 14px;
     }
 
     input:focus,
     textarea:focus {
-        border: 2px solid #4a6b8b;
-        background-color: #4a6a8b2d;
+        border: 2px solid $primary-color;
+        background-color: $input-focus-background;
         outline: none;
         box-shadow: none;
     }
@@ -63,48 +61,4 @@
         padding: 10px;
         display: inline-block;
     }
-
-    .red {
-        color: red;
-    }
-
-    @include button(10px, 10px);
-    @include title($primary-color, 0, 30px, 40px);
-    @include error-message(0 0 10px 35px);
-
-    // .buttons {
-    //     margin: 20px auto;
-    //     text-align: center;
-    // }
-
-    // button {
-    //     text-decoration: none;
-    //     font-family: Verdana;
-    //     font-size: 16px;
-    //     background-color: #4a6b8b;
-    //     color: lightgray;
-    //     padding: 10px 20px;
-    //     border-radius: 15px;
-    //     margin: 0 10px;
-    // }
-
-    // button:hover {
-    //     background-color: lightgray;
-    //     color: #4a6b8b;
-    //     box-shadow: 2px 2px 5px 0 gray;
-    // }
-
-    // button[disabled],
-    // button[disabled]:hover {
-    //     background-color: #4a6a8b8c;
-    //     color: lightgray;
-    //     box-shadow: none;
-    // }
-
-    // .error {
-    //     color: red;
-    //     font-size: 14px;
-    //     padding: 10px;
-    //     margin: 0;
-    // }
 }
