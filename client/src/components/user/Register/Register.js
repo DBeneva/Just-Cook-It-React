@@ -124,6 +124,7 @@ function Register() {
                         onChange={changeUsername}
                     />
                     {state.username.status === 'invalid empty' && <p className="error">Username is required!</p>}
+                    {state.username.status === 'invalid white-spaces' && <p className="error">No white spaces allowed!</p>}
                     {state.username.status === 'invalid non-alphanumeric' && <p className="error">Latin characters only!</p>}
                     {state.username.status === 'invalid too-short' && <p className="error">Username must be at least 3 characters long!</p>}
                 </div>
