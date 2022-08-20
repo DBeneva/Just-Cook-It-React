@@ -124,7 +124,7 @@ function ChangePassword() {
                     {state.newPassword.status === 'invalid empty' && <p className="error">Please enter your new password!</p>}
                     {state.newPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters long!</p>}
                     {state.newPassword.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
-                    {state.newPassword.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="error special-symbol">!?@#$%^&*()</span>!</p>}
+                    {state.newPassword.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: !?@#$%^&*()!</p>}
                 </div>
 
                 <div className="field">

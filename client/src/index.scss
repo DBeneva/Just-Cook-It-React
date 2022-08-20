@@ -218,13 +218,6 @@ h2 {
     width: 100%;
     padding: 0 60px;
 
-    .special-symbol {
-      background-color: $delete-btn-color;
-      color: $secondary-color;
-      padding: 2px;
-      border-radius: 5px;
-    }
-
     @include flex-column();
   }
 

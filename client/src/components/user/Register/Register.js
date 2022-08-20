@@ -150,7 +150,7 @@ function Register() {
                     {state.password.status === 'invalid empty' && <p className="error">Password is required!</p>}
                     {state.password.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
                     {state.password.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
-                    {state.password.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: <span className="special-symbol">!?@#$%^&*()</span>!</p>}
+                    {state.password.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: !?@#$%^&*()!</p>}
                 </div>
 
                 <div className="field field-icon">
