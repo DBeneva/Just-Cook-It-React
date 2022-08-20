@@ -35,9 +35,9 @@ function App() {
           <Route path="/recipes/:recipeId" element={<Recipe />} />
           <Route element={<GuardedRoute />}>
             <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
-            <Route path="/recipes/new-recipe" element={<NewRecipe />} />
-            <Route path="/recipes/my-recipes" element={<MyRecipes />} />
-            <Route path="/recipes/my-favorites" element={<MyFavorites />} />
+            <Route path="/new-recipe" element={<NewRecipe />} />
+            <Route path="/my-recipes" element={<MyRecipes />} />
+            <Route path="/my-favorites" element={<MyFavorites />} />
             <Route path="/users/:userId" element={<Account />} />
             <Route path="/users/:userId/edit" element={<EditAccount />} />
             <Route path="/users/:userId/change-password" element={<ChangePassword />} />
