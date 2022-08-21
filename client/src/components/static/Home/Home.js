@@ -13,7 +13,7 @@ function Home() {
         <Link className="button" to="/recipes">See Recipes</Link>
         {
           user.username
-            ? <Link className="button" to="/recipes/new-recipe">Add New Recipe</Link>
+            ? <Link className="button" to="/new-recipe">Add New Recipe</Link>
             : <Link className="button" to="/login">Login</Link>
         }
       </div>

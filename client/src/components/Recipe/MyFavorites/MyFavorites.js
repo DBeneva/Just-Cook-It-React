@@ -30,7 +30,7 @@ function MyFavorites() {
     const myFavoriteRecipeCards = (
         <div className="recipes">
             <h2 className="title">My Favorites</h2>
-            {myFavorites.map(r => <RecipeCard key={r._id} recipe={r} />)}
+            {myFavorites.length > 0 && myFavorites.map(r => <RecipeCard key={r._id} recipe={r} />)}
         </div>
     );
 
