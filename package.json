@@ -1,0 +1,22 @@
+{
+  "name": "just-cook-it",
+  "version": "1.0.0",
+  "description": "This single-page application was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) version 18.2.0 for the SoftUni React exam (August 2022).",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client/ && npm install && npm run build",
+    "postinstall": "npm run build",
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DBeneva/Just-Cook-It-React.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DBeneva/Just-Cook-It-React/issues"
+  },
+  "homepage": "https://github.com/DBeneva/Just-Cook-It-React#readme"
+}
