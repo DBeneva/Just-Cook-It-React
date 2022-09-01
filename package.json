@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/DBeneva/Just-Cook-It-React/issues"
   },
-  "homepage": "https://github.com/DBeneva/Just-Cook-It-React#readme"
+  "homepage": "https://github.com/DBeneva/Just-Cook-It-React#readme",
+  "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.4.0"
+  },
+  "engines": {
+    "node": "16.6.1",
+    "npm": "7.20.3"
+  }
 }
