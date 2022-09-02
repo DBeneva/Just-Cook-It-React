@@ -2,14 +2,10 @@
 
 .RecipeCard {
     @include likes(50px);
+    @include card(300px, 40px);
 
-    width: 300px;
     height: 330px;
-    box-shadow: $card-shadow;
-    border-radius: 15px;
-    margin: 40px;
     text-decoration: none;
-    position: relative;
     cursor: pointer;
 
     .card-image {
