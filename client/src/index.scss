@@ -19,6 +19,12 @@
   align-items: center;
 }
 
+@mixin flex-row() {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @mixin position-absolute($top, $left, $z-index) {
   position: absolute;
   top: $top;
