@@ -6,7 +6,7 @@
 }
 
 
-/* Page Layout */
+/* Layout */
 @mixin page-layout($margin-tb, $width, $height) {
   margin: $margin-tb auto;
   width: $width;
@@ -288,8 +288,15 @@ h2 {
   border-left: 0.3em solid $color;
 }
 
+/* Card */
+@mixin card($width, $margin) {
+  width: $width;
+  box-shadow: $card-shadow;
+  border-radius: 15px;
+  margin: $margin;
+  position: relative;
+}
 
-/* Card Bottom Banner */
 @mixin likes($padding-lr) {
   .likes {
     display: flex;
