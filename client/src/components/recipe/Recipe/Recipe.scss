@@ -1,0 +1,84 @@
+@import '../../../index.scss';
+
+.Recipe {
+    @include page-layout(115px, 100%, auto);
+    @include title($primary-color, 8px, 10px, 28px);
+    @include buttons(0, 0);
+    @include back-btn(185px, 170px);
+    @include loader();
+    @include likes(100px);
+    @include error-message(0);
+
+    position: relative;
+
+    .card {
+        width: 50%;
+        box-shadow: $card-shadow;
+        border-radius: 15px;
+        margin: 40px auto;
+        position: relative;
+
+        .card-image {
+            height: 200px;
+
+            img {
+                height: 200px;
+                width: 100%;
+                object-fit: cover;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 150px;
+        }
+
+        .card-content {
+            padding: 0px 50px 50px 50px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .card-section {
+            display: flex;
+            align-items: flex-start;
+            padding-bottom: 30px;
+            
+            .ingredients-section {
+                display: flex;
+                align-items: flex-start;
+                flex-wrap: wrap;
+                width: 100%;
+                padding-left: 20px;
+
+                li {
+                    padding-bottom: 5px;
+                    width: 49%;
+                    padding: 0 5px 5px 0;
+                }
+            }            
+        }
+
+        .card-content-icon {
+            display: inline-block;
+            width: 20px;
+            margin: 5px 20px 0 0;
+        }
+
+        .instructions {
+            p {
+                margin: 0 0 15px 0;
+            }
+        }
+    }
+
+    .ConfirmationModal {
+        .button {
+            margin: 20px 10px;
+        }
+    }
+}
