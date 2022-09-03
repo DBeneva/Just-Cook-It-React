@@ -5,7 +5,6 @@
     @include title($primary-color, 0, 0, 28px);
     @include buttons(0, 0);
     @include back-btn(185px, 170px);
-    @include loader();
     @include likes(100px);
     @include error-message(0);
 

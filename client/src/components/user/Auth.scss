@@ -5,5 +5,4 @@
     @include title($primary-color, 0, 30px, 40px);
     @include button(20px, 0px);
     @include error-message(5px 0);
-    @include form();
 }

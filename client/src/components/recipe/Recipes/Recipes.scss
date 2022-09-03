@@ -6,7 +6,6 @@
     @include title($primary-color, 160px, 40px, 40px);
     @include button(60px, 10px);
     @include error-message(20px);
-    @include loader();
     @include flex-row();
 
     font-size: 18px;
