@@ -13,16 +13,18 @@
   height: $height;
 }
 
-@mixin flex-column() {
+@mixin flex-column($align-items, $flex-basis: initial) {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: $align-items;
+  flex-basis: $flex-basis;
 }
 
-@mixin flex-row() {
+@mixin flex-row($justify-content, $align-items, $wrap: wrap) {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-wrap: $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }
 
 @mixin position-absolute($top, $left, $z-index) {
@@ -55,22 +57,25 @@ $confirmation-modal-background: #E8E8E8;
 $button-shadow: 0 0 8px 0 gray;
 $card-shadow: 2px 2px 20px 0 gray;
 $confirmation-modal-outline: 1700px solid rgba(0, 0, 0, 0.5);
-$border-thin: 1px solid $primary-color;
+$border: 1px solid $primary-color;
+$thin: 0.2em;
+$thick: 0.3em;
 
-@mixin border-thick($color) {
-  border-left: 0.3em solid $color;
+@mixin border-left($thickness, $color) {
+  border-left: $thickness solid $color;
 }
 
-@mixin input-border($color) {
-  border: $border-thin;
-  @include border-thick($color);
+@mixin input-border($thickness, $color) {
+  border: $border;
+  @include border-left($thickness, $color);
 }
 
 
 /* Text Font & Color */
 html,
 a,
-input {
+input,
+textarea {
   font-family: $font-body-text;
   color: $primary-color;
 }
@@ -229,64 +234,86 @@ h2 {
 
 
 /* Forms & Input Fields */
-.account-form {
-  width: 100%;
-  padding: 0 60px;
+@mixin input($thickness, $padding, $font-size) {
+  .input {
+    position: relative;
+    width: 100%;
+    font-size: $font-size;
+    padding: $padding;
+    border-radius: 5px;
+    resize: none;
 
-  @include flex-column();
+    &:focus {
+      background-color: $input-focus-background;
+      outline: none;
+      box-shadow: none;
+    }
+
+    &-untouched {
+      @include input-border($thickness, $primary-color);
+    }
+
+    &-valid {
+      @include input-border($thickness, $success-color);
+    }
+
+    &-invalid {
+      @include input-border($thickness, $error-color);
+    }
+  }
+
+  .field {
+    width: 100%;
+    padding: 5px 0;
+    position: relative;
+
+    &-change-password {
+      @include flex-row(space-between, center, nowrap);
+    }
+  }
+
+  .label {
+    &-account {
+      margin: 0 10px;
+      position: absolute;
+      top: 20px;
+      left: -40px;
+    }
+
+    &-recipe {
+      padding: 10px;
+      display: inline-block;
+    }
+
+    &-change-password {
+      width: 2.4em;
+      margin-right: 10px;
+      text-align: right;
+    }
+  }
+
+  .fa-eye,
+  .fa-eye-slash {
+    @include position-absolute(32px, calc(100% - 20px), 1);
+  }
 }
 
-input,
-textarea {
-  position: relative;
-  width: 100%;
-  font-size: 16px;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-input:focus,
-textarea:focus {
-  background-color: $input-focus-background;
-  outline: none;
-  box-shadow: none;
-}
-
-.input-untouched {
-  @include input-border($primary-color);
-}
-
-.input-valid {
-  @include input-border($success-color);
-}
-
-.input-invalid {
-  @include input-border($error-color);
-}
-
-.field {
-  width: 100%;
-  padding: 5px 0;
-  position: relative;
-}
-
-.label {
+.form {
   &-account {
-    margin: 0 10px;
-    position: absolute;
-    top: 20px;
-    left: -40px;
+    width: 100%;
+    padding: 0 60px;
+
+    @include input($thin, 15px, 16px);
+    @include flex-column(center);
   }
 
   &-recipe {
-    padding: 10px;
-    display: inline-block;
-  }
-}
+    border: $border;
+    border-radius: 10px;
+    padding: 10px 20px;
 
-.fa-eye,
-.fa-eye-slash {
-  @include position-absolute(33px, calc(100% + 14px), 1);
+    @include input($thin, 8px, 14px);
+  }
 }
 
 
