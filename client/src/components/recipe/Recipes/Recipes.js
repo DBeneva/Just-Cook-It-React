@@ -38,7 +38,7 @@ function Recipes() {
             {error && <p className="error">{error.message}</p>}
 
             {recipes?.length > 0 && recipes.map(r => <RecipeCard key={r._id} recipe={r} />)}
-            {recipes?.length == 0 && noRecipes}
+            {recipes?.length === 0 && noRecipes}
             {!recipes && <div className="loader"></div>}
         </div>
     );

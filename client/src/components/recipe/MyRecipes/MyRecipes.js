@@ -3,12 +3,12 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import * as contentService from '../../../services/contentService';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import './MyRecipes.scss';
+import '../../recipe/myRecipes.scss';
 
 function MyRecipes() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    const [myRecipes, setMyRecipes] = useState([]);
+    const [myRecipes, setMyRecipes] = useState(null);
 
     useEffect(() => {
         contentService.loadMyRecipes()
@@ -22,18 +22,22 @@ function MyRecipes() {
     }, []);
 
     const buttons = (
-        <div>
-            <p>Add one right away!</p>
-            <Link className="button" to="/new-recipe">Add New Recipe</Link>
-            <button className="button cancel-btn" onClick={() => navigate(-1)}>Go Back</button>
-        </div>
+        <>
+            <p className="my-recipes-message">Add one right away!</p>
+            <div>
+                <Link className="button" to="/new-recipe">Add New Recipe</Link>
+                <button className="button cancel-btn" onClick={() => navigate(-1)}>Go Back</button>
+            </div>
+        </>
     );
 
     const myRecipeCards = (
-        <div className="recipes">
+        <>
             <h2 className="title">My Recipes</h2>
-            {myRecipes.map(r => <RecipeCard key={r._id} recipe={r} />)}
-        </div>
+            <div className="recipes">
+                {myRecipes?.map(r => <RecipeCard key={r._id} recipe={r} />)}
+            </div>
+        </>
     );
 
     const noRecipes = (
@@ -44,12 +48,12 @@ function MyRecipes() {
     );
 
     return (
-        <div className="MyRecipes">
+        <div className="my-recipes">
             {error && <p className="error">{error.message}</p>}
 
             {myRecipes && myRecipes.length > 0 && myRecipeCards}
-            {myRecipes && myRecipes.length == 0 && noRecipes}
-            {!myRecipes && <div className = "loader"></div>}
+            {myRecipes?.length === 0 && noRecipes}
+            {!myRecipes && <div className="loader"></div>}
         </div >
     );
 }
