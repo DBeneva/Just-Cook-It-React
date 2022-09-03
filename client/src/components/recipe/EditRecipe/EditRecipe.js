@@ -7,8 +7,6 @@ import getRequiredInputStatus from '../../../utils/getRequiredInputStatus';
 import getUrlStatus from '../../../utils/getUrlStatus';
 import isFormStatusValid from '../../../utils/isFormStatusValid';
 
-import './EditRecipe.scss';
-
 function EditRecipe() {
     const initialState = {
         recipeData: {
@@ -125,18 +123,19 @@ function EditRecipe() {
     };
 
     return (
-        <div className="EditRecipe">
+        <div className="recipe-form">
             <div className="page-title">
                 <h2 className="title">Edit Recipe</h2>
             </div>
 
             {error && <p className="error">{error.message}</p>}
 
-            <form onSubmit={editRecipe}>
-                <div className="title-section">
+            <form className="form-recipe" onSubmit={editRecipe}>
+                <div className="title-time">
                     <div className="recipe-title">
-                        <label htmlFor="recipeName">Title <span className="error">*</span></label>
+                        <label htmlFor="recipeName" className="label-recipe">Title <span className="error">*</span></label>
                         <input
+                            className={`input input-${state.recipeData.name.status}`}
                             type="text"
                             name="recipeName"
                             id="recipeName"
@@ -151,8 +150,9 @@ function EditRecipe() {
                     </div>
 
                     <div>
-                        <label htmlFor="time">Cooking Time (Minutes) <span className="error">*</span></label>
+                        <label htmlFor="time" className="label-recipe">Cooking Time (Minutes) <span className="error">*</span></label>
                         <input
+                            className={`input input-${state.recipeData.time.status}`}
                             type="number"
                             name="time"
                             id="time"
@@ -168,8 +168,9 @@ function EditRecipe() {
                 </div>
 
                 <div className="ingredients">
-                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="error">*</span></label>
+                    <label htmlFor="ingredients" className="label-recipe">Ingredients (Comma-Separated) <span className="error">*</span></label>
                     <textarea
+                        className={`input input-${state.recipeData.ingredients.status}`}
                         type="text"
                         name="ingredients"
                         id="ingredients"
@@ -186,8 +187,9 @@ function EditRecipe() {
                 </div>
 
                 <div className="instructions">
-                    <label htmlFor="instructions">Instructions <span className="error">*</span></label>
+                    <label htmlFor="instructions" className="label-recipe">Instructions <span className="error">*</span></label>
                     <textarea
+                        className={`input input-${state.recipeData.instructions.status}`}
                         type="text"
                         name="instructions"
                         id="instructions"
@@ -203,8 +205,9 @@ function EditRecipe() {
                 </div>
 
                 <div className="image">
-                    <label htmlFor="imageUrl">Image URL <span className="error">*</span></label>
+                    <label htmlFor="imageUrl" className="label-recipe">Image URL <span className="error">*</span></label>
                     <input
+                        className={`input input-${state.recipeData.imageUrl.status}`}
                         type="text"
                         name="imageUrl"
                         id="imageUrl"

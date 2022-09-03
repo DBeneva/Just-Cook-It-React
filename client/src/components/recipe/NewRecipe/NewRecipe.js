@@ -6,7 +6,7 @@ import getNameStatus from '../../../utils/getNameStatus';
 import getRequiredInputStatus from '../../../utils/getRequiredInputStatus';
 import getUrlStatus from '../../../utils/getUrlStatus';
 import isFormStatusValid from '../../../utils/isFormStatusValid';
-import './NewRecipe.scss';
+import '../../recipe/recipeForm.scss';
 
 function NewRecipe() {
     const navigate = useNavigate();
@@ -103,18 +103,19 @@ function NewRecipe() {
     };
 
     return (
-        <div className="NewRecipe">
+        <div className="recipe-form">
             <div className="page-title">
                 <h2 className="title">New Recipe</h2>
             </div>
 
             {error && <p className="error">{error.message}</p>}
 
-            <form onSubmit={createRecipe}>
-                <div className="title-section">
+            <form className="form-recipe" onSubmit={createRecipe}>
+                <div className="title-time">
                     <div className="recipe-title">
-                        <label htmlFor="recipeName">Title <span className="error">*</span></label>
+                        <label htmlFor="recipeName" className="label-recipe">Title <span className="error">*</span></label>
                         <input
+                            className={`input input-${state.recipeName.status}`}
                             type="text"
                             name="recipeName"
                             id="recipeName"
@@ -127,8 +128,9 @@ function NewRecipe() {
                     </div>
 
                     <div>
-                        <label htmlFor="time">Cooking Time (Minutes) <span className="error">*</span></label>
+                        <label htmlFor="time" className="label-recipe">Cooking Time (Minutes) <span className="error">*</span></label>
                         <input
+                            className={`input input-${state.time.status}`}
                             type="number"
                             name="time"
                             id="time"
@@ -142,8 +144,9 @@ function NewRecipe() {
                 </div>
 
                 <div className="ingredients">
-                    <label htmlFor="ingredients">Ingredients (Comma-Separated) <span className="error">*</span></label>
+                    <label htmlFor="ingredients" className="label-recipe">Ingredients (Comma-Separated) <span className="error">*</span></label>
                     <textarea
+                        className={`input input-${state.ingredients.status}`}
                         type="text"
                         name="ingredients"
                         id="ingredients"
@@ -158,12 +161,13 @@ function NewRecipe() {
                 </div>
 
                 <div className="instructions">
-                    <label htmlFor="instructions">Instructions <span className="error">*</span></label>
+                    <label htmlFor="instructions" className="label-recipe">Instructions <span className="error">*</span></label>
                     <textarea
+                        className={`input input-${state.instructions.status}`}
                         type="text"
                         name="instructions"
                         id="instructions"
-                        rows="3"
+                        rows="10"
                         required
                         onFocus={changeInstructions}
                         onChange={changeInstructions}
@@ -173,8 +177,9 @@ function NewRecipe() {
                 </div>
 
                 <div className="image">
-                    <label htmlFor="imageUrl">Image URL <span className="error">*</span></label>
+                    <label htmlFor="imageUrl" className="label-recipe">Image URL <span className="error">*</span></label>
                     <input
+                        className={`input input-${state.imageUrl.status} password`}
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
