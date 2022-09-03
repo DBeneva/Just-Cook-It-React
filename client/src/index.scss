@@ -22,7 +22,7 @@
 @mixin flex-row() {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 @mixin position-absolute($top, $left, $z-index) {
@@ -51,10 +51,20 @@ $error-color: red;
 $confirmation-modal-background: #E8E8E8;
 
 
-/* Shadows & Outlines */
+/* Shadows, Outlines & Borders */
 $button-shadow: 0 0 8px 0 gray;
 $card-shadow: 2px 2px 20px 0 gray;
 $confirmation-modal-outline: 1700px solid rgba(0, 0, 0, 0.5);
+$border-thin: 1px solid $primary-color;
+
+@mixin border-thick($color) {
+  border-left: 0.3em solid $color;
+}
+
+@mixin input-border($color) {
+  border: $border-thin;
+  @include border-thick($color);
+}
 
 
 /* Text Font & Color */
@@ -207,86 +217,71 @@ h2 {
   .back-btn {
     @include position-absolute($top, $left, 0);
     font-size: 40px;
-  }
 
-  .back-btn i:hover {
-    border-radius: 50%;
-    background-color: $primary-color;
-    color: $secondary-color;
-    box-shadow: $button-shadow;
-  }
-}
-
-
-/* Forms */
-@mixin form() {
-  form {
-    width: 100%;
-    padding: 0 60px;
-
-    @include flex-column();
-  }
-
-  @include input();
-}
-
-
-/* Input Fields */
-@mixin input() {
-
-  input,
-  textarea {
-    position: relative;
-    width: 100%;
-    font-size: 16px;
-    padding: 15px;
-    border-radius: 10px;
-  }
-
-  input:focus,
-  textarea:focus {
-    background-color: $input-focus-background;
-    outline: none;
-    box-shadow: none;
-  }
-
-  .input-untouched {
-    @include input-border($primary-color);
-  }
-
-  .input-valid {
-    @include input-border($success-color);
-  }
-
-  .input-invalid {
-    @include input-border($error-color);
-  }
-
-  .field {
-    width: 100%;
-    padding: 5px 0;
-    position: relative;
-  }
-
-  label {
-    margin: 0 10px;
-    position: absolute;
-    top: 20px;
-    left: -40px;
-  }
-
-  .fa-eye,
-  .fa-eye-slash {
-    position: absolute;
-    left: calc(100% + 5px);
-    top: 25px;
+    i:hover {
+      border-radius: 50%;
+      background-color: $primary-color;
+      color: $secondary-color;
+      box-shadow: $button-shadow;
+    }
   }
 }
 
-@mixin input-border($color) {
-  border: 1px solid $primary-color;
-  border-left: 0.3em solid $color;
+
+/* Forms & Input Fields */
+form {
+  width: 100%;
+  padding: 0 60px;
+
+  @include flex-column();
 }
+
+input,
+textarea {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+input:focus,
+textarea:focus {
+  background-color: $input-focus-background;
+  outline: none;
+  box-shadow: none;
+}
+
+.input-untouched {
+  @include input-border($primary-color);
+}
+
+.input-valid {
+  @include input-border($success-color);
+}
+
+.input-invalid {
+  @include input-border($error-color);
+}
+
+.field {
+  width: 100%;
+  padding: 5px 0;
+  position: relative;
+}
+
+label {
+  margin: 0 10px;
+  position: absolute;
+  top: 20px;
+  left: -40px;
+}
+
+.fa-eye,
+.fa-eye-slash {
+  @include position-absolute(33px, calc(100% + 14px), 1);
+}
+
 
 /* Card */
 @mixin card($width, $margin) {
@@ -339,29 +334,27 @@ h2 {
 
 
 /*Loader*/
-@mixin loader() {
-  .loader {
-    flex-basis: 100;
-    border: 16px solid $secondary-color;
-    border-top: 16px solid $primary-color;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 60px);
-    transform: translate(-50%, -50%);
+.loader {
+  flex-basis: 100;
+  border: 16px solid $secondary-color;
+  border-top: 16px solid $primary-color;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 60px);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
