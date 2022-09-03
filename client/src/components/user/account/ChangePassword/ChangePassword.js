@@ -96,12 +96,12 @@ function ChangePassword() {
 
     return (
         <div className="Account">
-            <form onSubmit={changePassword} method="post">
+            <form className="account-form" onSubmit={changePassword} method="post">
                 <h2 className="title">Change Password</h2>
                 {error && <p className="error">{error.message}</p>}
 
                 <div className="field">
-                    <label className="label-text" htmlFor="oldPassword"><span>Old </span></label>
+                    <label className="label-account" htmlFor="oldPassword"><span>Old </span></label>
                     <input className={`input-${state.oldPassword.status} password`} type={state.visibleOldPassword ? 'text' : 'password'} name="oldPassword" id="oldPassword" placeholder="******"
                         required
                         onFocus={changeOldPassword}
@@ -114,7 +114,7 @@ function ChangePassword() {
 
 
                 <div className="field">
-                    <label className="label-text" htmlFor="newPassword"><span>New </span></label>
+                    <label className="label-account" htmlFor="newPassword"><span>New </span></label>
                     <input className={`input-${state.newPassword.status} password`} type={state.visibleNewPassword ? 'text' : 'password'} name="newPassword" id="newPassword" placeholder="******"
                         required
                         onFocus={changeNewPassword}
@@ -128,7 +128,7 @@ function ChangePassword() {
                 </div>
 
                 <div className="field">
-                    <label className="label-text" htmlFor="confirmPassword"><span>New </span></label>
+                    <label className="label-account" htmlFor="confirmPassword"><span>New </span></label>
                     <input className={`input-${state.confirmPassword.status} password`} type={state.visibleConfirmPassword ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" placeholder="******"
                         required
                         onFocus={changeConfirmPassword}

@@ -229,7 +229,7 @@ h2 {
 
 
 /* Forms & Input Fields */
-form {
+.account-form {
   width: 100%;
   padding: 0 60px;
 
@@ -270,11 +270,18 @@ textarea:focus {
   position: relative;
 }
 
-label {
-  margin: 0 10px;
-  position: absolute;
-  top: 20px;
-  left: -40px;
+.label {
+  &-account {
+    margin: 0 10px;
+    position: absolute;
+    top: 20px;
+    left: -40px;
+  }
+
+  &-recipe {
+    padding: 10px;
+    display: inline-block;
+  }
 }
 
 .fa-eye,

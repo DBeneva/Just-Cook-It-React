@@ -80,12 +80,12 @@ function Login() {
 
     return (
         <div className="Register-Login">
-            <form method="post" onSubmit={loginHandler}>
+            <form className="account-form" method="post" onSubmit={loginHandler}>
                 <h2 className="title">Login Form</h2>
                 {error && <p className="error">{error.message}</p>}
 
                 <div className="field field-icon">
-                    <label htmlFor="password"><span><i className="fas fa-user"></i></span></label>
+                    <label htmlFor="password" className="label-account"><span><i className="fas fa-user"></i></span></label>
                     <input
                         className={`input-${state.username.status}`}
                         type="text"
@@ -102,7 +102,7 @@ function Login() {
 
 
                 <div className="field">
-                    <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
+                    <label htmlFor="password" className="label-account"><span><i className="fas fa-lock"></i></span></label>
                     <input
                         className={`input-${state.password.status}`}
                         type={state.visiblePassword ? 'text' : 'password'}

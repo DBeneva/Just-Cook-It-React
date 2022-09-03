@@ -99,9 +99,9 @@ function EditAccount() {
 
             {error && <p className="error error-centered">{error.message}</p>}
 
-            <form onSubmit={editAccount}>
+            <form className="account-form" onSubmit={editAccount}>
                 <div className="field">
-                    <label htmlFor="username"><span><i className="fas fa-user"></i></span></label>
+                    <label className="label-icon" htmlFor="username"><span><i className="fas fa-user"></i></span></label>
                     <input
                         type="text"
                         name="username"
@@ -117,7 +117,7 @@ function EditAccount() {
                 </div>
 
                 <div className="field">
-                    <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
+                    <label className="label-icon" htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
                     <input
                         type="email"
                         name="email"
@@ -131,7 +131,7 @@ function EditAccount() {
                 </div>
 
                 <div className="field">
-                    <label><span><i className="fas fa-lock"></i></span></label>
+                    <label className="label-icon"><span><i className="fas fa-lock"></i></span></label>
                     <Link className="change-password-link" to={`/users/${user._id}/change-password`}>Change your password</Link>
                 </div>
 

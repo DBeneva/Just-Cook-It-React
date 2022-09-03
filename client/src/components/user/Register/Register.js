@@ -110,12 +110,12 @@ function Register() {
 
     return (
         <div className="Register-Login">
-            <form className="register" method="post" onSubmit={registerHandler}>
+            <form className="account-form" method="post" onSubmit={registerHandler}>
                 <h2 className="title">Registration Form</h2>
                 {error && <p className="error">{error.message}</p>}
 
                 <div className="field field-icon">
-                    <label htmlFor="username"><span><i className="fas fa-user"></i></span></label>
+                    <label htmlFor="username" className="label-account"><span><i className="fas fa-user"></i></span></label>
                     <input className={`input-${state.username.status}`}
                         type="text" name="username" id="username"
                         placeholder="Johny"
@@ -130,7 +130,7 @@ function Register() {
                 </div>
 
                 <div className="field field-icon">
-                    <label htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
+                    <label htmlFor="email" className="label-account"><span><i className="fas fa-envelope"></i></span></label>
                     <input className={`input-${state.email.status}`} type="email" name="email" id="email"
                         placeholder="john.doe@gmail.com"
                         onFocus={changeEmail}
@@ -141,7 +141,7 @@ function Register() {
                 </div>
 
                 <div className="field field-icon">
-                    <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
+                    <label htmlFor="password" className="label-account"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.password.status}`} type={state.visiblePassword ? 'text' : 'password'} name="password"
                         id="password" placeholder="******"
                         onFocus={changePassword}
@@ -155,7 +155,7 @@ function Register() {
                 </div>
 
                 <div className="field field-icon">
-                    <label htmlFor="repass"><span><i className="fas fa-lock"></i></span></label>
+                    <label htmlFor="repass" className="label-account"><span><i className="fas fa-lock"></i></span></label>
                     <input className={`input-${state.repass.status}`} type={state.visibleRepass ? 'text' : 'password'} name="repass" id="repass" placeholder="******"
                         onFocus={changeRepass}
                         onChange={changeRepass}
