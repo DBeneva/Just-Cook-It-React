@@ -1,0 +1,16 @@
+@import '../../index.scss';
+
+.recipe-form {
+    @include page-layout(115px, 45%, auto);
+    @include buttons(20px, 10px);
+    @include title($primary-color, 0, 30px, 40px);
+    @include error-message(5px 0);
+
+    .title-time {
+        @include flex-row(space-between, flex-start);
+
+        div {
+            @include flex-column(flex-start, 49%);
+        }
+    }
+}
