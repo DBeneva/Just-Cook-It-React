@@ -99,15 +99,15 @@ function EditAccount() {
 
             {error && <p className="error error-centered">{error.message}</p>}
 
-            <form className="account-form" onSubmit={editAccount}>
+            <form className="form-account" onSubmit={editAccount}>
                 <div className="field">
-                    <label className="label-icon" htmlFor="username"><span><i className="fas fa-user"></i></span></label>
+                    <label className="label-account" htmlFor="username"><span><i className="fas fa-user"></i></span></label>
                     <input
                         type="text"
                         name="username"
                         id="username"
                         required
-                        className={`input-${state.username.status}`}
+                        className={`input input-${state.username.status}`}
                         defaultValue={state.username.value}
                         onChange={changeUsername}
                         minLength="3"
@@ -117,13 +117,13 @@ function EditAccount() {
                 </div>
 
                 <div className="field">
-                    <label className="label-icon" htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
+                    <label className="label-account" htmlFor="email"><span><i className="fas fa-envelope"></i></span></label>
                     <input
                         type="email"
                         name="email"
                         id="email"
                         required
-                        className={`input-${state.email.status}`}
+                        className={`input input-${state.email.status}`}
                         defaultValue={state.email.value}
                         onChange={changeEmail} />
                     {state.email.status === 'invalid empty' && <p className="error">Email is required!</p>}
@@ -131,7 +131,7 @@ function EditAccount() {
                 </div>
 
                 <div className="field">
-                    <label className="label-icon"><span><i className="fas fa-lock"></i></span></label>
+                    <label className="label-account"><span><i className="fas fa-lock"></i></span></label>
                     <Link className="change-password-link" to={`/users/${user._id}/change-password`}>Change your password</Link>
                 </div>
 

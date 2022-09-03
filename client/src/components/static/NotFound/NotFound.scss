@@ -2,7 +2,7 @@
 
 .NotFound {
     @include page-layout(0, 100%, 100vh);
-    @include flex-column();
+    @include flex-column(center);
     @include back-btn(185px, 150px);
     @include title($primary-color, 150px, 40px, 40px);
     

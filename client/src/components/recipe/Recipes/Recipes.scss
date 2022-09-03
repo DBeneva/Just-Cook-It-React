@@ -6,11 +6,11 @@
     @include title($primary-color, 160px, 40px, 40px);
     @include button(60px, 10px);
     @include error-message(20px);
-    @include flex-row();
+    @include flex-row(space-between, center);
 
     font-size: 18px;
 
     .no-recipes {
-        @include flex-column();
+        @include flex-column(center);
     }
 }

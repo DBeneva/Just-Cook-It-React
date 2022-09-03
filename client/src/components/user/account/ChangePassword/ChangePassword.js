@@ -96,48 +96,48 @@ function ChangePassword() {
 
     return (
         <div className="Account">
-            <form className="account-form" onSubmit={changePassword} method="post">
+            <form className="form-account change-password-form" onSubmit={changePassword} method="post">
                 <h2 className="title">Change Password</h2>
                 {error && <p className="error">{error.message}</p>}
 
-                <div className="field">
-                    <label className="label-account" htmlFor="oldPassword"><span>Old </span></label>
-                    <input className={`input-${state.oldPassword.status} password`} type={state.visibleOldPassword ? 'text' : 'password'} name="oldPassword" id="oldPassword" placeholder="******"
+                <div className="field field-change-password">
+                    <label className="label-change-password" htmlFor="oldPassword">Old</label>
+                    <input className={`input input-${state.oldPassword.status} password`} type={state.visibleOldPassword ? 'text' : 'password'} name="oldPassword" id="oldPassword" placeholder="******"
                         required
                         onFocus={changeOldPassword}
                         onChange={changeOldPassword}
                     />
                     <i className={state.visibleOldPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
-                    {state.oldPassword.status === 'invalid empty' && <p className="error">Please enter your current password!</p>}
-                    {state.oldPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
                 </div>
+                {state.oldPassword.status === 'invalid empty' && <p className="error">Please enter your current password!</p>}
+                {state.oldPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters!</p>}
 
 
-                <div className="field">
-                    <label className="label-account" htmlFor="newPassword"><span>New </span></label>
-                    <input className={`input-${state.newPassword.status} password`} type={state.visibleNewPassword ? 'text' : 'password'} name="newPassword" id="newPassword" placeholder="******"
+                <div className="field field-change-password">
+                    <label className="label-change-password" htmlFor="newPassword">New</label>
+                    <input className={`input input-${state.newPassword.status} password`} type={state.visibleNewPassword ? 'text' : 'password'} name="newPassword" id="newPassword" placeholder="******"
                         required
                         onFocus={changeNewPassword}
                         onChange={changeNewPassword}
                     />
                     <i className={state.visibleNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
-                    {state.newPassword.status === 'invalid empty' && <p className="error">Please enter your new password!</p>}
-                    {state.newPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters long!</p>}
-                    {state.newPassword.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
-                    {state.newPassword.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: !?@#$%^&*()!</p>}
                 </div>
+                {state.newPassword.status === 'invalid empty' && <p className="error">Please enter your new password!</p>}
+                {state.newPassword.status === 'invalid too-short' && <p className="error">Password must be at least 5 characters long!</p>}
+                {state.newPassword.status === 'invalid non-latin-letters' && <p className="error">Latin characters only!</p>}
+                {state.newPassword.status === 'invalid no-special-symbol' && <p className="error">Please include at least one special symbol: !?@#$%^&*()!</p>}
 
-                <div className="field">
-                    <label className="label-account" htmlFor="confirmPassword"><span>New </span></label>
-                    <input className={`input-${state.confirmPassword.status} password`} type={state.visibleConfirmPassword ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" placeholder="******"
+                <div className="field field-change-password">
+                    <label className="label-change-password" htmlFor="confirmPassword">New</label>
+                    <input className={`input input-${state.confirmPassword.status} password`} type={state.visibleConfirmPassword ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" placeholder="******"
                         required
                         onFocus={changeConfirmPassword}
                         onChange={changeConfirmPassword}
                     />
                     <i className={state.visibleConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={showHidePassword}></i>
-                    {state.confirmPassword.status === 'invalid empty' && <p className="error">Please confirm your new password!</p>}
-                    {state.confirmPassword.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
                 </div>
+                {state.confirmPassword.status === 'invalid empty' && <p className="error">Please confirm your new password!</p>}
+                {state.confirmPassword.status === 'invalid no-match' && <p className="error">Passwords don't match!</p>}
 
                 <div className="buttons">
                     <button className="cancel-btn button" onClick={() => navigate(-1)}>Cancel</button>

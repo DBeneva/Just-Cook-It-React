@@ -2,7 +2,7 @@
 
 .Account {
     @include page-layout(115px, 37%, auto);
-    @include flex-column();
+    @include flex-column(center);
     @include title($primary-color, 0px, 20px, 40px);
     @include buttons(20px, 10px);
     @include error-message(10px 0);
@@ -17,11 +17,6 @@
         width: 100px;
     }
 
-    .change-password-link {
-        display: block;
-        padding: 17px 5px;
-    }
-
     .section {
         margin: 21px 0;
 
@@ -31,12 +26,12 @@
         }
     }
 
-    .password {
-        width: 95%;
-        margin-left: 20px;
+    .change-password-link {
+        display: block;
+        padding: 15px 5px;
+    }
 
-        ~ p {
-            padding-left: 20px;
-        }
+    .change-password-form {
+        @include error-message(10px calc(2.3em + 12px));
     }
 }
