@@ -1,19 +1,33 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 .Footer {
+    @include flex-row(space-around, center);
+    @include position-fixed(bottom);
+
     background-color: $primary-color;
     color: $secondary-color;
+    width: 100%;
     padding: 22px;
     font-size: 14px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    position: fixed;
-    bottom: 0px;
+
+    @media (max-width: 768px) {
+        @include flex-column(center);
+        padding: 0;
+        position: relative;
+
+        p {
+            width: 90%;
+            text-align: center;
+            padding: 15px;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $secondary-color;
+            }
+        }
+    }
     
     p a {
         color: $secondary-color;
-        text-decoration: none;
     }
     
     i {

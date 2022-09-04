@@ -1,0 +1,36 @@
+/* Box Sizing */
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+
+/* Block Elements Margin */
+body,
+p,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 3.5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $cancel-btn-color;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+}

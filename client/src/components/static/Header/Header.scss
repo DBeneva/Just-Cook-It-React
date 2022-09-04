@@ -1,31 +1,76 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 .Header {
-    background-color: $primary-color;
-    color: $secondary-color;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 50px;
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
+    @include banner(space-between, center, 8px 50px);
+    @include position-fixed(top);
+    @include title($secondary-color, 0, 0, 35px);
+    @include button(0, 0);
 
     .logo {
-        letter-spacing: 2px;
-        text-decoration: none;
-        
+        letter-spacing: 0.05em;
+
         .logo-egg {
             width: 25px;
             padding: 2px;
         }
     }
 
-    .navigation-list-item {
-        display: inline-block;
+    .navigation .fa-bars {
+        display: none;
+        font-size: 20px;
     }
 
-    @include title($secondary-color, 0, 0, 40px);
-    @include button(0, 5px);
+    .account-button {
+        position: relative;
+    }
+
+    .dropdown {
+        @include position-absolute(100%, 100%, 2, (-100%, 0));
+        display: none;
+
+        .navigation-list-item a {
+            width: 150px;
+            border-radius: 0;
+
+            &:not(.logout) {
+                border-top-left-radius: $button-border-radius;
+            }
+
+            &.logout {
+                border-bottom-left-radius: $button-border-radius;
+                border-bottom-right-radius: $button-border-radius;
+            }
+        }
+
+    }
+
+    .account-button:hover {
+        a {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .dropdown {
+            @include flex-column(flex-start);
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 8px 20px;
+    }
+
+    @media (max-width: 1024px) {
+        .navigation ul {
+            display: none;
+        }
+
+        .navigation .fa-bars {
+            display: inline-block;
+        }
+    }
+
+    .navigation-list-item {
+        display: inline-block;
+        color: $secondary-color;
+    }
 }

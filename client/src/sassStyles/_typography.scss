@@ -1,0 +1,32 @@
+/* Text Font, Color & Decoration */
+html,
+a,
+input,
+textarea {
+  font-family: $font-body-text;
+  color: $primary-color;
+  text-decoration: none;
+}
+
+
+/* Selection */
+*::selection {
+  color: white;
+  background-color: $primary-color;
+}
+
+
+/* Titles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-title;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+}

@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <h1 className="welcome-message title">Welcome to our very special place for sharing recipes!</h1>
+      <h1 className="welcome-message title">Welcome to our very special place<br/>for sharing recipes!</h1>
       <div className="buttons">
         <Link className="button" to="/recipes">See Recipes</Link>
         {

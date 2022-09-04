@@ -24,7 +24,7 @@ function MyRecipes() {
     const buttons = (
         <>
             <p className="my-recipes-message">Add one right away!</p>
-            <div>
+            <div className="buttons">
                 <Link className="button" to="/new-recipe">Add New Recipe</Link>
                 <button className="button cancel-btn" onClick={() => navigate(-1)}>Go Back</button>
             </div>

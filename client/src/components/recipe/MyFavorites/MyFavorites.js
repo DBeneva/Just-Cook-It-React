@@ -21,7 +21,7 @@ function MyFavorites() {
     const buttons = (
         <>
             <p className="my-recipes-message">Have a look at the recipes and like the best ones!</p>
-            <div>
+            <div className="buttons">
                 <Link className="button" to="/recipes">See Recipes</Link>
                 <button className="button cancel-btn" onClick={() => navigate(-1)}>Go Back</button>
             </div>

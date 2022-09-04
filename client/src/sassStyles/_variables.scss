@@ -1,0 +1,26 @@
+/* Fonts */
+$font-title: 'Merienda';
+$font-body-text: Verdana;
+
+
+/* Colors */
+$primary-color: #4a6b8b;
+$secondary-color: lightgray;
+$disabled-btn-background: #9babbc;
+$active-link-background: #7f90a1;
+$input-focus-background: #4a6a8b2d;
+$cancel-btn-color: gray;
+$delete-btn-color: #EF5E5E;
+$success-color: green;
+$error-color: red;
+$confirmation-modal-background: #E8E8E8;
+
+
+/* Shadows, Outlines & Borders */
+$button-shadow: 0 0 8px 0 gray;
+$card-shadow: 2px 2px 20px 0 gray;
+$confirmation-modal-outline: 1700px solid rgba(0, 0, 0, 0.5);
+$border: 1px solid $primary-color;
+$thin: 0.2em;
+$thick: 0.3em;
+$button-border-radius: 5px;

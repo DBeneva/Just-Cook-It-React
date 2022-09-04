@@ -1,9 +1,9 @@
-@import '../../index.scss';
+@import '../../sassStyles/';
 
 .my-recipes {
     @include page-layout(0, 80%, auto);
-    @include button(40px, 10px);
-    @include title($primary-color, 120px, 0px, 40px);
+    @include buttons(40px, 10px);
+    @include title($primary-color, 40px, 0px, 40px);
     @include error-message(0 0 10px 35px);
 
     .recipes {
@@ -11,7 +11,6 @@
     }
 
     .no-recipes {
-        @include title($primary-color, 160px, 0px, 40px);
         @include flex-column(center);
 
         .my-recipes-message {

@@ -1,9 +1,9 @@
-@import '../../index.scss';
+@import '../../sassStyles/';
 
 .recipe-form {
-    @include page-layout(115px, 45%, auto);
+    @include page-layout(0, 45%, auto);
     @include buttons(20px, 10px);
-    @include title($primary-color, 0, 30px, 40px);
+    @include title($primary-color, 40px, 30px, 40px);
     @include error-message(5px 0);
 
     .title-time {

@@ -1,0 +1,100 @@
+/* Input Fields */
+@mixin input($thickness, $padding, $font-size) {
+    .input {
+        position: relative;
+        width: 100%;
+        font-size: $font-size;
+        padding: $padding;
+        border-radius: 5px;
+        resize: none;
+
+        &:focus {
+            background-color: $input-focus-background;
+            outline: none;
+            box-shadow: none;
+        }
+
+        &-untouched {
+            @include input-border($thickness, $primary-color);
+        }
+
+        &-valid {
+            @include input-border($thickness, $success-color);
+        }
+
+        &-invalid {
+            @include input-border($thickness, $error-color);
+        }
+    }
+
+    .field {
+        width: 100%;
+        padding: 5px 0;
+        position: relative;
+
+        &-change-password {
+            @include flex-row(space-between, center, nowrap);
+        }
+    }
+
+    .label {
+        &-account {
+            margin: 0 10px;
+            position: absolute;
+            top: 20px;
+            left: -40px;
+        }
+
+        &-recipe {
+            padding: 10px;
+            display: inline-block;
+        }
+
+        &-change-password {
+            width: 2.4em;
+            margin-right: 10px;
+            text-align: right;
+        }
+    }
+
+    .fa-eye,
+    .fa-eye-slash {
+        @include position-absolute(23px, calc(100% - 33px), 1);
+    }
+}
+
+
+/* Forms */
+.form {
+    &-account {
+        width: 100%;
+        padding: 0 60px;
+
+        @include input($thin, 15px, 16px);
+        @include flex-column(center);
+    }
+
+    &-recipe {
+        border: $border;
+        border-radius: 10px;
+        padding: 10px 20px;
+
+        @include input($thin, 8px, 14px);
+    }
+}
+
+
+/* Error Messages */
+@mixin error-message($padding) {
+    .error {
+        color: $error-color;
+        font-size: 14px;
+        padding: $padding;
+        margin: 0;
+        align-self: flex-start;
+    }
+
+    .error-centered {
+        align-self: center;
+    }
+}

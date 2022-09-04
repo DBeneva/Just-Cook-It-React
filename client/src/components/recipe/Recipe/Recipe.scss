@@ -1,34 +1,19 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 .Recipe {
     @include page-layout(115px, 100%, auto);
     @include title($primary-color, 0, 0, 28px);
-    @include buttons(0, 0);
     @include back-btn(185px, 170px);
-    @include likes(100px);
+    @include card-banner(100px);
     @include error-message(0);
 
     position: relative;
 
     .card {
-        @include card(50%, 40px auto);
-
-        .card-image {
-            height: 200px;
-
-            img {
-                height: 100%;
-                width: 100%;
-                object-fit: cover;
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
-            }
-        }
+        @include card(50%, auto, 200px, 40px auto);
 
         .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include flex-row(space-between, center);
             padding: 20px 150px 0 150px;
         }
 
@@ -37,24 +22,21 @@
             font-size: 14px;
             line-height: 1.5;
         }
-        
+
         .card-section {
-            display: flex;
-            align-items: flex-start;
+            @include flex-row(stretch, flex-start, nowrap);
             padding-bottom: 30px;
-            
+
             .ingredients-section {
-                display: flex;
-                align-items: flex-start;
-                flex-wrap: wrap;
+                @include flex-row(stretch, flex-start);
                 width: 100%;
                 padding-left: 15px;
-                
+
                 li {
                     padding: 0 20px 5px 5px;
                     width: 49%;
                 }
-            }            
+            }
         }
 
         .card-content-icon {

@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 .Account {
     @include page-layout(115px, 37%, auto);
@@ -33,5 +33,9 @@
 
     .change-password-form {
         @include error-message(10px calc(2.3em + 12px));
+    }
+
+    a:not(.button) {
+        text-decoration: underline;
     }
 }

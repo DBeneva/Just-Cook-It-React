@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
-import './App.css';
+import './sassStyles/index.scss';
 
 import Home from './components/static/Home/Home';
 import Header from './components/static/Header/Header';

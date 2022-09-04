@@ -1,14 +1,19 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 
 .Home {
+    @include page-layout(0, 100%, calc(100vh - 130px));
+    @include title($primary-color, 80px, 30px, 35px);
+    @include buttons(20px, 5px);
+
     .welcome-message {
-        width: 45%;
+        width: 90%;
         margin: auto;
     }
 
-    @include page-layout(50px, 100%, calc(100vh - 120px));
-    @include title($primary-color, 80px, 30px, 40px);
-    @include background-opacity-80('spices.jpg');
-    @include buttons(20px, 5px);    
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+        url('../../../../public/spices.jpg');
+    background-position: 51.3% 0;
+    background-repeat: no-repeat;
 }

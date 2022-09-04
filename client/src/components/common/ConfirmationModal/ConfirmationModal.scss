@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import '../../../sassStyles/';
 
 .ConfirmationModal {
     background-color: $confirmation-modal-background;
@@ -17,6 +17,6 @@
         color: $error-color;
     }
 
-    @include position-absolute(calc(100% - 200px), 50%, 1);
+    @include position-absolute(calc(100% - 200px), 50%, 1, (-50%, -50%));
     @include button(20px, 10px);
 }

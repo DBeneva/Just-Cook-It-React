@@ -71,7 +71,7 @@ function Recipe() {
 
     const recipeCard = (
         <div className="card">
-            <div className="card-image"><img src={recipe.imageUrl} alt="Recipe Image" /></div>
+            <img className="card-image" src={recipe.imageUrl} alt="Recipe Image" />
             <div className="card-header">
                 <h3 className="title">{recipe.name}</h3>
                 <p>
