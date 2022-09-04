@@ -1,0 +1,27 @@
+@mixin card($width, $height, $image-height, $margin) {
+    width: $width;
+    height: $height;
+    box-shadow: $card-shadow;
+    border-radius: 15px;
+    margin: $margin;
+    position: relative;
+
+    .card-image {
+        width: 100%;
+        height: $image-height;
+        object-fit: cover;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+}
+
+@mixin card-banner($padding-lr) {
+    .likes {
+        @include banner(space-between, center, 12px $padding-lr);
+        @include position-absolute(100%, 0, 1, (0, -100%));
+        @include buttons(0, 0, 16px);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        font-family: $font-title;
+    }
+}

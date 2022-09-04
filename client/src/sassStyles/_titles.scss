@@ -1,0 +1,26 @@
+@mixin title($color, $padding-t, $padding-b, $font-size) {
+    .title {
+        font-family: $font-title;
+        font-size: $font-size;
+        color: $color;
+        text-align: center;
+        padding-top: $padding-t;
+        padding-bottom: $padding-b;
+
+        @media (max-width: 768px) {
+            font-size: calc($font-size - 5px);
+
+            @if $padding-t >0 {
+                padding-top: calc($padding-t - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            font-size: calc($font-size - 10px);
+
+            @if $padding-t >0 {
+                padding-top: calc($padding-t - 40px);
+            }
+        }
+    }
+}

@@ -1,4 +1,15 @@
+@import './layout';
+
 /* Input Fields */
+@mixin border-left($thickness, $color) {
+    border-left: $thickness solid $color;
+}
+
+@mixin input-border($thickness, $color) {
+    border: $border;
+    @include border-left($thickness, $color);
+}
+
 @mixin input($thickness, $padding, $font-size) {
     .input {
         position: relative;

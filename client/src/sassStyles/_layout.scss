@@ -1,0 +1,53 @@
+@mixin page-layout($margin-top, $width, $height) {
+    position: relative;
+    top: 66px;
+    margin: $margin-top auto 130px auto;
+    width: $width;
+    height: $height;
+
+    @media (max-width: 768px) {
+        @if $margin-top >0 {
+            margin-top: calc($margin-top - 80px);
+        }
+
+        margin-bottom: 70px;
+    }
+}
+
+@mixin flex-column($align-items, $flex-basis: initial) {
+    display: flex;
+    flex-direction: column;
+    align-items: $align-items;
+    flex-basis: $flex-basis;
+}
+
+@mixin flex-row($justify-content, $align-items, $wrap: wrap) {
+    display: flex;
+    flex-wrap: $wrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+@mixin position-absolute($top, $left, $z-index, $translate: (0, 0)) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    transform: translate($translate);
+    z-index: $z-index;
+}
+
+@mixin position-fixed($position) {
+    position: fixed;
+    z-index: 1;
+    #{$position}: 0;
+}
+
+@mixin banner($justify-content, $align-items, $padding) {
+    @include flex-row($justify-content, $align-items, nowrap);
+
+    width: 100%;
+    background-color: $primary-color;
+    color: $secondary-color;
+    padding: $padding;
+    text-align: center;
+}

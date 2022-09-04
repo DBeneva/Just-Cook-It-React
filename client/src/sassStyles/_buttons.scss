@@ -1,0 +1,110 @@
+@mixin buttons($margin-tb, $margin-lr, $font-size: 18px) {
+    @include button($margin-tb, $margin-lr, $font-size);
+
+    .buttons {
+        @include flex-row(center, stretch, nowrap);
+    }
+
+    @media (max-width: 480px) {
+        .buttons {
+            @include flex-column(stretch);
+
+            .button {
+                margin: 5px 15px;
+            }
+        }
+    }
+}
+
+@mixin button($margin-tb, $margin-lr, $font-size: 18px) {
+    .button {
+        display: inline-block;
+        text-align: center;
+        font-family: $font-body-text;
+        font-size: $font-size;
+        background-color: $primary-color;
+        color: $secondary-color;
+        margin: $margin-tb $margin-lr;
+        padding: 10px 20px;
+        border-radius: $button-border-radius;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $secondary-color;
+            color: $primary-color;
+            box-shadow: $button-shadow;
+        }
+
+        &:disabled,
+        &:disabled:hover {
+            background-color: $disabled-btn-background;
+            color: $secondary-color;
+            box-shadow: none;
+            cursor: default;
+        }
+    }
+
+    .active-btn,
+    .active-btn:hover {
+        background-color: $active-link-background;
+        color: $secondary-color;
+        border-bottom: 2px solid $secondary-color;
+    }
+
+    .cancel-btn {
+        background-color: $cancel-btn-color;
+        color: $secondary-color;
+    }
+
+    .naked-btn {
+        background-color: transparent;
+        color: $primary-color;
+
+        &:hover {
+            background-color: $primary-color;
+            color: $secondary-color;
+        }
+
+        &:disabled,
+        &:disabled:hover {
+            background-color: transparent;
+            color: $disabled-btn-background;
+        }
+    }
+
+    .naked-cancel-btn {
+        background-color: transparent;
+        color: $cancel-btn-color;
+
+        &:hover {
+            background-color: $cancel-btn-color;
+            color: $secondary-color;
+        }
+    }
+
+    .delete-btn {
+        background-color: transparent;
+        color: $delete-btn-color;
+        position: relative;
+
+        &:hover {
+            background-color: $delete-btn-color;
+            color: $secondary-color;
+        }
+    }
+}
+
+@mixin back-btn($top, $left) {
+    .back-btn {
+        @include position-absolute($top, $left, 0, (-50%, -50%));
+        font-size: 40px;
+
+        i:hover {
+            border-radius: 50%;
+            background-color: $primary-color;
+            color: $secondary-color;
+            box-shadow: $button-shadow;
+        }
+    }
+}
