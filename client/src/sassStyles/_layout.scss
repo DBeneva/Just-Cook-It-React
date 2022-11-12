@@ -4,12 +4,6 @@
     padding-top: $padding-top;
     width: $width;
     height: $height;
-
-    @media (max-width: $screen-md) {
-        @if $padding-top > 0 {
-            padding-top: calc($padding-top - 80px);
-        }
-    }
 }
 
 @mixin flex-column($align-items, $flex-basis: initial) {

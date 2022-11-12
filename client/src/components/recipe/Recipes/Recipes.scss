@@ -1,14 +1,14 @@
 @import '../../../sassStyles/';
 
 .Recipes {
-    @include page-layout(0, 80%, auto);
+    @include page-layout(80px, 90%, auto);
     @include title($primary-color, 160px, 40px, 40px);
     @include button(60px, 10px);
     @include error-message(20px);
-    @include flex-row(space-around, center);
+    @include flex-row(center, center);
 
     @media (max-width: 850px) {
-        @include page-layout(0, 95%, auto);
+        @include page-layout(80px, 95%, auto);
         margin-bottom: 0;
     }
 
