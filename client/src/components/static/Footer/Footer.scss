@@ -2,7 +2,6 @@
 
 .Footer {
     @include banner(space-around, center, 0, 0, 0);
-    @include position-fixed(bottom);
 
     p {
         font-size: 14px;
@@ -16,7 +15,6 @@
 
     @media (max-width: $screen-md) {
         @include flex-column(center);
-        position: relative;
 
         p {
             padding: 15px;

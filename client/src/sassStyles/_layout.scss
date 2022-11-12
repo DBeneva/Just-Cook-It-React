@@ -1,16 +1,14 @@
-@mixin page-layout($margin-top, $width, $height) {
+@mixin page-layout($padding-top, $width, $height) {
     position: relative;
-    top: 66px;
-    margin: $margin-top auto 130px auto;
+    margin: 0 auto;
+    padding-top: $padding-top;
     width: $width;
     height: $height;
 
     @media (max-width: $screen-md) {
-        @if $margin-top >0 {
-            margin-top: calc($margin-top - 80px);
+        @if $padding-top > 0 {
+            padding-top: calc($padding-top - 80px);
         }
-
-        margin-bottom: 70px;
     }
 }
 

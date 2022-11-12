@@ -7,6 +7,7 @@
 
 
 /* Block Elements Margin */
+html,
 body,
 p,
 ul,
@@ -22,7 +23,7 @@ h6 {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 3.5px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
