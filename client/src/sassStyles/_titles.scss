@@ -7,7 +7,7 @@
         padding-top: $padding-t;
         padding-bottom: $padding-b;
 
-        @media (max-width: 768px) {
+        @media (max-width: $screen-md) {
             font-size: calc($font-size - 5px);
 
             @if $padding-t >0 {
@@ -15,7 +15,7 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: $screen-sm) {
             font-size: calc($font-size - 10px);
 
             @if $padding-t >0 {

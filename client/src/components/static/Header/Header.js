@@ -29,6 +29,18 @@ function Header() {
             </li>
         </div >
     );
+
+    const userNavigationMobile = (
+        <div className="user">
+            <li className="navigation-list-item"><NavLink className={(({ isActive }) => "button" + (isActive ? " active-btn" : ""))} to="/recipes">Recipes</NavLink></li >
+            <li className="navigation-list-item"><NavLink className={(({ isActive }) => "button" + (isActive ? " active-btn" : ""))} to="/new-recipe">New Recipe</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({ isActive }) => "button" + (isActive ? " active-btn" : "")} to="/my-recipes">My Recipes</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({ isActive }) => "button" + (isActive ? " active-btn" : "")} to="/my-favorites">My Favorites</NavLink></li>
+            <li className="navigation-list-item"><NavLink className={({ isActive }) => "button" + (isActive ? " active-btn" : "")} to={`/users/${user._id}`}><i className="fas fa-user"></i> {user.username}</NavLink></li>
+            <li className="navigation-list-item"><NavLink className="button logout" to="/logout">Logout</NavLink></li>
+        </div >
+    );
+
     return (
         <div className="Header">
             <div>
@@ -36,7 +48,12 @@ function Header() {
             </div>
 
             <nav className="navigation">
-                <i className="fas fa-bars"></i>
+                <div className="menu">
+                    <i className="fas fa-bars"></i>
+                    <div className="dropdown">
+                        {user.username ? userNavigationMobile : guestNavigation}
+                    </div>
+                </div>
                 <ul>
                     {user.username ? userNavigation : guestNavigation}
                 </ul >

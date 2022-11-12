@@ -6,7 +6,7 @@
 }
 
 @mixin input-border($thickness, $color) {
-    border: $border;
+    border: $border-primary;
     @include border-left($thickness, $color);
 }
 
@@ -86,7 +86,7 @@
     }
 
     &-recipe {
-        border: $border;
+        border: $border-primary;
         border-radius: 10px;
         padding: 10px 20px;
 

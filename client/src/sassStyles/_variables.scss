@@ -20,7 +20,14 @@ $confirmation-modal-background: #E8E8E8;
 $button-shadow: 0 0 8px 0 gray;
 $card-shadow: 2px 2px 20px 0 gray;
 $confirmation-modal-outline: 1700px solid rgba(0, 0, 0, 0.5);
-$border: 1px solid $primary-color;
+$border-primary: 1px solid $primary-color;
+$border-secondary: 0.5px solid $secondary-color;
 $thin: 0.2em;
 $thick: 0.3em;
 $button-border-radius: 5px;
+
+
+/* Media Queries Breakpoints */
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 1024px;

@@ -1,6 +1,5 @@
 @import '../../../sassStyles/';
 
-
 .Home {
     @include page-layout(0, 100%, calc(100vh - 130px));
     @include title($primary-color, 80px, 30px, 35px);

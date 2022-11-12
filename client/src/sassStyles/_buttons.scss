@@ -5,7 +5,7 @@
         @include flex-row(center, stretch, nowrap);
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: $screen-sm) {
         .buttons {
             @include flex-column(stretch);
 
@@ -28,6 +28,7 @@
         padding: 10px 20px;
         border-radius: $button-border-radius;
         border: none;
+        border-bottom: 2px solid transparent;
         cursor: pointer;
 
         &:hover {
@@ -45,11 +46,14 @@
         }
     }
 
-    .active-btn,
-    .active-btn:hover {
+    .active-btn {
         background-color: $active-link-background;
         color: $secondary-color;
         border-bottom: 2px solid $secondary-color;
+
+        &:hover {
+            border-bottom: none;
+        }
     }
 
     .cancel-btn {

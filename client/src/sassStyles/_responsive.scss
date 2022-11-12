@@ -1,0 +1,33 @@
+@mixin only-screen-lg() {
+    @media (min-width: $screen-lg) {
+        display: inline-block;
+    }
+
+    @media (max-width: $screen-lg) {
+        display: none;
+    }
+}
+
+@mixin only-screen-sm() {
+    @media (min-width: $screen-lg) {
+        display: none;
+    }
+
+    @media (max-width: $screen-lg) {
+        display: inline-block;
+    }
+}
+
+@mixin responsive($property, $value-lg, $value-md, $value-sm) {
+    @media (min-width: $screen-md) {
+        #{$property}: $value-lg;
+    }
+
+    @media (max-width: $screen-md) {
+        #{$property}: $value-md;
+    }
+
+    @media (max-width: $screen-sm) {
+        #{$property}: $value-sm;
+    }
+}

@@ -1,7 +1,7 @@
 @import '../../../sassStyles/';
 
 .Header {
-    @include banner(space-between, center, 8px 50px);
+    @include banner(space-between, center, 8px 50px, 8px 50px, 8px 20px);
     @include position-fixed(top);
     @include title($secondary-color, 0, 0, 35px);
     @include button(0, 0);
@@ -15,62 +15,41 @@
         }
     }
 
-    .navigation .fa-bars {
-        display: none;
-        font-size: 20px;
+    .navigation ul {
+        @include only-screen-lg();
+    }
+
+    .navigation-list-item {
+        display: inline-block;
+    }
+
+    .menu {
+        @include dropdown-trigger();
+
+        .fa-bars {
+            @include only-screen-sm();
+            font-size: 20px;
+        }
+
+        .dropdown {
+            top: 0px;
+
+            .navigation-list-item:first-of-type a {
+                border-top-right-radius: $button-border-radius;
+            }
+        }
     }
 
     .account-button {
-        position: relative;
-    }
+        @include dropdown-trigger();
 
-    .dropdown {
-        @include position-absolute(100%, 100%, 2, (-100%, 0));
-        display: none;
-
-        .navigation-list-item a {
-            width: 150px;
-            border-radius: 0;
-
-            &:not(.logout) {
-                border-top-left-radius: $button-border-radius;
-            }
-
-            &.logout {
-                border-bottom-left-radius: $button-border-radius;
-                border-bottom-right-radius: $button-border-radius;
-            }
-        }
-
-    }
-
-    .account-button:hover {
-        a {
+        &:hover a {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
 
         .dropdown {
-            @include flex-column(flex-start);
+            border-top-right-radius: 0;        
         }
-    }
-
-    @media (max-width: 480px) {
-        padding: 8px 20px;
-    }
-
-    @media (max-width: 1024px) {
-        .navigation ul {
-            display: none;
-        }
-
-        .navigation .fa-bars {
-            display: inline-block;
-        }
-    }
-
-    .navigation-list-item {
-        display: inline-block;
-        color: $secondary-color;
     }
 }

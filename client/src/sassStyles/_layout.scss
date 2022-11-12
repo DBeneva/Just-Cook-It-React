@@ -5,7 +5,7 @@
     width: $width;
     height: $height;
 
-    @media (max-width: 768px) {
+    @media (max-width: $screen-md) {
         @if $margin-top >0 {
             margin-top: calc($margin-top - 80px);
         }
@@ -42,12 +42,19 @@
     #{$position}: 0;
 }
 
-@mixin banner($justify-content, $align-items, $padding) {
+@mixin banner($justify-content, $align-items, $padding-lg, $padding-md: $padding-lg, $padding-sm: $padding-lg) {
     @include flex-row($justify-content, $align-items, nowrap);
 
     width: 100%;
     background-color: $primary-color;
     color: $secondary-color;
-    padding: $padding;
     text-align: center;
+
+    @include responsive('padding', $padding-lg, $padding-md, $padding-sm);
+}
+
+@mixin separator() {
+    &:not(:last-child) {
+        border-bottom: $border-secondary;
+    }
 }
